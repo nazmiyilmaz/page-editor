@@ -1,0 +1,197 @@
+.main {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   align-items: center;
+}
+
+// BOOK
+.book {
+   margin: 1rem;
+   border: 1px solid lightgrey;
+   overflow: hidden;
+   border-radius: 12px;
+   .page {
+      border: none;
+      width: 100%;
+      height: 100%;
+   }
+}
+
+// ELEMENT
+.element {
+   position: relative;
+   border-radius: 12px;
+   touch-action: none;
+   box-sizing: border-box;
+   display: flex;
+   justify-content: center;
+   .item {
+      width: 100%;
+      height: 100%;
+      margin-top: 20px;
+      z-index: 1;
+   }
+   .controller {
+      border-radius: 16px;
+      display: none !important;
+      z-index: 2;
+   }
+}
+.element.is-active {
+   border-radius: 16px;
+   .controller {
+      display: flex !important;
+      overflow: hidden;
+   }
+}
+
+// BASIC CONTROLLER
+.controller.place-bottom {
+   position: absolute;
+   bottom: 5px;
+   display: flex;
+   justify-content: center;
+   width: 100%;
+   height: 22px;
+   .delete-handle,
+   .rotation-handle {
+      margin: 0 5px;
+      cursor: pointer;
+      color: grey;
+   }
+}
+
+// SPESIFIC CONTROLLER
+.controller.place-top {
+   position: absolute;
+   top: 0;
+   border: 1px solid lightgrey;
+   background: rgb(240, 240, 240);
+   display: flex;
+   width: 100%;
+   height: 32px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+// IMAGE CONTROLLER
+.controller.is-image {
+   width: 200px !important;
+   .el {
+      padding: 0 5px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      border-right: 1px solid lightgrey;
+      &:hover {
+         background: rgb(204, 212, 218);
+      }
+   }
+   .fliph,
+   .flipv,
+   .flipf,
+   .flipb {
+      width: 100%;
+      cursor: pointer;
+      background: none;
+      border: none;
+   }
+}
+
+// TEXT CONTROLLER
+.controller.is-text {
+   width: 440px !important;
+   .el {
+      padding: 0 4px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid lightgrey;
+   }
+   .el.font select {
+      width: 100%;
+      border: none;
+      background: none;
+   }
+   .el.size select {
+      width: 100%;
+      border: none;
+      background: none;
+   }
+
+   .el.bold,
+   .el.italic,
+   .el.strike,
+   .el.flipb,
+   .el.flipf {
+      &:hover {
+         background: rgb(204, 212, 218);
+      }
+      button {
+         background: none;
+         border: none;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         cursor: pointer;
+      }
+   }
+
+   .el.color input {
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
+      border: none !important;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+   }
+}
+
+// IMAGE ELEMENT
+.element.is-image {
+   width: 180px;
+   min-width: 100px;
+}
+// IMAGE ITEM PASSIVE
+.element img.item {
+   border: none;
+}
+// IMAGE ITEM ACTIVE
+.element.is-active img.item {
+   border: 1px solid lightgray;
+   border-radius: 16px;
+}
+
+// TEXT ELEMENT
+.element.is-text {
+   min-width: 150px;
+   height: min-content;
+}
+// TEXT ITEM PASSIVE
+.element textarea.item {
+   resize: none;
+   overflow: scroll;
+   min-height: 100px;
+   padding: 1.5rem;
+   background: none;
+   border: none;
+   border-radius: 16px;
+   cursor: move !important;
+   -ms-overflow-style: none;
+   scrollbar-width: none;
+   &::-webkit-scrollbar {
+      display: none;
+   }
+}
+// TEXT ITEM ACTIVE
+.element.is-active textarea.item {
+   resize: both;
+   border: 1px solid lightgray;
+   border-radius: 16px;
+   cursor: text !important;
+}

@@ -1,0 +1,253 @@
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.book {
+  margin: 1rem;
+  border: 1px solid lightgrey;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.book .page {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.element {
+  position: relative;
+  border-radius: 12px;
+  -ms-touch-action: none;
+      touch-action: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.element .item {
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  z-index: 1;
+}
+
+.element .controller {
+  border-radius: 16px;
+  display: none !important;
+  z-index: 2;
+}
+
+.element.is-active {
+  border-radius: 16px;
+}
+
+.element.is-active .controller {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  overflow: hidden;
+}
+
+.controller.place-bottom {
+  position: absolute;
+  bottom: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 22px;
+}
+
+.controller.place-bottom .delete-handle,
+.controller.place-bottom .rotation-handle {
+  margin: 0 5px;
+  cursor: pointer;
+  color: grey;
+}
+
+.controller.place-top {
+  position: absolute;
+  top: 0;
+  border: 1px solid lightgrey;
+  background: #f0f0f0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.controller.is-image {
+  width: 200px !important;
+}
+
+.controller.is-image .el {
+  padding: 0 5px;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-right: 1px solid lightgrey;
+}
+
+.controller.is-image .el:hover {
+  background: #ccd4da;
+}
+
+.controller.is-image .fliph,
+.controller.is-image .flipv,
+.controller.is-image .flipf,
+.controller.is-image .flipb {
+  width: 100%;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.controller.is-text {
+  width: 440px !important;
+}
+
+.controller.is-text .el {
+  padding: 0 4px;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-right: 1px solid lightgrey;
+}
+
+.controller.is-text .el.font select {
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+.controller.is-text .el.size select {
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+.controller.is-text .el.bold:hover,
+.controller.is-text .el.italic:hover,
+.controller.is-text .el.strike:hover,
+.controller.is-text .el.flipb:hover,
+.controller.is-text .el.flipf:hover {
+  background: #ccd4da;
+}
+
+.controller.is-text .el.bold button,
+.controller.is-text .el.italic button,
+.controller.is-text .el.strike button,
+.controller.is-text .el.flipb button,
+.controller.is-text .el.flipf button {
+  background: none;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+.controller.is-text .el.color input {
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  border: none !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.element.is-image {
+  width: 180px;
+  min-width: 100px;
+}
+
+.element img.item {
+  border: none;
+}
+
+.element.is-active img.item {
+  border: 1px solid lightgray;
+  border-radius: 16px;
+}
+
+.element.is-text {
+  min-width: 150px;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+
+.element textarea.item {
+  resize: none;
+  overflow: scroll;
+  min-height: 100px;
+  padding: 1.5rem;
+  background: none;
+  border: none;
+  border-radius: 16px;
+  cursor: move !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.element textarea.item::-webkit-scrollbar {
+  display: none;
+}
+
+.element.is-active textarea.item {
+  resize: both;
+  border: 1px solid lightgray;
+  border-radius: 16px;
+  cursor: text !important;
+}
+/*# sourceMappingURL=main.css.map */

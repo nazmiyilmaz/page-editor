@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="main.css" />
+      <link rel="stylesheet" href="pages.css" />
+   </head>
+   <body>
+      <!--BASIC CONTROLLER-->
+      <div style="display: none" class="controller place-bottom is-basic">
+         <span class="rotation-handle">
+            <img src="rotation.svg" />
+         </span>
+         <span class="delete-handle">
+            <img src="delete.svg" />
+         </span>
+      </div>
+
+      <!--IMAGE CONTROLLER-->
+      <div style="display: none" class="controller place-top is-image">
+         <span class="el">
+            <button class="fliph">
+               <img src="fliph.svg" />
+            </button>
+         </span>
+         <span class="el">
+            <button class="flipv">
+               <img src="flipv.svg" />
+            </button>
+         </span>
+         <span class="el">
+            <button class="flipb">
+               <img src="flipb.svg" />
+            </button>
+         </span>
+         <span class="el">
+            <button class="flipf">
+               <img src="flipf.svg" />
+            </button>
+         </span>
+      </div>
+
+      <!--TEXT CONTROLLER-->
+      <div style="display: none" class="controller place-top is-text">
+         <span class="el font">
+            <select>
+               <option selected>Font</option>
+               <option value="Times New Roman">Times New Roman</option>
+               <option value="Quick Sand">Quick Sand</option>
+               <option value="Quick Sand">Open Sans</option>
+            </select>
+         </span>
+         <span class="el size">
+            <select>
+               <option selected>Size</option>
+               <option value="16">16</option>
+               <option value="18">18</option>
+               <option value="20">20</option>
+               <option value="22">22</option>
+            </select>
+         </span>
+         <span class="el color">
+            <input type="color" />
+         </span>
+         <span class="el bold">
+            <button>
+               <img src="bold.svg" />
+            </button>
+         </span>
+         <span class="el italic">
+            <button>
+               <img src="italic.svg" />
+            </button>
+         </span>
+         <span class="el strike">
+            <button>
+               <img src="strike.svg" />
+            </button>
+         </span>
+         <span class="el flipb">
+            <button>
+               <img src="flipb.svg" />
+            </button>
+         </span>
+         <span class="el flipf">
+            <button>
+               <img src="flipf.svg" />
+            </button>
+         </span>
+      </div>
+
+      <div class="main">
+         <!--CONTENT-->
+         <div class="book is-hdv">
+            <div class="page is-current-page"></div>
+         </div>
+      </div>
+
+      <!--SCRIPTS-->
+      <script type="module" src="helpers.js"></script>
+      <script type="module" src="listeners.js"></script>
+      <script type="module" src="interact.js"></script>
+      <script type="module" src="actions.js"></script>
+      <script type="module" src="main.js"></script>
+   </body>
+</html>
