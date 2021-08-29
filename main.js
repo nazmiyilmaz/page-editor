@@ -1,15 +1,24 @@
 import { setDrag, setDropZone, setResize, setRotate } from './interact.js'
 
 import {
-   deleteListener,
-   toggleControllerListener,
-   flipHListener,
-   flipVListener,
-   flipFrontListener,
-   flipBackListener,
-} from './listeners.js'
+   changeColor,
+   changeFontFamily,
+   changeFontSize,
+   deleteItem,
+   flipBack,
+   flipFront,
+   flipHorizontal,
+   flipVertical,
+   switchController,
+   toggleBold,
+   toggleItalic,
+   toggleStrike,
+   setupAlign,
+} from './controls.js'
 
 import { insertImage, insertText } from './actions.js'
+
+import { registerClick, registerChange } from './helpers.js'
 
 // SET PAGES AS DROPZONES
 setDropZone('.page')
@@ -18,49 +27,62 @@ setDropZone('.page')
 setResize('.element.is-image')
 
 // SET DRAG OF ELEMENTS
-setDrag('.element.is-image')
-setDrag('.element.is-text:not(.is-active)')
+setDrag('.move-handle')
 
 // SET ROTATE OF ELEMENTS
 setRotate('.rotation-handle')
 
+// SETUP ALIGN DROPDOWN
+setupAlign()
+
 // REFRESH PAGE
 function refresh() {
-   // FLIP HORIZONTAL
-   document
-      .querySelectorAll('.fliph')
-      .forEach((d) => d.addEventListener('click', flipHListener))
-   // FLIP VERTICAL
-   document
-      .querySelectorAll('.flipv')
-      .forEach((d) => d.addEventListener('click', flipVListener))
-   // FLIP FRONT
-   document
-      .querySelectorAll('.flipf')
-      .forEach((f) => f.addEventListener('click', flipFrontListener))
-   // FLIP FRONT
-   document
-      .querySelectorAll('.flipb')
-      .forEach((f) => f.addEventListener('click', flipBackListener))
-   // DELETE HANDLE
-   document
-      .querySelectorAll('.delete-handle')
-      .forEach((d) => d.addEventListener('click', deleteListener))
-   // SHOW CONTROLLER LISTENERS
-   document
-      .querySelectorAll('.element')
-      .forEach((e) => e.addEventListener('click', toggleControllerListener))
+   // CHANGE FONT
+   registerChange('#change-font', changeFontFamily)
 
-   // HIDE CONTROLLER LISTENERS
-   document
-      .querySelectorAll('.page')
-      .forEach((p) => p.addEventListener('click', toggleControllerListener))
+   // CHANGE FONT SIZE
+   registerChange('#change-font-size', changeFontSize)
+
+   // CHANGE COLOR
+   registerChange('#change-color', changeColor)
+
+   // TOGGLE BOLD TEXT
+   registerChange('#toggle-bold', toggleBold)
+
+   // TOGGLE ITALIC TEXT
+   registerChange('#toggle-italic', toggleItalic)
+
+   // TOGGLE STRIKE TEXT
+   registerChange('#toggle-strike', toggleStrike)
+
+   // FLIP HORIZONTAL
+   registerClick('#flip-horizontal', flipHorizontal)
+
+   // FLIP VERTICAL
+   registerClick('#flip-vertical', flipVertical)
+
+   // FLIP FRONT
+   registerClick('#flip-front', flipFront)
+
+   // FLIP BACK
+   registerClick('#flip-back', flipBack)
+
+   // DELETE HANDLE
+   registerClick('.delete-handle', deleteItem)
+
+   // SWITCH CONTROLLER
+   registerClick('.element', switchController)
+
+   // HIDE CONTROLLER
+   registerClick('.page', switchController)
 }
 
-insertImage('assets/bird.png')
+setTimeout(() => {
+   insertImage('assets/bird.png')
 
-insertText(
-   `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
-)
+   insertText(`Lorem Ipsum is simply dummy text`)
 
-refresh()
+   insertText(`Lorem Ipsum is simply dummy text`)
+
+   refresh()
+}, 1000)
