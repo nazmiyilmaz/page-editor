@@ -1,3 +1,23 @@
+// RGB TO HEX
+export function rgbToHex(rgb) {
+   if (!rgb) {
+      return null
+   }
+   const rgbRegex = /rgb\((.*?), (.*?), (.*?)\)/
+
+   const match = rgbRegex.exec(rgb)
+
+   const r = match[1]
+   const g = match[2]
+   const b = match[3]
+
+   const componentToHex = (c) => {
+      const hex = parseInt(c, 10).toString(16)
+      return hex.length == 1 ? `0${hex}` : hex
+   }
+   return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b)
+}
+
 // REPLACE TRANSLATE VALUE
 export function replaceTranslate(str, x, y) {
    if (!str) {
@@ -146,4 +166,29 @@ export function getBasicControls() {
 
    // return clone
    return controls.cloneNode(true)
+}
+
+export function getThumbs() {
+   // tl
+   const tl = document.createElement('span')
+   tl.classList.add('tl', 'thumb')
+
+   // tr
+   const tr = document.createElement('span')
+   tr.classList.add('tr', 'thumb')
+
+   // bl
+   const bl = document.createElement('span')
+   bl.classList.add('bl', 'thumb')
+
+   // br
+   const br = document.createElement('span')
+   br.classList.add('br', 'thumb')
+
+   return [
+      tl.cloneNode(true),
+      tr.cloneNode(true),
+      bl.cloneNode(true),
+      br.cloneNode(true),
+   ]
 }

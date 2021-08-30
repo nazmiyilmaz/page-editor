@@ -1,4 +1,4 @@
-import { getMaxZ, getBasicControls } from './helpers.js'
+import { getMaxZ, getBasicControls, getThumbs } from './helpers.js'
 
 // INSERT TEXT
 export function insertText(value) {
@@ -33,6 +33,12 @@ function insertElement(item, type) {
    node.appendChild(item)
    // attach controllers
    node.appendChild(getBasicControls())
+
+   // attach thumbs
+   getThumbs().forEach((t) => {
+      node.appendChild(t)
+   })
+
    // append to the page
    page.appendChild(node)
 

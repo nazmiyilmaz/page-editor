@@ -3,11 +3,6 @@ import {
    replaceRotate,
    getDragAngle,
    queryParent,
-   toggleFlipH,
-   toggleFlipV,
-   getMinZ,
-   raiseAllElements,
-   getMaxZ,
 } from './helpers.js'
 
 // DRAG MOVE LISTENER
@@ -25,16 +20,14 @@ export function dragMoveListener(event) {
 // ROTATE LISTENER
 export const rotateListeners = {
    onstart(event) {
-      const el = queryParent(event.target, 'element')
-      const target = el.querySelector('.item')
+      const target = queryParent(event.target, 'element')
       const rect = target.getBoundingClientRect()
       target.setAttribute('data-center-x', rect.left + rect.width / 2)
       target.setAttribute('data-center-y', rect.top + rect.height / 2)
       target.setAttribute('data-angle', getDragAngle(event, target))
    },
    onmove(event) {
-      const el = queryParent(event.target, 'element')
-      const target = el.querySelector('.item')
+      const target = queryParent(event.target, 'element')
       const pos = {
          x: parseFloat(target.getAttribute('data-x')) || 0,
          y: parseFloat(target.getAttribute('data-y')) || 0,
@@ -46,8 +39,7 @@ export const rotateListeners = {
       )
    },
    onend(event) {
-      const el = queryParent(event.target, 'element')
-      const target = el.querySelector('.item')
+      const target = queryParent(event.target, 'element')
       target.setAttribute('data-angle', getDragAngle(event, target))
    },
 }

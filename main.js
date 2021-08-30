@@ -14,6 +14,7 @@ import {
    toggleItalic,
    toggleStrike,
    setupAlign,
+   setupAlpha,
 } from './controls.js'
 
 import { insertImage, insertText } from './actions.js'
@@ -24,7 +25,19 @@ import { registerClick, registerChange } from './helpers.js'
 setDropZone('.page')
 
 // SET RESIZABLE ELEMENTS
-setResize('.element.is-image')
+setResize('.element.is-image', {
+   top: '.thumb.tl, .thumb.tr',
+   left: '.thumb.tl, .thumb.bl',
+   bottom: '.thumb.br, .thumb.bl',
+   right: '.thumb.br, .thumb.tr',
+})
+
+setResize('.element.is-text', {
+   top: '.thumb.tl, .thumb.tr',
+   left: '.thumb.tl, .thumb.bl',
+   bottom: '.thumb.br, .thumb.bl',
+   right: '.thumb.br, .thumb.tr',
+})
 
 // SET DRAG OF ELEMENTS
 setDrag('.move-handle')
@@ -34,6 +47,9 @@ setRotate('.rotation-handle')
 
 // SETUP ALIGN DROPDOWN
 setupAlign()
+
+// SETUP ALPHA
+setupAlpha()
 
 // REFRESH PAGE
 function refresh() {
@@ -80,9 +96,13 @@ function refresh() {
 setTimeout(() => {
    insertImage('assets/bird.png')
 
-   insertText(`Lorem Ipsum is simply dummy text`)
+   insertImage('assets/pineapple.png')
 
-   insertText(`Lorem Ipsum is simply dummy text`)
+   //insertText(`Lorem Ipsum is simply dummy text`)
+
+   insertText(
+      `Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text`
+   )
 
    refresh()
 }, 1000)

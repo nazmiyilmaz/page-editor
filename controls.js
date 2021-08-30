@@ -1,7 +1,14 @@
 // controls
 const controls = {
-   image: ['flip-horizontal', 'flip-vertical', 'flip-back', 'flip-front'],
+   image: [
+      'flip-horizontal',
+      'flip-vertical',
+      'flip-back',
+      'flip-front',
+      'change-alpha',
+   ],
    text: [
+      'change-alpha',
       'change-font',
       'change-font-size',
       'change-color',
@@ -21,6 +28,7 @@ import {
    getMinZ,
    raiseAllElements,
    getMaxZ,
+   rgbToHex,
 } from './helpers.js'
 
 // FLIP FRONT
@@ -97,7 +105,7 @@ export function changeFontSize(event) {
 export function changeColor(event) {
    const el = document.querySelector('.element.is-active')
    const text = el.querySelector('.item')
-   text.style.color = event.target.value
+   text.style.color = `${event.target.value}`
 }
 
 // SETUP ALIGN
@@ -138,6 +146,31 @@ export function alignText(orientation) {
    }
 }
 
+// SETUP ALPHA
+export function setupAlpha() {
+   const alphaPicker = document.getElementById('change-alpha')
+   const menu = alphaPicker.querySelector('.menu')
+   const alphaSlider = document.getElementById('alpha-slider')
+   const alphaLabel = document.getElementById('alpha-label')
+   alphaPicker.addEventListener('click', function (event) {
+      menu.classList.toggle('has-display-none')
+   })
+
+   alphaSlider.addEventListener('change', function (event) {
+      alphaLabel.innerText = event.target.value
+      setAlpha(event.target.value)
+   })
+}
+
+// SET ALPHA
+export function setAlpha(val) {
+   const el = document.querySelector('.element.is-active')
+   if (el) {
+      const item = el.querySelector('.item')
+      item.style.opacity = val / 100
+   }
+}
+
 // DELETE
 export function deleteItem(event) {
    const el = queryParent(event.target, 'element')
@@ -169,6 +202,7 @@ export function switchController(event) {
 
       if (el.classList.contains('is-image')) {
          openMenu('image')
+         loadImageController()
       }
 
       if (el.classList.contains('is-text')) {
@@ -191,8 +225,8 @@ function openMenu(type) {
 }
 
 function hideAll() {
-   controller = document.getElementById('controller')
-   controller.querySelectorAll('.el').forEach(function (el) {
+   const controller = document.getElementById('controller')
+   controller?.querySelectorAll('.el').forEach(function (el) {
       el.style.display = 'none'
    })
 }
@@ -210,6 +244,9 @@ function loadTextController() {
       .getElementById('change-align')
       .querySelector('.selected')
 
+   const alphaSlider = document.getElementById('alpha-slider')
+   const alphaLabel = document.getElementById('alpha-label')
+
    const text = el.querySelector('.item')
 
    // load font family
@@ -219,7 +256,7 @@ function loadTextController() {
    sizePicker.value = text.style.fontSize
 
    // load color
-   colorPicker.value = text.style.color
+   colorPicker.value = rgbToHex(text.style.color) || '#000000'
 
    // load bold
    boldToggle.checked = text.classList.contains('is-bold')
@@ -232,4 +269,22 @@ function loadTextController() {
 
    // load align
    alignSelected.src = `align-${text.style.textAlign || 'left'}.svg`
+
+   // load alpha
+   const alpha = parseFloat(text.style.opacity) * 100 || 100
+   alphaSlider.value = alpha
+   alphaLabel.innerText = alpha
+}
+
+function loadImageController() {
+   const el = document.querySelector('.element.is-active')
+   const alphaSlider = document.getElementById('alpha-slider')
+   const alphaLabel = document.getElementById('alpha-label')
+
+   const image = el.querySelector('.item')
+
+   // load alpha
+   const alpha = parseFloat(image.style.opacity) * 100
+   alphaSlider.value = isNaN(alpha) ? 100 : alpha
+   alphaLabel.innerText = isNaN(alpha) ? 100 : alpha
 }

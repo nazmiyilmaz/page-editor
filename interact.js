@@ -12,10 +12,13 @@ import {
 } from './listeners.js'
 
 // MAKE RESIZABLE
-export function setResize(selector) {
+export function setResize(
+   selector,
+   edges = { left: true, right: true, bottom: true, top: true }
+) {
    interact(selector).resizable({
       // resize from all edges and corners
-      edges: { left: true, bottom: true, top: false, right: true },
+      edges,
       listeners: {
          move: resizeListener,
       },
@@ -25,7 +28,6 @@ export function setResize(selector) {
             outer: 'parent',
          }),
       ],
-
       inertia: true,
    })
 }
@@ -40,7 +42,7 @@ export function setDrag(selector) {
             endOnly: true,
          }),
       ],
-      autoScroll: true,
+      autoScroll: false,
       listeners: { move: dragMoveListener },
    })
 }
