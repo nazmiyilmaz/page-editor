@@ -2,6 +2,8 @@ import { getMaxZ, getBasicControls, getThumbs } from './helpers.js'
 
 import { families, sizes } from './fonts.js'
 
+import { markState } from './history.js'
+
 // INSERT TEXT
 export function insertText(value) {
    // create text
@@ -28,6 +30,9 @@ export function changeBackground(src) {
    // find page
    const page = document.getElementById('active-page')
    page.style.backgroundImage = `url(${src})`
+
+   // mark state
+   markState()
 }
 
 // GENERAL FUNCTION FOR INSERTING ELEMENT
@@ -59,4 +64,7 @@ function insertElement(item, type) {
 
    // dispatch click
    node.click()
+
+   // mark state
+   markState()
 }

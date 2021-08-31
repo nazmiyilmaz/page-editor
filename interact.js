@@ -12,13 +12,15 @@ import {
 } from './listeners.js'
 
 // MAKE RESIZABLE
-export function setResize(
-   selector,
-   edges = { left: true, right: true, bottom: true, top: true }
-) {
+export function setResize(selector) {
    interact(selector).resizable({
       // resize from all edges and corners
-      edges,
+      edges: {
+         top: '.thumb.tl, .thumb.tr',
+         left: '.thumb.tl, .thumb.bl',
+         bottom: '.thumb.br, .thumb.bl',
+         right: '.thumb.br, .thumb.tr',
+      },
       listeners: {
          move: resizeListener,
       },

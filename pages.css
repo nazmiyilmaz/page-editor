@@ -1,20 +1,36 @@
-.is-hd {
+.is-hd #active-page {
   width: 1080px;
   height: 768px;
 }
 
-.is-fhd {
+.is-hd #controller {
+  width: 1080px;
+}
+
+.is-fhd #active-page {
   width: 1920px;
   height: 1080px;
 }
 
-.is-hdv {
+.is-fhd #controller {
+  width: 1920px;
+}
+
+.is-hdv #active-page {
   width: 768px;
   height: 1080px;
 }
 
-.is-fhdv {
+.is-hdv #controller {
+  width: 768px;
+}
+
+.is-fhdv #active-page {
   width: 1080px;
   height: 1920px;
+}
+
+.is-fhdv #controller {
+  width: 1080px;
 }
 /*# sourceMappingURL=pages.css.map */

@@ -17,29 +17,24 @@ import {
    setupAlpha,
 } from './controls.js'
 
-import { insertImage, insertText, changeBackground } from './actions.js'
-
 import { registerClick, registerChange } from './helpers.js'
-
 import { setupFonts } from './fonts.js'
+import keyboard from './keyboard.js'
 
-// SET PAGES AS DROPZONES
+// REFRESH PAGE
+export function refresh() {
+   // DELETE HANDLE
+   registerClick('.delete-handle', deleteItem)
+   // SWITCH CONTROLLER
+   registerClick('.element', switchController)
+}
+
+// SET PAGE AS DROPZONE
 setDropZone('#active-page')
 
 // SET RESIZABLE ELEMENTS
-setResize('.element.is-image', {
-   top: '.thumb.tl, .thumb.tr',
-   left: '.thumb.tl, .thumb.bl',
-   bottom: '.thumb.br, .thumb.bl',
-   right: '.thumb.br, .thumb.tr',
-})
-
-setResize('.element.is-text', {
-   top: '.thumb.tl, .thumb.tr',
-   left: '.thumb.tl, .thumb.bl',
-   bottom: '.thumb.br, .thumb.bl',
-   right: '.thumb.br, .thumb.tr',
-})
+setResize('.element.is-image')
+setResize('.element.is-text')
 
 // SET DRAG OF ELEMENTS
 setDrag('.move-handle')
@@ -56,60 +51,38 @@ setupAlpha()
 // SETUP FONTS
 setupFonts()
 
-// REFRESH PAGE
-function refresh() {
-   // CHANGE FONT
-   registerChange('#change-font', changeFontFamily)
+// INIT KEYBOARD EVENTS
+keyboard()
 
-   // CHANGE FONT SIZE
-   registerChange('#change-font-size', changeFontSize)
+// CHANGE FONT
+registerChange('#change-font', changeFontFamily)
 
-   // CHANGE COLOR
-   registerChange('#change-color', changeColor)
+// CHANGE FONT SIZE
+registerChange('#change-font-size', changeFontSize)
 
-   // TOGGLE BOLD TEXT
-   registerChange('#toggle-bold', toggleBold)
+// CHANGE COLOR
+registerChange('#change-color', changeColor)
 
-   // TOGGLE ITALIC TEXT
-   registerChange('#toggle-italic', toggleItalic)
+// TOGGLE BOLD TEXT
+registerChange('#toggle-bold', toggleBold)
 
-   // TOGGLE STRIKE TEXT
-   registerChange('#toggle-strike', toggleStrike)
+// TOGGLE ITALIC TEXT
+registerChange('#toggle-italic', toggleItalic)
 
-   // FLIP HORIZONTAL
-   registerClick('#flip-horizontal', flipHorizontal)
+// TOGGLE STRIKE TEXT
+registerChange('#toggle-strike', toggleStrike)
 
-   // FLIP VERTICAL
-   registerClick('#flip-vertical', flipVertical)
+// FLIP HORIZONTAL
+registerClick('#flip-horizontal', flipHorizontal)
 
-   // FLIP FRONT
-   registerClick('#flip-front', flipFront)
+// FLIP VERTICAL
+registerClick('#flip-vertical', flipVertical)
 
-   // FLIP BACK
-   registerClick('#flip-back', flipBack)
+// FLIP FRONT
+registerClick('#flip-front', flipFront)
 
-   // DELETE HANDLE
-   registerClick('.delete-handle', deleteItem)
+// FLIP BACK
+registerClick('#flip-back', flipBack)
 
-   // SWITCH CONTROLLER
-   registerClick('.element', switchController)
-
-   // HIDE CONTROLLER
-   registerClick('#active-page', switchController)
-}
-
-setTimeout(() => {
-   insertImage('assets/bird.png')
-
-   insertImage('assets/pineapple.png')
-
-   //insertText(`Lorem Ipsum is simply dummy text`)
-
-   insertText(
-      `Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text`
-   )
-
-   changeBackground('assets/page.jpg')
-
-   refresh()
-}, 1000)
+// HIDE CONTROLLER
+registerClick('#active-page', switchController)
