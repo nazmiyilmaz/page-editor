@@ -12,40 +12,20 @@
           align-items: center;
 }
 
-.book {
-  margin: 1rem;
+#active-page {
+  margin-top: 1rem;
+  display: block;
   border: 1px solid #e2e6eb;
-  overflow: hidden;
   border-radius: 12px;
-}
-
-.book .page {
-  border: none;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .has-display-none {
   display: none !important;
-}
-
-.controls {
-  position: absolute;
-  bottom: -30px;
-  display: none;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: 100%;
-  height: 22px;
-  overflow: hidden;
-}
-
-.controls .delete-handle,
-.controls .rotation-handle,
-.controls .move-handle {
-  margin: 0 5px;
-  cursor: pointer;
 }
 
 .controller {
@@ -62,6 +42,7 @@
   padding: 10px;
   border: 1px solid #e2e6eb;
   border-radius: 12px;
+  z-index: 99999;
 }
 
 .controller .el {
@@ -124,12 +105,20 @@
   background: none;
 }
 
+.controller #change-font select:focus {
+  outline: none;
+}
+
 .controller #change-font-size select {
   width: 80px;
   border: 1px solid #e2e6eb;
   padding: 8px 12px;
   border-radius: 10px;
   background: none;
+}
+
+.controller #change-font-size select:focus {
+  outline: none;
 }
 
 .controller #change-align {
@@ -304,7 +293,7 @@
 }
 
 .element {
-  position: relative;
+  position: absolute;
   -ms-touch-action: none;
       touch-action: none;
   -webkit-box-sizing: border-box;
@@ -319,11 +308,11 @@
       -ms-flex-align: center;
           align-items: center;
   width: 300px;
-  border: 3px solid transparent;
+  border: 2px solid transparent;
 }
 
 .element.is-active {
-  border: 3px solid #6b94d1;
+  border: 2px solid #616a70;
 }
 
 .element.is-active .controls {
@@ -345,13 +334,36 @@
   padding: 1rem;
 }
 
+.element .controls {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  width: 100px;
+  height: 24px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid grey;
+  padding: 5px;
+}
+
+.element .controls .delete-handle,
+.element .controls .rotation-handle,
+.element .controls .move-handle {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
 .element .thumb {
   display: none;
   position: absolute;
   width: 9px;
   height: 9px;
   background: white;
-  border: 3px solid #6b94d1;
+  border: 2px solid #616a70;
 }
 
 .element .thumb.tl {

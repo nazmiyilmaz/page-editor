@@ -3,9 +3,11 @@ $controller-bg-hover: rgb(234, 240, 243);
 $border-color: rgb(226, 230, 235);
 $default-br: 1px solid $border-color;
 
-$element-br: 3px solid rgb(107, 148, 209);
-$element-br-transparent: 3px solid transparent;
+$element-br: 2px solid rgb(97, 106, 112);
+$element-br-transparent: 2px solid transparent;
 $element-br-radius: 12px;
+
+$controls-br: 1px solid grey;
 
 $toggle-bg: white;
 $toggle-bg-active: rgb(241, 241, 241);
@@ -18,39 +20,22 @@ $toggle-bg-active: rgb(241, 241, 241);
    align-items: center;
 }
 
-// BOOK
-.book {
-   margin: 1rem;
+// PAGE
+#active-page {
+   margin-top: 1rem;
+   display: block;
    border: $default-br;
-   overflow: hidden;
    border-radius: 12px;
-   .page {
-      border: none;
-      width: 100%;
-      height: 100%;
-   }
+   overflow: hidden;
+   position: relative;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
 }
 
 // HAS DISPLAY NONE
 .has-display-none {
    display: none !important;
-}
-
-// BASIC CONTROLS
-.controls {
-   position: absolute;
-   bottom: -30px;
-   display: none;
-   justify-content: center;
-   width: 100%;
-   height: 22px;
-   overflow: hidden;
-   .delete-handle,
-   .rotation-handle,
-   .move-handle {
-      margin: 0 5px;
-      cursor: pointer;
-   }
 }
 
 // CONTROLLER
@@ -62,6 +47,7 @@ $toggle-bg-active: rgb(241, 241, 241);
    padding: 10px;
    border: $default-br;
    border-radius: 12px;
+   z-index: 99999;
 
    // GENERAL CONTROL ELEMENT
    .el {
@@ -104,6 +90,10 @@ $toggle-bg-active: rgb(241, 241, 241);
       padding: 8px 12px;
       border-radius: 10px;
       background: none;
+
+      &:focus {
+         outline: none;
+      }
    }
 
    // FONT SIZE SELECTOR
@@ -113,6 +103,9 @@ $toggle-bg-active: rgb(241, 241, 241);
       padding: 8px 12px;
       border-radius: 10px;
       background: none;
+      &:focus {
+         outline: none;
+      }
    }
 
    // ALIGN SELECTOR
@@ -266,7 +259,7 @@ $toggle-bg-active: rgb(241, 241, 241);
 
 // ELEMENT
 .element {
-   position: relative;
+   position: absolute;
    touch-action: none;
    box-sizing: border-box;
    display: flex;
@@ -294,6 +287,27 @@ $toggle-bg-active: rgb(241, 241, 241);
       height: 100%;
       background: none;
       padding: 1rem;
+   }
+
+   // BASIC CONTROLS
+   .controls {
+      display: none;
+      position: absolute;
+      bottom: 10px;
+      width: 100px;
+      height: 24px;
+      justify-content: center;
+      overflow: hidden;
+      background-color: white;
+      border-radius: 12px;
+      border: $controls-br;
+      padding: 5px;
+      .delete-handle,
+      .rotation-handle,
+      .move-handle {
+         margin: 0 5px;
+         cursor: pointer;
+      }
    }
 
    // THUMBS

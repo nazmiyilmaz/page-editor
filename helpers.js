@@ -142,21 +142,21 @@ export function getBasicControls() {
    const rotHandle = document.createElement('span')
    rotHandle.classList.add('rotation-handle')
    const rotIcon = document.createElement('img')
-   rotIcon.src = 'rotation.svg'
+   rotIcon.src = 'icos/rotation.svg'
    rotHandle.appendChild(rotIcon)
 
    // move handle
    const movHandle = document.createElement('span')
    movHandle.classList.add('move-handle')
    const movIcon = document.createElement('img')
-   movIcon.src = 'move.svg'
+   movIcon.src = 'icos/move.svg'
    movHandle.appendChild(movIcon)
 
    // delete handle
    const delHandle = document.createElement('span')
    delHandle.classList.add('delete-handle')
    const delIcon = document.createElement('img')
-   delIcon.src = 'delete.svg'
+   delIcon.src = 'icos/delete.svg'
    delHandle.appendChild(delIcon)
 
    // append handlers

@@ -17,12 +17,14 @@ import {
    setupAlpha,
 } from './controls.js'
 
-import { insertImage, insertText } from './actions.js'
+import { insertImage, insertText, changeBackground } from './actions.js'
 
 import { registerClick, registerChange } from './helpers.js'
 
+import { setupFonts } from './fonts.js'
+
 // SET PAGES AS DROPZONES
-setDropZone('.page')
+setDropZone('#active-page')
 
 // SET RESIZABLE ELEMENTS
 setResize('.element.is-image', {
@@ -50,6 +52,9 @@ setupAlign()
 
 // SETUP ALPHA
 setupAlpha()
+
+// SETUP FONTS
+setupFonts()
 
 // REFRESH PAGE
 function refresh() {
@@ -90,7 +95,7 @@ function refresh() {
    registerClick('.element', switchController)
 
    // HIDE CONTROLLER
-   registerClick('.page', switchController)
+   registerClick('#active-page', switchController)
 }
 
 setTimeout(() => {
@@ -103,6 +108,8 @@ setTimeout(() => {
    insertText(
       `Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text. Lorem Ipsum is simply dummy text`
    )
+
+   changeBackground('assets/page.jpg')
 
    refresh()
 }, 1000)

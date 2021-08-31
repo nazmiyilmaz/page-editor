@@ -34,7 +34,7 @@ import {
 // FLIP FRONT
 export function flipFront() {
    const el = document.querySelector('.element.is-active')
-   const page = queryParent(el, 'page')
+   const page = document.getElementById('active-page')
    const max = getMaxZ(page)
    el.style['z-index'] = max + 1
 }
@@ -42,7 +42,7 @@ export function flipFront() {
 // FLIP BACK
 export function flipBack() {
    const el = document.querySelector('.element.is-active')
-   const page = queryParent(el, 'page')
+   const page = document.getElementById('active-page')
    const min = getMinZ(page)
    if (min <= 0) {
       raiseAllElements(page, min)
@@ -122,17 +122,17 @@ export function setupAlign() {
    })
 
    rightAlg?.addEventListener('click', function (event) {
-      selected.src = 'align-right.svg'
+      selected.src = 'icos/align-right.svg'
       alignText('right')
    })
 
    leftAlg?.addEventListener('click', function (event) {
-      selected.src = 'align-left.svg'
+      selected.src = 'icos/align-left.svg'
       alignText('left')
    })
 
    centerAlg?.addEventListener('click', function (event) {
-      selected.src = 'align-center.svg'
+      selected.src = 'icos/align-center.svg'
       alignText('center')
    })
 }
@@ -189,7 +189,7 @@ export function switchController(event) {
    }
 
    const el = queryParent(event.target, 'element')
-   const page = queryParent(event.target, 'page')
+   const page = document.getElementById('active-page')
 
    if (page) {
       page.querySelectorAll('.element').forEach(function (e) {
@@ -268,12 +268,14 @@ function loadTextController() {
    strikeToggle.checked = text.classList.contains('is-strike')
 
    // load align
-   alignSelected.src = `align-${text.style.textAlign || 'left'}.svg`
+   alignSelected.src = `icos/align-${text.style.textAlign || 'left'}.svg`
 
    // load alpha
-   const alpha = parseFloat(text.style.opacity) * 100 || 100
-   alphaSlider.value = alpha
-   alphaLabel.innerText = alpha
+   const alpha = isNaN(parseFloat(text.style.opacity))
+      ? 1
+      : parseFloat(text.style.opacity)
+   alphaSlider.value = alpha * 100
+   alphaLabel.innerText = parseInt(alpha * 100)
 }
 
 function loadImageController() {
@@ -284,7 +286,9 @@ function loadImageController() {
    const image = el.querySelector('.item')
 
    // load alpha
-   const alpha = parseFloat(image.style.opacity) * 100
-   alphaSlider.value = isNaN(alpha) ? 100 : alpha
-   alphaLabel.innerText = isNaN(alpha) ? 100 : alpha
+   const alpha = isNaN(parseFloat(image.style.opacity))
+      ? 1
+      : parseFloat(image.style.opacity)
+   alphaSlider.value = alpha * 100
+   alphaLabel.innerText = parseInt(alpha * 100)
 }

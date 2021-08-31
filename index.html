@@ -11,42 +11,21 @@
          <div id="controller" class="controller">
             <!--FONT FAMILY-->
             <span id="change-font" class="el">
-               <select id="change-font-select">
-                  <option value="Open Sans, sans-serif">Open Sans</option>
-                  <option value="Bungee, cursive">Bungee</option>
-                  <option value="Lilita One, cursive">Lilita One</option>
-                  <option value="Pollar One, cursive">Pollar One</option>
-                  <option value="Courier Prime, monospace">Courier</option>
-                  <option value="Zen Tokyo Zoo, cursive">Zen Tokyo Zoo</option>
-                  <option value="Shrikhand, cursive">Shrikhand</option>
-                  <option value="Bevan, cursive">Bevan</option>
-               </select>
+               <select id="change-font-select"></select>
             </span>
 
             <!--FONT SIZE-->
             <span id="change-font-size" class="el">
-               <select id="change-font-size-select">
-                  <option value="16px">16px</option>
-                  <option value="18px">18px</option>
-                  <option value="20px">20px</option>
-                  <option value="22px">22px</option>
-                  <option value="24px">24px</option>
-                  <option value="26px">26px</option>
-                  <option value="28px">28px</option>
-                  <option value="30px">30px</option>
-                  <option value="32px">32px</option>
-                  <option value="34px">34px</option>
-                  <option value="36px">36px</option>
-               </select>
+               <select id="change-font-size-select"></select>
             </span>
 
             <!--TEXT ALIGN-->
             <span id="change-align" class="el">
-               <img class="selected" src="align-left.svg" />
+               <img class="selected" src="icos/align-left.svg" />
                <div class="menu has-display-none">
-                  <img src="align-left.svg" class="left-alg" />
-                  <img src="align-center.svg" class="center-alg" />
-                  <img src="align-right.svg" class="right-alg" />
+                  <img src="icos/align-left.svg" class="left-alg" />
+                  <img src="icos/align-center.svg" class="center-alg" />
+                  <img src="icos/align-right.svg" class="right-alg" />
                </div>
             </span>
 
@@ -58,53 +37,57 @@
             <!--TOGGLE BOLD-->
             <span id="toggle-bold" class="el">
                <input type="checkbox" id="toggle-bold-btn" />
-               <label for="toggle-bold-btn"><img src="bold.svg" /></label>
+               <label for="toggle-bold-btn"><img src="icos/bold.svg" /></label>
             </span>
 
             <!--TOGGLE ITALIC-->
             <span id="toggle-italic" class="el italic">
                <input type="checkbox" id="toggle-italic-btn" />
-               <label for="toggle-italic-btn"><img src="italic.svg" /></label>
+               <label for="toggle-italic-btn"
+                  ><img src="icos/italic.svg"
+               /></label>
             </span>
 
             <!--TOGGLE STRIKE-->
             <span id="toggle-strike" class="el">
                <input type="checkbox" id="toggle-strike-btn" />
-               <label for="toggle-strike-btn"><img src="strike.svg" /></label>
+               <label for="toggle-strike-btn"
+                  ><img src="icos/strike.svg"
+               /></label>
             </span>
 
             <!--FLIP HORIZONTAL-->
             <span id="flip-horizontal" class="el">
                <button>
-                  <img src="fliph.svg" />
+                  <img src="icos/fliph.svg" />
                </button>
             </span>
 
             <!--FLIP VERTICAL-->
             <span id="flip-vertical" class="el">
                <button>
-                  <img src="flipv.svg" />
+                  <img src="icos/flipv.svg" />
                </button>
             </span>
 
             <!--FLIP BACK-->
             <span id="flip-back" class="el">
                <button>
-                  <img src="flipb.svg" />
+                  <img src="icos/flipb.svg" />
                </button>
             </span>
 
             <!--FLIP FRONT-->
             <span id="flip-front" class="el">
                <button>
-                  <img src="flipf.svg" />
+                  <img src="icos/flipf.svg" />
                </button>
             </span>
 
             <!--ALPHA-->
             <span id="change-alpha" class="el">
                <span class="selected">
-                  <img src="opacity.svg" />
+                  <img src="icos/opacity.svg" />
                   <p id="alpha-label">100</p>
                </span>
                <div class="menu has-display-none">
@@ -113,13 +96,12 @@
             </span>
          </div>
          <!--CONTENT-->
-         <div class="book is-hdv">
-            <div class="page is-current-page"></div>
-         </div>
+         <div id="active-page" class="is-hdv"></div>
       </div>
 
       <!--SCRIPTS-->
       <script type="module" src="helpers.js"></script>
+      <script type="module" src="fonts.js"></script>
       <script type="module" src="listeners.js"></script>
       <script type="module" src="interact.js"></script>
       <script type="module" src="actions.js"></script>

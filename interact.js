@@ -25,7 +25,7 @@ export function setResize(
       modifiers: [
          // keep the edges inside the parent
          interact.modifiers.restrictEdges({
-            outer: 'parent',
+            outer: '#active-page',
          }),
       ],
       inertia: true,
@@ -38,7 +38,7 @@ export function setDrag(selector) {
       inertia: true,
       modifiers: [
          interact.modifiers.restrictRect({
-            restriction: 'parent',
+            restriction: '#active-page',
             endOnly: true,
          }),
       ],

@@ -1,12 +1,15 @@
 import { getMaxZ, getBasicControls, getThumbs } from './helpers.js'
 
+import { families, sizes } from './fonts.js'
+
 // INSERT TEXT
 export function insertText(value) {
    // create text
    const text = document.createElement('textarea')
    text.value = value
-   text.style.fontFamily = 'Open Sans, sans-serif'
-   text.style.fontSize = '16px'
+   text.style.fontFamily = families[0][1]
+   text.style.fontSize = `${sizes.default}${sizes.unit}`
+   text.spellcheck = false
    // insert to the page
    insertElement(text, 'text')
 }
@@ -20,17 +23,29 @@ export function insertImage(src) {
    insertElement(image, 'image')
 }
 
+// CHANGE BACKGROUND
+export function changeBackground(src) {
+   // find page
+   const page = document.getElementById('active-page')
+   page.style.backgroundImage = `url(${src})`
+}
+
+// GENERAL FUNCTION FOR INSERTING ELEMENT
 function insertElement(item, type) {
    // find page
-   const page = document.querySelector('.page.is-current-page')
+   const page = document.getElementById('active-page')
+
    // create node
    const node = document.createElement('div')
    node.classList.add('element', `is-${type}`)
+
    // set z-index
    node.style['z-index'] = getMaxZ(page) + 1
+
    // attach item
    item.classList.add('item')
    node.appendChild(item)
+
    // attach controllers
    node.appendChild(getBasicControls())
 
