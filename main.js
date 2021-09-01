@@ -21,13 +21,13 @@ import { registerClick, registerChange } from './helpers.js'
 import { setupFonts } from './fonts.js'
 import keyboard from './keyboard.js'
 
-// REFRESH PAGE
-export function refresh() {
-   // DELETE HANDLE
-   registerClick('.delete-handle', deleteItem)
-   // SWITCH CONTROLLER
-   registerClick('.element', switchController)
-}
+import { init as initHistory, undo, redo } from './history.js'
+
+// SWITCH CONTROLLER
+registerClick('.element', switchController)
+
+// DELETE HANDLE
+registerClick('.delete-handle', deleteItem)
 
 // SET PAGE AS DROPZONE
 setDropZone('#active-page')
@@ -86,3 +86,10 @@ registerClick('#flip-back', flipBack)
 
 // HIDE CONTROLLER
 registerClick('#active-page', switchController)
+
+// REGISTER UNDO REDO
+registerClick('#undo', undo)
+registerClick('#redo', redo)
+
+// INIT HISTORY
+initHistory()

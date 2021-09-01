@@ -4,11 +4,12 @@ import { families, sizes } from './fonts.js'
 
 import { markState } from './history.js'
 
+import { create as createText } from './textarea.js'
+
 // INSERT TEXT
 export function insertText(value) {
    // create text
-   const text = document.createElement('textarea')
-   text.value = value
+   const text = createText(value)
    text.style.fontFamily = families[0][1]
    text.style.fontSize = `${sizes.default}${sizes.unit}`
    text.spellcheck = false

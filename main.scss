@@ -12,12 +12,20 @@ $controls-br: 1px solid grey;
 $toggle-bg: white;
 $toggle-bg-active: rgb(241, 241, 241);
 
+// REMOVE LATER |||||||||||||||||||||||||||
+body {
+   width: 1000px;
+   margin: auto;
+   margin-top: 120px;
+}
+
 // MAIN
-.main {
+.main-container {
+   padding: 10px;
    display: flex;
    flex-direction: column;
-   width: 100%;
    align-items: center;
+   border: 1px solid red;
 }
 
 // PAGE
@@ -38,21 +46,25 @@ $toggle-bg-active: rgb(241, 241, 241);
    display: none !important;
 }
 
-// CONTROLLER
-.controller {
+// CONTROLLERS
+#controllers {
+   width: 100%;
+   display: flex;
+}
+
+// ELEMENT CONTROLLER
+.element-controller {
    width: min-content;
-   height: 30px;
    display: flex;
    justify-content: center;
-   padding: 10px;
-   border: $default-br;
-   border-radius: 12px;
+   align-items: center;
    z-index: 99999;
+   height: 30px;
 
    // GENERAL CONTROL ELEMENT
    .el {
       padding: 0 4px;
-      height: 100%;
+      height: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -98,7 +110,7 @@ $toggle-bg-active: rgb(241, 241, 241);
 
    // FONT SIZE SELECTOR
    #change-font-size select {
-      width: 80px;
+      width: 70px;
       border: $default-br;
       padding: 8px 12px;
       border-radius: 10px;
@@ -152,25 +164,16 @@ $toggle-bg-active: rgb(241, 241, 241);
    // ALPHA SELECTOR
    #change-alpha {
       position: relative;
-      .selected {
+      .icon {
+         width: 32px;
+         height: 28px;
          border: $default-br;
-         border-radius: 6px;
          cursor: pointer;
+         border-radius: 6px;
          display: flex;
          justify-content: center;
-         align-items: center;
-         width: 60px;
-         height: 28px;
          img {
             width: 20px;
-         }
-         p {
-            padding: 1px 3px;
-            font-family: sans-serif;
-            font-size: 0.8rem;
-            border: $default-br;
-            border-radius: 4px;
-            color: rgb(70, 71, 73);
          }
       }
 
@@ -180,35 +183,39 @@ $toggle-bg-active: rgb(241, 241, 241);
          left: 0;
          background-color: white;
          border: $default-br;
-         border-radius: 6px;
+         border-radius: 8px;
+         display: flex;
+         height: 27px;
+         width: 160px;
+         align-items: center;
+         justify-content: center;
 
          #alpha-slider {
             -webkit-appearance: none;
             appearance: none;
-            background-color: black;
+            background-color: rgb(213, 225, 231);
             height: 7px;
+            border: 1px solid rgb(104, 112, 116);
             border-radius: 5px;
             outline: none;
 
             &::-webkit-slider-thumb {
                -webkit-appearance: none;
                appearance: none;
-               width: 12px;
-               height: 12px;
-               outline: 1px solid white;
-               border: 3px solid black;
+               width: 16px;
+               height: 16px;
+               border: 3px solid rgb(69, 81, 97);
                border-radius: 100%;
-               background: white;
+               background: rgb(213, 225, 231);
                cursor: pointer;
             }
 
             &::-moz-range-thumb {
-               width: 12px;
-               height: 12px;
-               outline: 1px solid white;
-               border: 3px solid black;
+               width: 16px;
+               height: 16px;
+               border: 3px solid rgb(69, 81, 97);
                border-radius: 100%;
-               background: white;
+               background: rgb(213, 225, 231);
                cursor: pointer;
             }
          }
@@ -218,7 +225,6 @@ $toggle-bg-active: rgb(241, 241, 241);
    // COLOR SELECTOR
    #change-color {
       width: 30px;
-      height: 30px;
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -253,6 +259,51 @@ $toggle-bg-active: rgb(241, 241, 241);
          border: $default-br;
          border-radius: 6px;
          cursor: pointer;
+         height: 100%;
+      }
+      img {
+         width: 22px;
+      }
+   }
+}
+
+// PAGE CONTROLLER
+#page-controller {
+   margin-left: auto;
+   width: min-content;
+   height: 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 99999;
+   // GENERAL CONTROL ELEMENT
+   .el {
+      padding: 0 4px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+   #undo,
+   #redo {
+      button {
+         height: 100%;
+         background: none;
+         border: $default-br;
+         border-radius: 100%;
+         cursor: pointer;
+      }
+      img {
+         width: 16px;
+      }
+
+      &.is-disabled {
+         button {
+            cursor: not-allowed;
+         }
+         img {
+            filter: opacity(0.4);
+         }
       }
    }
 }

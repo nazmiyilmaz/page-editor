@@ -132,6 +132,13 @@ export function registerChange(query, handler) {
    })
 }
 
+// REGISTER INPUT
+export function registerInput(query, handler) {
+   document.querySelectorAll(query).forEach(function (el) {
+      el.addEventListener('input', handler)
+   })
+}
+
 // GENERATE CONTROLLER
 export function getBasicControls() {
    // controls

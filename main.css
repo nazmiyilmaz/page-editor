@@ -1,4 +1,11 @@
-.main {
+body {
+  width: 1000px;
+  margin: auto;
+  margin-top: 120px;
+}
+
+.main-container {
+  padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6,10 +13,10 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border: 1px solid red;
 }
 
 #active-page {
@@ -28,26 +35,33 @@
   display: none !important;
 }
 
-.controller {
+#controllers {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.element-controller {
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
-  height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 10px;
-  border: 1px solid #e2e6eb;
-  border-radius: 12px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   z-index: 99999;
+  height: 30px;
 }
 
-.controller .el {
+.element-controller .el {
   padding: 0 4px;
-  height: 100%;
+  height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -59,27 +73,27 @@
           align-items: center;
 }
 
-.controller #toggle-bold,
-.controller #toggle-italic,
-.controller #toggle-strike {
+.element-controller #toggle-bold,
+.element-controller #toggle-italic,
+.element-controller #toggle-strike {
   position: relative;
 }
 
-.controller #toggle-bold input,
-.controller #toggle-italic input,
-.controller #toggle-strike input {
+.element-controller #toggle-bold input,
+.element-controller #toggle-italic input,
+.element-controller #toggle-strike input {
   display: none;
 }
 
-.controller #toggle-bold input:checked + label,
-.controller #toggle-italic input:checked + label,
-.controller #toggle-strike input:checked + label {
+.element-controller #toggle-bold input:checked + label,
+.element-controller #toggle-italic input:checked + label,
+.element-controller #toggle-strike input:checked + label {
   background-color: #f1f1f1;
 }
 
-.controller #toggle-bold label,
-.controller #toggle-italic label,
-.controller #toggle-strike label {
+.element-controller #toggle-bold label,
+.element-controller #toggle-italic label,
+.element-controller #toggle-strike label {
   cursor: pointer;
   border: 1px solid #e2e6eb;
   border-radius: 6px;
@@ -97,7 +111,7 @@
   background-color: white;
 }
 
-.controller #change-font select {
+.element-controller #change-font select {
   width: 130px;
   border: 1px solid #e2e6eb;
   padding: 8px 12px;
@@ -105,23 +119,23 @@
   background: none;
 }
 
-.controller #change-font select:focus {
+.element-controller #change-font select:focus {
   outline: none;
 }
 
-.controller #change-font-size select {
-  width: 80px;
+.element-controller #change-font-size select {
+  width: 70px;
   border: 1px solid #e2e6eb;
   padding: 8px 12px;
   border-radius: 10px;
   background: none;
 }
 
-.controller #change-font-size select:focus {
+.element-controller #change-font-size select:focus {
   outline: none;
 }
 
-.controller #change-align {
+.element-controller #change-align {
   border: 1px solid #e2e6eb;
   border-radius: 6px;
   cursor: pointer;
@@ -131,17 +145,17 @@
   margin-right: 4px;
 }
 
-.controller #change-align .selected {
+.element-controller #change-align .selected {
   width: 24px;
   padding: 3px 4px;
   border-radius: 5px;
 }
 
-.controller #change-align .selected:hover {
+.element-controller #change-align .selected:hover {
   background-color: #f1f1f1;
 }
 
-.controller #change-align .menu {
+.element-controller #change-align .menu {
   overflow: hidden;
   background-color: white;
   display: -webkit-box;
@@ -163,24 +177,146 @@
   border-bottom-right-radius: 6px;
 }
 
-.controller #change-align .menu img {
+.element-controller #change-align .menu img {
   width: 24px;
   padding: 2px 4px;
   height: 30px;
 }
 
-.controller #change-align .menu img:hover {
+.element-controller #change-align .menu img:hover {
   background-color: #f1f1f1;
 }
 
-.controller #change-alpha {
+.element-controller #change-alpha {
   position: relative;
 }
 
-.controller #change-alpha .selected {
+.element-controller #change-alpha .icon {
+  width: 32px;
+  height: 28px;
+  border: 1px solid #e2e6eb;
+  cursor: pointer;
+  border-radius: 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.element-controller #change-alpha .icon img {
+  width: 20px;
+}
+
+.element-controller #change-alpha .menu {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  background-color: white;
+  border: 1px solid #e2e6eb;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 27px;
+  width: 160px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.element-controller #change-alpha .menu #alpha-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  background-color: #d5e1e7;
+  height: 7px;
+  border: 1px solid #687074;
+  border-radius: 5px;
+  outline: none;
+}
+
+.element-controller #change-alpha .menu #alpha-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 3px solid #455161;
+  border-radius: 100%;
+  background: #d5e1e7;
+  cursor: pointer;
+}
+
+.element-controller #change-alpha .menu #alpha-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 3px solid #455161;
+  border-radius: 100%;
+  background: #d5e1e7;
+  cursor: pointer;
+}
+
+.element-controller #change-color {
+  width: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  border: 1px solid #e2e6eb;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.element-controller #change-color input {
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  width: 29px;
+  height: 100%;
+}
+
+.element-controller #change-color input::-webkit-color-swatch {
+  border-radius: 5px;
+  border: none;
+}
+
+.element-controller #change-color input::-moz-color-swatch {
+  border-radius: 5px;
+  border: none;
+}
+
+.element-controller #flip-horizontal button,
+.element-controller #flip-vertical button,
+.element-controller #flip-back button,
+.element-controller #flip-front button {
+  background: none;
   border: 1px solid #e2e6eb;
   border-radius: 6px;
   cursor: pointer;
+  height: 100%;
+}
+
+.element-controller #flip-horizontal img,
+.element-controller #flip-vertical img,
+.element-controller #flip-back img,
+.element-controller #flip-front img {
+  width: 22px;
+}
+
+#page-controller {
+  margin-left: auto;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -190,106 +326,46 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 60px;
-  height: 28px;
+  z-index: 99999;
 }
 
-.controller #change-alpha .selected img {
-  width: 20px;
-}
-
-.controller #change-alpha .selected p {
-  padding: 1px 3px;
-  font-family: sans-serif;
-  font-size: 0.8rem;
-  border: 1px solid #e2e6eb;
-  border-radius: 4px;
-  color: #464749;
-}
-
-.controller #change-alpha .menu {
-  position: absolute;
-  top: 32px;
-  left: 0;
-  background-color: white;
-  border: 1px solid #e2e6eb;
-  border-radius: 6px;
-}
-
-.controller #change-alpha .menu #alpha-slider {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
-  background-color: black;
-  height: 7px;
-  border-radius: 5px;
-  outline: none;
-}
-
-.controller #change-alpha .menu #alpha-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  outline: 1px solid white;
-  border: 3px solid black;
-  border-radius: 100%;
-  background: white;
-  cursor: pointer;
-}
-
-.controller #change-alpha .menu #alpha-slider::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  outline: 1px solid white;
-  border: 3px solid black;
-  border-radius: 100%;
-  background: white;
-  cursor: pointer;
-}
-
-.controller #change-color {
-  width: 30px;
+#page-controller .el {
+  padding: 0 4px;
   height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  cursor: pointer;
-  border: 1px solid #e2e6eb;
-  border-radius: 6px;
-  background-color: white;
 }
 
-.controller #change-color input {
-  padding: 0;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  width: 29px;
+#page-controller #undo button,
+#page-controller #redo button {
   height: 100%;
-}
-
-.controller #change-color input::-webkit-color-swatch {
-  border-radius: 5px;
-  border: none;
-}
-
-.controller #change-color input::-moz-color-swatch {
-  border-radius: 5px;
-  border: none;
-}
-
-.controller #flip-horizontal button,
-.controller #flip-vertical button,
-.controller #flip-back button,
-.controller #flip-front button {
   background: none;
   border: 1px solid #e2e6eb;
-  border-radius: 6px;
+  border-radius: 100%;
   cursor: pointer;
+}
+
+#page-controller #undo img,
+#page-controller #redo img {
+  width: 16px;
+}
+
+#page-controller #undo.is-disabled button,
+#page-controller #redo.is-disabled button {
+  cursor: not-allowed;
+}
+
+#page-controller #undo.is-disabled img,
+#page-controller #redo.is-disabled img {
+  -webkit-filter: opacity(0.4);
+          filter: opacity(0.4);
 }
 
 .element {

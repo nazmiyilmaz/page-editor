@@ -5,11 +5,9 @@ import 'https://cdn.interactjs.io/v1.9.20/modifiers/index.js'
 import 'https://cdn.interactjs.io/v1.9.20/dev-tools/index.js'
 import interact from 'https://cdn.interactjs.io/v1.9.20/interactjs/index.js'
 
-import {
-   dragMoveListener,
-   resizeListener,
-   rotateListeners,
-} from './listeners.js'
+import { rotateListeners, dragListeners, resizeListeners } from './listeners.js'
+
+import { markState } from './history.js'
 
 // MAKE RESIZABLE
 export function setResize(selector) {
@@ -21,9 +19,7 @@ export function setResize(selector) {
          bottom: '.thumb.br, .thumb.bl',
          right: '.thumb.br, .thumb.tr',
       },
-      listeners: {
-         move: resizeListener,
-      },
+      listeners: resizeListeners,
       modifiers: [
          // keep the edges inside the parent
          interact.modifiers.restrictEdges({
@@ -45,7 +41,7 @@ export function setDrag(selector) {
          }),
       ],
       autoScroll: false,
-      listeners: { move: dragMoveListener },
+      listeners: dragListeners,
    })
 }
 

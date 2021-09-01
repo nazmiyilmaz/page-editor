@@ -6,100 +6,123 @@
       <link rel="stylesheet" href="pages.css" />
    </head>
    <body>
-      <div class="main is-hdv">
-         <!--CONTROLLER-->
-         <div id="controller" class="controller">
-            <!--FONT FAMILY-->
-            <span id="change-font" class="el">
-               <select id="change-font-select"></select>
-            </span>
-
-            <!--FONT SIZE-->
-            <span id="change-font-size" class="el">
-               <select id="change-font-size-select"></select>
-            </span>
-
-            <!--TEXT ALIGN-->
-            <span id="change-align" class="el">
-               <img class="selected" src="icos/align-left.svg" />
-               <div class="menu has-display-none">
-                  <img src="icos/align-left.svg" class="left-alg" />
-                  <img src="icos/align-center.svg" class="center-alg" />
-                  <img src="icos/align-right.svg" class="right-alg" />
-               </div>
-            </span>
-
-            <!--COLOR-->
-            <span id="change-color" class="el">
-               <input id="change-color-picker" type="color" />
-            </span>
-
-            <!--TOGGLE BOLD-->
-            <span id="toggle-bold" class="el">
-               <input type="checkbox" id="toggle-bold-btn" />
-               <label for="toggle-bold-btn"><img src="icos/bold.svg" /></label>
-            </span>
-
-            <!--TOGGLE ITALIC-->
-            <span id="toggle-italic" class="el italic">
-               <input type="checkbox" id="toggle-italic-btn" />
-               <label for="toggle-italic-btn"
-                  ><img src="icos/italic.svg"
-               /></label>
-            </span>
-
-            <!--TOGGLE STRIKE-->
-            <span id="toggle-strike" class="el">
-               <input type="checkbox" id="toggle-strike-btn" />
-               <label for="toggle-strike-btn"
-                  ><img src="icos/strike.svg"
-               /></label>
-            </span>
-
-            <!--FLIP HORIZONTAL-->
-            <span id="flip-horizontal" class="el">
-               <button>
-                  <img src="icos/fliph.svg" />
-               </button>
-            </span>
-
-            <!--FLIP VERTICAL-->
-            <span id="flip-vertical" class="el">
-               <button>
-                  <img src="icos/flipv.svg" />
-               </button>
-            </span>
-
-            <!--FLIP BACK-->
-            <span id="flip-back" class="el">
-               <button>
-                  <img src="icos/flipb.svg" />
-               </button>
-            </span>
-
-            <!--FLIP FRONT-->
-            <span id="flip-front" class="el">
-               <button>
-                  <img src="icos/flipf.svg" />
-               </button>
-            </span>
-
-            <!--ALPHA-->
-            <span id="change-alpha" class="el">
-               <span class="selected">
-                  <img src="icos/opacity.svg" />
-                  <p id="alpha-label">100</p>
+      <div class="main-container is-square600">
+         <!--CONTROLLERS-->
+         <div id="controllers">
+            <!--ELEMENT CONTROLLER-->
+            <div id="element-controller" class="element-controller">
+               <!--FONT FAMILY-->
+               <span id="change-font" class="el">
+                  <select id="change-font-select"></select>
                </span>
-               <div class="menu has-display-none">
-                  <input type="range" min="0" max="100" id="alpha-slider" />
-               </div>
-            </span>
+
+               <!--FONT SIZE-->
+               <span id="change-font-size" class="el">
+                  <select id="change-font-size-select"></select>
+               </span>
+
+               <!--TEXT ALIGN-->
+               <span id="change-align" class="el">
+                  <img class="selected" src="icos/align-left.svg" />
+                  <div class="menu has-display-none">
+                     <img src="icos/align-left.svg" class="left-alg" />
+                     <img src="icos/align-center.svg" class="center-alg" />
+                     <img src="icos/align-right.svg" class="right-alg" />
+                  </div>
+               </span>
+
+               <!--COLOR-->
+               <span id="change-color" class="el">
+                  <input id="change-color-picker" type="color" />
+               </span>
+
+               <!--TOGGLE BOLD-->
+               <span id="toggle-bold" class="el">
+                  <input type="checkbox" id="toggle-bold-btn" />
+                  <label for="toggle-bold-btn"
+                     ><img src="icos/bold.svg"
+                  /></label>
+               </span>
+
+               <!--TOGGLE ITALIC-->
+               <span id="toggle-italic" class="el italic">
+                  <input type="checkbox" id="toggle-italic-btn" />
+                  <label for="toggle-italic-btn"
+                     ><img src="icos/italic.svg"
+                  /></label>
+               </span>
+
+               <!--TOGGLE STRIKE-->
+               <span id="toggle-strike" class="el">
+                  <input type="checkbox" id="toggle-strike-btn" />
+                  <label for="toggle-strike-btn"
+                     ><img src="icos/strike.svg"
+                  /></label>
+               </span>
+
+               <!--FLIP HORIZONTAL-->
+               <span id="flip-horizontal" class="el">
+                  <button>
+                     <img src="icos/fliph.svg" />
+                  </button>
+               </span>
+
+               <!--FLIP VERTICAL-->
+               <span id="flip-vertical" class="el">
+                  <button>
+                     <img src="icos/flipv.svg" />
+                  </button>
+               </span>
+
+               <!--FLIP BACK-->
+               <span id="flip-back" class="el">
+                  <button>
+                     <img src="icos/flipb.svg" />
+                  </button>
+               </span>
+
+               <!--FLIP FRONT-->
+               <span id="flip-front" class="el">
+                  <button>
+                     <img src="icos/flipf.svg" />
+                  </button>
+               </span>
+
+               <!--ALPHA-->
+               <span id="change-alpha" class="el">
+                  <span class="icon">
+                     <img src="icos/opacity.svg" />
+                  </span>
+                  <div class="menu has-display-none">
+                     <input type="range" min="0" max="100" id="alpha-slider" />
+                  </div>
+               </span>
+            </div>
+
+            <!--PAGE CONTROLLER-->
+            <div id="page-controller" class="page-controller">
+               <!--FLIP BACK-->
+               <span id="undo" class="el is-disabled">
+                  <button>
+                     <img src="icos/undo.svg" />
+                  </button>
+               </span>
+
+               <!--FLIP FRONT-->
+               <span id="redo" class="el is-disabled">
+                  <button>
+                     <img src="icos/redo.svg" />
+                  </button>
+               </span>
+            </div>
          </div>
+
          <!--CONTENT-->
          <div id="active-page"></div>
       </div>
 
       <!--SCRIPTS-->
+      <script type="module" src="textarea.js"></script>
       <script type="module" src="helpers.js"></script>
       <script type="module" src="fonts.js"></script>
       <script type="module" src="history.js"></script>

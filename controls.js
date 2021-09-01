@@ -253,7 +253,6 @@ export function setupAlpha() {
    const alphaPicker = document.getElementById('change-alpha')
    const menu = alphaPicker.querySelector('.menu')
    const alphaSlider = document.getElementById('alpha-slider')
-   const alphaLabel = document.getElementById('alpha-label')
 
    // show slider when clicked to the alpha picker
    alphaPicker.addEventListener('click', function (event) {
@@ -262,7 +261,6 @@ export function setupAlpha() {
 
    // update opacity when there is a change
    alphaSlider.addEventListener('change', function (event) {
-      alphaLabel.innerText = event.target.value
       setAlpha(event.target.value)
    })
 }
@@ -325,40 +323,33 @@ export function switchController(event) {
       return
    }
 
-   // find element
+   // set active class
    const el = queryParent(event.target, 'element')
+   el.classList.add('is-active')
 
-   // if element is found open corresponding controllers
-   if (el) {
-      // activate element
-      el.classList.add('is-active')
-
-      // check if it is a image item
-      if (el.classList.contains('is-image')) {
-         // open image controllers
-         openMenu('image')
-         // load settings of the element
-         loadImageController()
-      }
-
-      // check if it is a text item
-      if (el.classList.contains('is-text')) {
-         // open text controllers
-         openMenu('text')
-         // load settings of the element
-         loadTextController()
-      }
-   }
-   // else hide menu
-   else {
-      hideAll()
-   }
+   // open menu
+   openMenu()
 }
 
 // OPEN MENU FOR SPECIFIC TYPE OF ELEMENT
-function openMenu(type) {
+export function openMenu() {
    // hide all at first
    hideAll()
+
+   // find element
+   const el = document.querySelector('.element.is-active')
+
+   // if no element is active return
+   if (!el) {
+      return
+   }
+
+   // init type
+   let type
+
+   // assign type
+   if (el.classList.contains('is-image')) type = 'image'
+   if (el.classList.contains('is-text')) type = 'text'
 
    // get controller based on type
    const items = controls[type]
@@ -368,12 +359,15 @@ function openMenu(type) {
          document.getElementById(item).style.display = 'unset'
       }
    }
+
+   // load settings of item
+   loadController(type)
 }
 
 // HIDE ALL CONTROLLER ITEMS
 function hideAll() {
    // find controller
-   const controller = document.getElementById('controller')
+   const controller = document.getElementById('element-controller')
 
    // set display none to all controller components
    controller?.querySelectorAll('.el').forEach(function (el) {
@@ -381,68 +375,66 @@ function hideAll() {
    })
 }
 
-// SET VALUES OF TEXT ELEMENT IN THE CONTROLLER
-function loadTextController() {
-   // find element
-   const el = document.querySelector('.element.is-active')
+// SET VALUES OF ELEMENT IN THE CONTROLLER
+function loadController(type) {
+   // LOAD TEXT CONTROLLER
+   if (type === 'text') {
+      // find element
+      const el = document.querySelector('.element.is-active')
 
-   // find item
-   const text = el.querySelector('.item')
+      // find item
+      const text = el.querySelector('.item')
 
-   // load font family
-   const fontPicker = document.getElementById('change-font-select')
-   fontPicker.value = text.style.fontFamily
+      // load font family
+      const fontPicker = document.getElementById('change-font-select')
+      fontPicker.value = text.style.fontFamily
 
-   // load font size
-   const sizePicker = document.getElementById('change-font-size-select')
-   sizePicker.value = text.style.fontSize
+      // load font size
+      const sizePicker = document.getElementById('change-font-size-select')
+      sizePicker.value = text.style.fontSize
 
-   // load color
-   const colorPicker = document.getElementById('change-color-picker')
-   colorPicker.value = rgbToHex(text.style.color) || '#000000'
+      // load color
+      const colorPicker = document.getElementById('change-color-picker')
+      colorPicker.value = rgbToHex(text.style.color) || '#000000'
 
-   // load bold
-   const boldToggle = document.getElementById('toggle-bold-btn')
-   boldToggle.checked = text.classList.contains('is-bold')
+      // load bold
+      const boldToggle = document.getElementById('toggle-bold-btn')
+      boldToggle.checked = text.classList.contains('is-bold')
 
-   // load italic
-   const italicToggle = document.getElementById('toggle-italic-btn')
-   italicToggle.checked = text.classList.contains('is-italic')
+      // load italic
+      const italicToggle = document.getElementById('toggle-italic-btn')
+      italicToggle.checked = text.classList.contains('is-italic')
 
-   // load strike
-   const strikeToggle = document.getElementById('toggle-strike-btn')
-   strikeToggle.checked = text.classList.contains('is-strike')
+      // load strike
+      const strikeToggle = document.getElementById('toggle-strike-btn')
+      strikeToggle.checked = text.classList.contains('is-strike')
 
-   // load align
-   const alignSelected = document
-      .getElementById('change-align')
-      .querySelector('.selected')
-   alignSelected.src = `icos/align-${text.style.textAlign || 'left'}.svg`
+      // load align
+      const alignSelected = document
+         .getElementById('change-align')
+         .querySelector('.selected')
+      alignSelected.src = `icos/align-${text.style.textAlign || 'left'}.svg`
 
-   // load alpha
-   const alphaSlider = document.getElementById('alpha-slider')
-   const alphaLabel = document.getElementById('alpha-label')
-   const alpha = isNaN(parseFloat(text.style.opacity))
-      ? 1
-      : parseFloat(text.style.opacity)
-   alphaSlider.value = alpha * 100
-   alphaLabel.innerText = parseInt(alpha * 100)
-}
+      // load alpha
+      const alphaSlider = document.getElementById('alpha-slider')
+      const alpha = isNaN(parseFloat(text.style.opacity))
+         ? 1
+         : parseFloat(text.style.opacity)
+      alphaSlider.value = alpha * 100
+   }
+   // LOAD IMAGE CONTROLLER
+   if (type === 'image') {
+      // find element
+      const el = document.querySelector('.element.is-active')
 
-// SET VALUES OF IMAGE ELEMENT IN THE CONTROLLER
-function loadImageController() {
-   // find element
-   const el = document.querySelector('.element.is-active')
+      // find item
+      const image = el.querySelector('.item')
 
-   // find item
-   const image = el.querySelector('.item')
-
-   // load alpha
-   const alphaSlider = document.getElementById('alpha-slider')
-   const alphaLabel = document.getElementById('alpha-label')
-   const alpha = isNaN(parseFloat(image.style.opacity))
-      ? 1
-      : parseFloat(image.style.opacity)
-   alphaSlider.value = alpha * 100
-   alphaLabel.innerText = parseInt(alpha * 100)
+      // load alpha
+      const alphaSlider = document.getElementById('alpha-slider')
+      const alpha = isNaN(parseFloat(image.style.opacity))
+         ? 1
+         : parseFloat(image.style.opacity)
+      alphaSlider.value = alpha * 100
+   }
 }
