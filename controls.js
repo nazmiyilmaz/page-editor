@@ -19,6 +19,7 @@ const controls = {
       'flip-back',
       'flip-front',
    ],
+   audio: ['audio-playback', 'flip-back', 'flip-front'],
 }
 
 import { markState } from './history.js'
@@ -29,8 +30,11 @@ import {
    getMinZ,
    raiseAllElements,
    getMaxZ,
-   rgbToHex,
 } from './helpers.js'
+
+import { load as loadAudio, resetPlayback } from './audio.js'
+import { load as loadText } from './textarea.js'
+import { load as loadImage } from './image.js'
 
 // FLIP FRONT
 export function flipFront() {
@@ -194,8 +198,17 @@ export function changeColor(event) {
    // change color
    text.style.color = `${event.target.value}`
 
+   // update indicator
+   updateFontColorIndicator(text.style.color)
+
    // mark state
    markState()
+}
+
+// UPDATE FONT COLOR INDICATOR
+export function updateFontColorIndicator(color) {
+   const indicator = document.getElementById('color-indicator')
+   indicator.style.backgroundColor = color
 }
 
 // SETUP ALIGN
@@ -297,13 +310,21 @@ export function deleteItem(event) {
    markState()
 }
 
-// SWITCH CONTROLLER
-export function switchController(event) {
-   // de-activate all elements at first
+// DE ACTIVATE ALL ELEMENTS
+export function deActivateAll() {
    const page = document.getElementById('active-page')
    page.querySelectorAll('.element').forEach(function (e) {
       e.classList.remove('is-active')
    })
+}
+
+// SWITCH CONTROLLER
+export function switchController(event) {
+   // reset audio playback
+   resetPlayback()
+
+   // de-activate all elements at first
+   deActivateAll()
 
    // check if click origin is delete button
    const isDel = queryParent(event.target, 'delete-handle')
@@ -350,6 +371,7 @@ export function openMenu() {
    // assign type
    if (el.classList.contains('is-image')) type = 'image'
    if (el.classList.contains('is-text')) type = 'text'
+   if (el.classList.contains('is-audio')) type = 'audio'
 
    // get controller based on type
    const items = controls[type]
@@ -379,62 +401,14 @@ function hideAll() {
 function loadController(type) {
    // LOAD TEXT CONTROLLER
    if (type === 'text') {
-      // find element
-      const el = document.querySelector('.element.is-active')
-
-      // find item
-      const text = el.querySelector('.item')
-
-      // load font family
-      const fontPicker = document.getElementById('change-font-select')
-      fontPicker.value = text.style.fontFamily
-
-      // load font size
-      const sizePicker = document.getElementById('change-font-size-select')
-      sizePicker.value = text.style.fontSize
-
-      // load color
-      const colorPicker = document.getElementById('change-color-picker')
-      colorPicker.value = rgbToHex(text.style.color) || '#000000'
-
-      // load bold
-      const boldToggle = document.getElementById('toggle-bold-btn')
-      boldToggle.checked = text.classList.contains('is-bold')
-
-      // load italic
-      const italicToggle = document.getElementById('toggle-italic-btn')
-      italicToggle.checked = text.classList.contains('is-italic')
-
-      // load strike
-      const strikeToggle = document.getElementById('toggle-strike-btn')
-      strikeToggle.checked = text.classList.contains('is-strike')
-
-      // load align
-      const alignSelected = document
-         .getElementById('change-align')
-         .querySelector('.selected')
-      alignSelected.src = `icos/align-${text.style.textAlign || 'left'}.svg`
-
-      // load alpha
-      const alphaSlider = document.getElementById('alpha-slider')
-      const alpha = isNaN(parseFloat(text.style.opacity))
-         ? 1
-         : parseFloat(text.style.opacity)
-      alphaSlider.value = alpha * 100
+      loadText()
    }
    // LOAD IMAGE CONTROLLER
    if (type === 'image') {
-      // find element
-      const el = document.querySelector('.element.is-active')
-
-      // find item
-      const image = el.querySelector('.item')
-
-      // load alpha
-      const alphaSlider = document.getElementById('alpha-slider')
-      const alpha = isNaN(parseFloat(image.style.opacity))
-         ? 1
-         : parseFloat(image.style.opacity)
-      alphaSlider.value = alpha * 100
+      loadImage()
+   }
+   // LOAD AUDIO CONTROLLER
+   if (type === 'audio') {
+      loadAudio()
    }
 }

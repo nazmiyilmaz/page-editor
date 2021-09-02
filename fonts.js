@@ -22,6 +22,7 @@ export function setupFonts() {
       const option = document.createElement('option')
       option.label = family[0]
       option.value = family[1]
+      option.style.fontFamily = family[1]
       fontPicker.appendChild(option.cloneNode(true))
    }
 

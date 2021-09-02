@@ -6,11 +6,21 @@
       <link rel="stylesheet" href="pages.css" />
    </head>
    <body>
+      <div class="non-func is-square600"></div>
+
       <div class="main-container is-square600">
          <!--CONTROLLERS-->
          <div id="controllers">
             <!--ELEMENT CONTROLLER-->
             <div id="element-controller" class="element-controller">
+               <!--AUDIO PLAYBACK-->
+               <span id="audio-playback" class="el">
+                  <span class="player">
+                     <img id="audio-play-button" src="icos/play.svg" />
+                     <input min="0" type="range" id="audio-playback-slider" />
+                  </span>
+               </span>
+
                <!--FONT FAMILY-->
                <span id="change-font" class="el">
                   <select id="change-font-select"></select>
@@ -33,6 +43,10 @@
 
                <!--COLOR-->
                <span id="change-color" class="el">
+                  <span class="area">
+                     <img src="icos/font-color.svg" />
+                     <span id="color-indicator"></span>
+                  </span>
                   <input id="change-color-picker" type="color" />
                </span>
 

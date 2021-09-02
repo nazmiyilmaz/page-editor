@@ -7,10 +7,24 @@ import interact from 'https://cdn.interactjs.io/v1.9.20/interactjs/index.js'
 
 import { rotateListeners, dragListeners, resizeListeners } from './listeners.js'
 
-import { markState } from './history.js'
-
 // MAKE RESIZABLE
-export function setResize(selector) {
+export function setResize(selector, preserveRatio = false) {
+   const modifiers = [
+      // keep the edges inside the parent
+      interact.modifiers.restrictEdges({
+         outer: '#active-page',
+      }),
+   ]
+
+   if (preserveRatio) {
+      modifiers.push(
+         interact.modifiers.aspectRatio({
+            ratio: 'preserve',
+            modifiers: [interact.modifiers.restrictSize({ max: 'parent' })],
+         })
+      )
+   }
+
    interact(selector).resizable({
       // resize from all edges and corners
       edges: {
@@ -20,12 +34,7 @@ export function setResize(selector) {
          right: '.thumb.br, .thumb.tr',
       },
       listeners: resizeListeners,
-      modifiers: [
-         // keep the edges inside the parent
-         interact.modifiers.restrictEdges({
-            outer: '#active-page',
-         }),
-      ],
+      modifiers,
       inertia: true,
    })
 }

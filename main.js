@@ -22,6 +22,10 @@ import { setupFonts } from './fonts.js'
 import keyboard from './keyboard.js'
 
 import { init as initHistory, undo, redo } from './history.js'
+import { init as initAudio } from './audio.js'
+
+// INIT AUDIO CONTROLLER
+initAudio()
 
 // SWITCH CONTROLLER
 registerClick('.element', switchController)
@@ -35,6 +39,7 @@ setDropZone('#active-page')
 // SET RESIZABLE ELEMENTS
 setResize('.element.is-image')
 setResize('.element.is-text')
+setResize('.element.is-video', true)
 
 // SET DRAG OF ELEMENTS
 setDrag('.move-handle')
