@@ -1,10 +1,4 @@
-body {
-  width: 1000px;
-  margin: auto;
-  margin-top: 120px;
-}
-
-.non-func {
+#editor {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15,24 +9,10 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid green;
+  border: 3px solid red;
 }
 
-.main-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border: 1px solid red;
-}
-
-#active-page {
+#editor .page {
   padding: 10px;
   margin-top: 1rem;
   display: block;
@@ -45,11 +25,7 @@ body {
   background-size: cover;
 }
 
-.has-display-none {
-  display: none !important;
-}
-
-#controllers {
+#toolbar {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -61,7 +37,7 @@ body {
   height: 50px;
 }
 
-.element-controller {
+#options-toolbar {
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
@@ -78,7 +54,7 @@ body {
   height: 30px;
 }
 
-.element-controller .el {
+#options-toolbar .tool {
   padding: 0 4px;
   height: 30px;
   display: -webkit-box;
@@ -92,27 +68,27 @@ body {
           align-items: center;
 }
 
-.element-controller #toggle-bold,
-.element-controller #toggle-italic,
-.element-controller #toggle-strike {
+#options-toolbar #toggle-bold,
+#options-toolbar #toggle-italic,
+#options-toolbar #toggle-strike {
   position: relative;
 }
 
-.element-controller #toggle-bold input,
-.element-controller #toggle-italic input,
-.element-controller #toggle-strike input {
+#options-toolbar #toggle-bold input,
+#options-toolbar #toggle-italic input,
+#options-toolbar #toggle-strike input {
   display: none;
 }
 
-.element-controller #toggle-bold input:checked + label,
-.element-controller #toggle-italic input:checked + label,
-.element-controller #toggle-strike input:checked + label {
+#options-toolbar #toggle-bold input:checked + label,
+#options-toolbar #toggle-italic input:checked + label,
+#options-toolbar #toggle-strike input:checked + label {
   background-color: #f1f1f1;
 }
 
-.element-controller #toggle-bold label,
-.element-controller #toggle-italic label,
-.element-controller #toggle-strike label {
+#options-toolbar #toggle-bold label,
+#options-toolbar #toggle-italic label,
+#options-toolbar #toggle-strike label {
   cursor: pointer;
   border: 1px solid #e2e6eb;
   border-radius: 6px;
@@ -130,7 +106,7 @@ body {
   background-color: white;
 }
 
-.element-controller #change-font select {
+#options-toolbar #change-font select {
   width: 130px;
   height: 31px;
   border: 1px solid #e2e6eb;
@@ -140,11 +116,11 @@ body {
   background: url("icos/select-arrow.svg") no-repeat right white;
 }
 
-.element-controller #change-font select:focus {
+#options-toolbar #change-font select:focus {
   outline: none;
 }
 
-.element-controller #change-font-size select {
+#options-toolbar #change-font-size select {
   width: 60px;
   height: 31px;
   border: 1px solid #e2e6eb;
@@ -155,11 +131,11 @@ body {
   background: url("icos/select-arrow.svg") no-repeat right white;
 }
 
-.element-controller #change-font-size select:focus {
+#options-toolbar #change-font-size select:focus {
   outline: none;
 }
 
-.element-controller #change-align {
+#options-toolbar #change-align {
   border: 1px solid #e2e6eb;
   border-radius: 6px;
   cursor: pointer;
@@ -169,17 +145,17 @@ body {
   margin-right: 8px;
 }
 
-.element-controller #change-align .selected {
+#options-toolbar #change-align .selected {
   width: 24px;
   padding: 3px 4px;
   border-radius: 5px;
 }
 
-.element-controller #change-align .selected:hover {
+#options-toolbar #change-align .selected:hover {
   background-color: #f1f1f1;
 }
 
-.element-controller #change-align .menu {
+#options-toolbar #change-align .menu {
   overflow: hidden;
   background-color: white;
   display: -webkit-box;
@@ -201,21 +177,21 @@ body {
   border-bottom-right-radius: 6px;
 }
 
-.element-controller #change-align .menu img {
+#options-toolbar #change-align .menu img {
   width: 24px;
   padding: 2px 4px;
   height: 30px;
 }
 
-.element-controller #change-align .menu img:hover {
+#options-toolbar #change-align .menu img:hover {
   background-color: #f1f1f1;
 }
 
-.element-controller #change-alpha {
+#options-toolbar #change-alpha {
   position: relative;
 }
 
-.element-controller #change-alpha .icon {
+#options-toolbar #change-alpha .icon {
   width: 32px;
   height: 28px;
   border: 1px solid #e2e6eb;
@@ -229,11 +205,11 @@ body {
           justify-content: center;
 }
 
-.element-controller #change-alpha .icon img {
+#options-toolbar #change-alpha .icon img {
   width: 20px;
 }
 
-.element-controller #change-alpha .menu {
+#options-toolbar #change-alpha .menu {
   position: absolute;
   top: 32px;
   left: 0;
@@ -253,7 +229,7 @@ body {
           justify-content: center;
 }
 
-.element-controller #change-alpha .menu #alpha-slider {
+#options-toolbar #change-alpha .menu #alpha-slider {
   -webkit-appearance: none;
   -moz-appearance: none;
        appearance: none;
@@ -264,7 +240,7 @@ body {
   outline: none;
 }
 
-.element-controller #change-alpha .menu #alpha-slider::-webkit-slider-thumb {
+#options-toolbar #change-alpha .menu #alpha-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 16px;
@@ -275,7 +251,7 @@ body {
   cursor: pointer;
 }
 
-.element-controller #change-alpha .menu #alpha-slider::-moz-range-thumb {
+#options-toolbar #change-alpha .menu #alpha-slider::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border: 3px solid #455161;
@@ -284,7 +260,7 @@ body {
   cursor: pointer;
 }
 
-.element-controller #change-color {
+#options-toolbar #change-color {
   width: 28px;
   height: 30px;
   cursor: pointer;
@@ -295,7 +271,7 @@ body {
   position: relative;
 }
 
-.element-controller #change-color .area {
+#options-toolbar #change-color .area {
   width: 100%;
   height: 100%;
   display: -webkit-box;
@@ -313,18 +289,18 @@ body {
           justify-content: center;
 }
 
-.element-controller #change-color .area img {
+#options-toolbar #change-color .area img {
   width: 20px;
 }
 
-.element-controller #change-color .area #color-indicator {
+#options-toolbar #change-color .area #color-indicator {
   width: 24px;
   height: 4px;
   border: 1px solid #e2e6eb;
   border-radius: 3px;
 }
 
-.element-controller #change-color #change-color-picker {
+#options-toolbar #change-color #change-color-picker {
   z-index: 99;
   cursor: pointer;
   top: 0;
@@ -336,18 +312,18 @@ body {
   opacity: 0;
 }
 
-.element-controller #change-color #change-color-picker::-webkit-color-swatch {
+#options-toolbar #change-color #change-color-picker::-webkit-color-swatch {
   display: none;
 }
 
-.element-controller #change-color #change-color-picker::-moz-color-swatch {
+#options-toolbar #change-color #change-color-picker::-moz-color-swatch {
   display: none;
 }
 
-.element-controller #flip-horizontal button,
-.element-controller #flip-vertical button,
-.element-controller #flip-back button,
-.element-controller #flip-front button {
+#options-toolbar #flip-horizontal button,
+#options-toolbar #flip-vertical button,
+#options-toolbar #flip-back button,
+#options-toolbar #flip-front button {
   background: none;
   border: 1px solid #e2e6eb;
   border-radius: 6px;
@@ -355,21 +331,21 @@ body {
   height: 100%;
 }
 
-.element-controller #flip-horizontal img,
-.element-controller #flip-vertical img,
-.element-controller #flip-back img,
-.element-controller #flip-front img {
+#options-toolbar #flip-horizontal img,
+#options-toolbar #flip-vertical img,
+#options-toolbar #flip-back img,
+#options-toolbar #flip-front img {
   width: 22px;
 }
 
-.element-controller #audio-playback {
+#options-toolbar #audio-playback {
   border: 1px solid #e2e6eb;
   width: 180px;
   border-radius: 8px;
   margin-left: 8px;
 }
 
-.element-controller #audio-playback .player {
+#options-toolbar #audio-playback .player {
   height: 30px;
   width: 180px;
   display: -webkit-box;
@@ -383,26 +359,27 @@ body {
           align-items: center;
 }
 
-.element-controller #audio-playback #audio-play-button {
+#options-toolbar #audio-playback #audio-play-button {
   width: 22px;
   height: 22px;
   cursor: pointer;
 }
 
-.element-controller #audio-playback #audio-playback-slider {
+#options-toolbar #audio-playback #audio-playback-slider {
   -webkit-appearance: none;
   -moz-appearance: none;
        appearance: none;
-  width: 150px;
+  width: 100%;
   background: #e8edee;
   height: 12px;
   border: 1px solid #bfc4c5;
   border-radius: 12px;
   outline: none;
   cursor: pointer;
+  margin: 0 8px;
 }
 
-.element-controller #audio-playback #audio-playback-slider::-webkit-slider-thumb {
+#options-toolbar #audio-playback #audio-playback-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 16px;
@@ -413,7 +390,7 @@ body {
   cursor: pointer;
 }
 
-.element-controller #audio-playback #audio-playback-slider::-moz-range-thumb {
+#options-toolbar #audio-playback #audio-playback-slider::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border: 1px solid #434547;
@@ -422,7 +399,7 @@ body {
   cursor: pointer;
 }
 
-#page-controller {
+#history-toolbar {
   margin-left: auto;
   width: -webkit-min-content;
   width: -moz-min-content;
@@ -440,7 +417,7 @@ body {
   z-index: 99999;
 }
 
-#page-controller .el {
+#history-toolbar .tool {
   padding: 0 4px;
   height: 30px;
   display: -webkit-box;
@@ -454,8 +431,8 @@ body {
           align-items: center;
 }
 
-#page-controller #undo button,
-#page-controller #redo button {
+#history-toolbar #undo button,
+#history-toolbar #redo button {
   height: 100%;
   background: none;
   border: 1px solid #e2e6eb;
@@ -463,248 +440,123 @@ body {
   cursor: pointer;
 }
 
-#page-controller #undo img,
-#page-controller #redo img {
+#history-toolbar #undo img,
+#history-toolbar #redo img {
   width: 16px;
 }
 
-#page-controller #undo.is-disabled button,
-#page-controller #redo.is-disabled button {
+#history-toolbar #undo.is-disabled button,
+#history-toolbar #redo.is-disabled button {
   cursor: not-allowed;
 }
 
-#page-controller #undo.is-disabled img,
-#page-controller #redo.is-disabled img {
+#history-toolbar #undo.is-disabled img,
+#history-toolbar #redo.is-disabled img {
   -webkit-filter: opacity(0.4);
           filter: opacity(0.4);
 }
 
+#editor .page .element:not(.is-active) .item {
+  cursor: pointer !important;
+}
+
 .element {
-  position: absolute;
-  -ms-touch-action: none;
-      touch-action: none;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border: 2px solid transparent;
-}
-
-.element.is-active {
-  border: 2px solid #616a70;
-}
-
-.element.is-active .controls {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
-}
-
-.element.is-active .thumb {
-  display: unset;
+  -ms-touch-action: none;
+      touch-action: none;
 }
 
 .element.is-active .item {
   cursor: unset !important;
 }
 
-.element .item {
-  resize: none;
-  border: none;
-  width: 100%;
-  height: 100%;
-  background: none;
-  padding: 1rem;
-  cursor: pointer;
-}
-
-.element .controls {
-  display: none;
+#controller {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -ms-touch-action: none;
+      touch-action: none;
   position: absolute;
-  bottom: 10px;
-  width: 100px;
-  height: 24px;
+  display: none;
+  border: 2px solid #616a70;
+  width: 300px;
+  height: 300px;
+  pointer-events: none;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  overflow: hidden;
-  background-color: white;
-  border-radius: 12px;
-  border: 1px solid grey;
-  padding: 5px;
 }
 
-.element .controls .delete-handle,
-.element .controls .rotation-handle,
-.element .controls .move-handle {
+#controller.is-active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#controller.is-resizable .thumbs {
+  display: unset;
+}
+
+#controller .controls {
+  position: absolute;
+  bottom: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 24px;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 12px;
+  padding: 5px;
+  z-index: 99999999;
+}
+
+#controller .controls #delete-handle,
+#controller .controls #rotate-handle,
+#controller .controls #move-handle {
   margin: 0 5px;
   cursor: pointer;
+  pointer-events: auto;
 }
 
-.element .thumb {
+#controller .thumbs {
   display: none;
+}
+
+#controller .thumbs .thumb {
   position: absolute;
   width: 9px;
   height: 9px;
   background: white;
   border: 2px solid #616a70;
+  pointer-events: auto;
 }
 
-.element .thumb.tl {
+#controller .thumbs .thumb.tl {
   top: 0;
   left: 0;
   margin-top: -8px;
   margin-left: -8px;
 }
 
-.element .thumb.tr {
+#controller .thumbs .thumb.tr {
   top: 0;
   right: 0;
   margin-top: -8px;
   margin-right: -8px;
 }
 
-.element .thumb.bl {
+#controller .thumbs .thumb.bl {
   bottom: 0;
   left: 0;
   margin-bottom: -8px;
   margin-left: -8px;
 }
 
-.element .thumb.br {
+#controller .thumbs .thumb.br {
   bottom: 0;
   right: 0;
   margin-bottom: -8px;
   margin-right: -8px;
 }
-
-.element.is-image {
-  width: 300px;
-}
-
-.element.is-image .item {
-  padding: 0;
-}
-
-.element.is-text {
-  width: 300px;
-}
-
-.element.is-text .item {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.element.is-text .item::-webkit-scrollbar {
-  display: none;
-}
-
-.element.is-text .item:focus {
-  outline: none !important;
-}
-
-.element.is-audio {
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
-  cursor: unset;
-  height: 40px;
-}
-
-.element.is-audio .item {
-  cursor: unset;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.element.is-audio .item img {
-  width: 36px;
-  height: 36px;
-}
-
-.element.is-audio .item a {
-  margin-left: 10px;
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
-  font-family: sans-serif;
-  color: #6983db;
-  font-weight: bold;
-}
-
-.element.is-audio .controls {
-  width: 60px;
-}
-
-.element.is-audio.hide-links {
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-}
-
-.element.is-audio.hide-links .item {
-  cursor: pointer;
-}
-
-.element.is-audio.hide-links .item img {
-  width: 48px;
-  height: 48px;
-}
-
-.element.is-audio.hide-links .item a {
-  display: none;
-}
-
-.element.is-video {
-  width: 300px;
-}
-
-.element.is-video .item {
-  border-radius: 12px;
-  overflow: hidden;
-  padding: 0;
-}
-
-.element.is-video .item.link {
-  border-radius: 0;
-  cursor: unset;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.element.is-video .item.link img {
-  width: 36px;
-  height: 36px;
-}
-
-.element.is-video .item.link a {
-  margin-left: 10px;
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
-  font-family: sans-serif;
-  color: #6983db;
-  font-weight: bold;
-}
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=editor.css.map */

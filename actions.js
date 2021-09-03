@@ -1,6 +1,6 @@
 import { getMaxZ } from './helpers.js'
 
-import { deActivateAll } from './controls.js'
+import { deActivateAll } from './toolbar.js'
 
 import { markState } from './history.js'
 
@@ -9,8 +9,15 @@ import { create as createAudio } from './audio.js'
 import { create as createImage } from './image.js'
 import { create as createVideo } from './video.js'
 
-import { create as createBasicControls } from './basic-controls.js'
-import { create as createThumbs } from './thumbs.js'
+// GET PREVIEW PAGE
+export function getPreviewPage() {
+   // deactivate all
+   deActivateAll()
+   // get page
+   const page = document.querySelector('#editor .page')
+   // return html
+   return page.outerHTML
+}
 
 // GET NON FUNCTIONAL PAGE
 export function getNonFunctionalPage() {
@@ -18,7 +25,7 @@ export function getNonFunctionalPage() {
    deActivateAll()
 
    // get page
-   const page = document.getElementById('active-page')
+   const page = document.querySelector('#editor .page')
 
    const temp = page.cloneNode(true)
 
@@ -45,17 +52,7 @@ export function insertVideo(src) {
    // create
    const video = createVideo(src)
    // insert to the page
-   insertElement(
-      video,
-      'video',
-      {
-         rotate: false,
-         move: true,
-         del: true,
-      },
-      true,
-      ['hide-links']
-   )
+   insertItem(video, 'video', ['hide-links'])
 }
 
 // INSERT AUDIO
@@ -63,13 +60,7 @@ export function insertAudio(src) {
    // create
    const audio = createAudio(src)
    // insert to the page
-   insertElement(
-      audio,
-      'audio',
-      { rotate: false, move: true, del: true },
-      false,
-      ['hide-links']
-   )
+   insertItem(audio, 'audio', ['hide-links'])
 }
 
 // INSERT TEXT
@@ -77,7 +68,7 @@ export function insertText(value) {
    // create text
    const text = createText(value)
    // insert to the page
-   insertElement(text, 'text')
+   insertItem(text, 'text')
 }
 
 // INSERT IMAGE
@@ -85,29 +76,58 @@ export function insertImage(src) {
    // create image
    const image = createImage(src)
    // insert to the page
-   insertElement(image, 'image')
+   insertItem(image, 'image')
 }
 
 // CHANGE BACKGROUND
 export function changeBackground(src) {
    // find page
-   const page = document.getElementById('active-page')
+   const page = document.querySelector('#editor .page')
    page.style.backgroundImage = `url(${src})`
 
    // mark state
    markState()
 }
 
-// GENERAL FUNCTION FOR INSERTING ELEMENT
-function insertElement(
-   item,
-   type,
-   controls = { rotate: true, move: true, del: true },
-   thumbs = true,
-   bind = []
-) {
+// INSERT HTML
+export function insertElement(element) {
    // find page
-   const page = document.getElementById('active-page')
+   const page = document.querySelector('#editor .page')
+
+   // set z-index
+   element.style['z-index'] = getMaxZ(page) + 1
+
+   // append to the page
+   page.appendChild(element)
+
+   // dispatch click
+   page.click()
+   element.click()
+
+   // mark state
+   markState()
+}
+
+// REMOVE ELEMENT
+export function removeElement(element) {
+   // find page
+   const page = document.querySelector('#editor .page')
+
+   // remove
+   element.remove()
+
+   // dispatch click
+   page.click()
+   element.click()
+
+   // mark state
+   markState()
+}
+
+// GENERAL FUNCTION FOR INSERTING ELEMENT
+function insertItem(item, type, bind = []) {
+   // find page
+   const page = document.querySelector('#editor .page')
 
    // create node
    const node = document.createElement('div')
@@ -125,20 +145,11 @@ function insertElement(
    item.classList.add('item')
    node.appendChild(item)
 
-   // attach controllers
-   node.appendChild(createBasicControls(controls))
-
-   // attach thumbs
-   if (thumbs) {
-      createThumbs().forEach((t) => {
-         node.appendChild(t)
-      })
-   }
-
    // append to the page
    page.appendChild(node)
 
    // dispatch click
+   page.click()
    node.click()
 
    // mark state

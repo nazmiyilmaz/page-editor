@@ -1,3 +1,5 @@
+import { queryParent } from './helpers.js'
+
 // SLIDER ELEMENT
 const slider = document.getElementById('audio-playback-slider')
 
@@ -6,6 +8,9 @@ const playButton = document.getElementById('audio-play-button')
 
 // GLOBAL VARIABLE TO POINT THE INTERVAL
 let syncInterval
+
+// GLOBAL VARIABLE TO POINT CURRENT PREVIEW
+let currentPreviewElement
 
 // CREATE
 export function create(src) {
@@ -46,6 +51,39 @@ export function init() {
    slider.addEventListener('change', seek)
 }
 
+// INIT PREVIEW
+export function initPreview() {
+   // find preview page
+   const page = document.querySelector('#preview .page')
+
+   // find audios
+   const items = page?.querySelectorAll('.element.is-audio .item')
+
+   // load slots
+   items.forEach(function (item) {
+      item.addEventListener('click', function (event) {
+         // stop others
+         if (currentPreviewElement) {
+            const audio = currentPreviewElement.querySelector('audio')
+            const icon = currentPreviewElement.querySelector('img')
+            audio.pause()
+            audio.currentTime = 0
+            icon.src = 'icos/audio.svg'
+         }
+         // play
+         currentPreviewElement = item
+         const audio = item.querySelector('audio')
+         const icon = item.querySelector('img')
+         audio.currentTime = 0
+         icon.src = 'icos/audio-active.svg'
+         audio.play()
+         audio.addEventListener('ended', function (event) {
+            icon.src = 'icos/audio.svg'
+         })
+      })
+   })
+}
+
 // LOAD AUDIO TO PLAYBACK
 export function load() {
    const audio = getAudio()
@@ -61,7 +99,6 @@ export function load() {
       audio.addEventListener('play', startSync)
    }
    init()
-   playButton.click()
 }
 
 // RESET PLAYBACK
@@ -70,7 +107,7 @@ export function resetPlayback() {
    pauseSync()
 
    // pause all audio tracks
-   const elements = document.querySelectorAll('.element.is-audio')
+   const elements = document.querySelectorAll('#editor .element.is-audio')
    for (const el of elements) {
       const audio = el.querySelector('audio')
       audio.currentTime = 0
@@ -84,7 +121,7 @@ export function resetPlayback() {
 // GET ACTIVE AUDIO ELEMENT
 function getAudio() {
    return document
-      ?.querySelector('.element.is-active.is-audio')
+      ?.querySelector('#editor .element.is-active.is-audio')
       ?.querySelector('audio')
 }
 

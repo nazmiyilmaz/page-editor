@@ -4,18 +4,17 @@ import {
    changeColor,
    changeFontFamily,
    changeFontSize,
-   deleteItem,
    flipBack,
    flipFront,
    flipHorizontal,
    flipVertical,
-   switchController,
+   toggleToolbar,
    toggleBold,
    toggleItalic,
    toggleStrike,
    setupAlign,
    setupAlpha,
-} from './controls.js'
+} from './toolbar.js'
 
 import { registerClick, registerChange } from './helpers.js'
 import { setupFonts } from './fonts.js'
@@ -24,28 +23,28 @@ import keyboard from './keyboard.js'
 import { init as initHistory, undo, redo } from './history.js'
 import { init as initAudio } from './audio.js'
 
-// INIT AUDIO CONTROLLER
+import { deleteItem } from './controller.js'
+
+// INIT AUDIO
 initAudio()
 
-// SWITCH CONTROLLER
-registerClick('.element', switchController)
-
-// DELETE HANDLE
-registerClick('.delete-handle', deleteItem)
+// TOGGLE TOOLBAR
+registerClick('#editor .element', toggleToolbar)
 
 // SET PAGE AS DROPZONE
-setDropZone('#active-page')
+setDropZone('#editor .page')
 
 // SET RESIZABLE ELEMENTS
-setResize('.element.is-image')
-setResize('.element.is-text')
-setResize('.element.is-video', true)
+setResize('#controller.is-resizable')
 
 // SET DRAG OF ELEMENTS
-setDrag('.move-handle')
+setDrag('#move-handle')
 
 // SET ROTATE OF ELEMENTS
-setRotate('.rotation-handle')
+setRotate('#rotate-handle')
+
+// DELETE HANDLE
+registerClick('#delete-handle', deleteItem)
 
 // SETUP ALIGN DROPDOWN
 setupAlign()
@@ -89,8 +88,8 @@ registerClick('#flip-front', flipFront)
 // FLIP BACK
 registerClick('#flip-back', flipBack)
 
-// HIDE CONTROLLER
-registerClick('#active-page', switchController)
+// HIDE TOOLBAR
+registerClick('#editor .page', toggleToolbar)
 
 // REGISTER UNDO REDO
 registerClick('#undo', undo)

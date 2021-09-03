@@ -1,43 +1,27 @@
-$controller-bg: white;
-$controller-bg-hover: rgb(234, 240, 243);
+$toolbar-bg: white;
+$toolbar-bg-hover: rgb(234, 240, 243);
 $border-color: rgb(226, 230, 235);
 $default-br: 1px solid $border-color;
 
 $element-br: 2px solid rgb(97, 106, 112);
-$element-br-transparent: 2px solid transparent;
-$element-br-radius: 12px;
-
-$controls-br: 1px solid grey;
 
 $toggle-bg: white;
 $toggle-bg-active: rgb(241, 241, 241);
 
 $audio-link-cl: rgb(105, 131, 219);
 
-// REMOVE LATER |||||||||||||||||||||||||||
-body {
-   width: 1000px;
-   margin: auto;
-   margin-top: 120px;
-}
+$controller-br: 1px solid grey;
 
-.non-func {
+// EDITOR
+#editor {
    display: flex;
    flex-direction: column;
    align-items: center;
-   border: 1px solid green;
-}
-
-// MAIN
-.main-container {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   border: 1px solid red;
+   border: 3px solid red;
 }
 
 // PAGE
-#active-page {
+#editor .page {
    padding: 10px;
    margin-top: 1rem;
    display: block;
@@ -50,13 +34,8 @@ body {
    background-size: cover;
 }
 
-// HAS DISPLAY NONE
-.has-display-none {
-   display: none !important;
-}
-
-// CONTROLLERS
-#controllers {
+// TOOLBAR
+#toolbar {
    width: 100%;
    display: flex;
    align-items: center;
@@ -64,8 +43,8 @@ body {
    height: 50px;
 }
 
-// ELEMENT CONTROLLER
-.element-controller {
+// OPTIONS TOOLBAR
+#options-toolbar {
    width: min-content;
    display: flex;
    justify-content: center;
@@ -73,8 +52,8 @@ body {
    z-index: 99999;
    height: 30px;
 
-   // GENERAL CONTROL ELEMENT
-   .el {
+   // TOOL
+   .tool {
       padding: 0 4px;
       height: 30px;
       display: flex;
@@ -327,13 +306,14 @@ body {
       #audio-playback-slider {
          -webkit-appearance: none;
          appearance: none;
-         width: 150px;
+         width: 100%;
          background: rgb(232, 237, 238);
          height: 12px;
          border: 1px solid rgb(191, 196, 197);
          border-radius: 12px;
          outline: none;
          cursor: pointer;
+         margin: 0 8px;
          &::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -356,8 +336,8 @@ body {
    }
 }
 
-// PAGE CONTROLLER
-#page-controller {
+// HISTORY TOOLBAR
+#history-toolbar {
    margin-left: auto;
    width: min-content;
    height: 30px;
@@ -365,8 +345,8 @@ body {
    justify-content: center;
    align-items: center;
    z-index: 99999;
-   // GENERAL CONTROL ELEMENT
-   .el {
+   // TOOL
+   .tool {
       padding: 0 4px;
       height: 30px;
       display: flex;
@@ -397,190 +377,105 @@ body {
    }
 }
 
+// EDITOR ELEMENT
+#editor .page .element {
+   // GENERAL ITEM STYLES
+   &:not(.is-active) {
+      .item {
+         cursor: pointer !important;
+      }
+   }
+}
+
 // ELEMENT
 .element {
-   position: absolute;
-   touch-action: none;
    box-sizing: border-box;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   border: $element-br-transparent;
-
-   // ACTIVE CONTROL DISPLAY
+   touch-action: none;
+   // ACTIVE CONTROLLER DISPLAY
    &.is-active {
-      border: $element-br;
-      .controls {
-         display: flex !important;
-      }
-      .thumb {
-         display: unset;
-      }
       .item {
          cursor: unset !important;
       }
    }
+}
 
-   // NO BORDER WHEN PASSIVE
-   .item {
-      resize: none;
-      border: none;
-      width: 100%;
-      height: 100%;
-      background: none;
-      padding: 1rem;
-      cursor: pointer;
+// CONTROLLER
+#controller {
+   box-sizing: border-box;
+   touch-action: none;
+   position: absolute;
+   display: none;
+   border: $element-br;
+   width: 300px;
+   height: 300px;
+   pointer-events: none;
+   justify-content: center;
+   &.is-active {
+      display: flex;
    }
 
-   // BASIC CONTROLS
+   &.is-resizable {
+      .thumbs {
+         display: unset;
+      }
+   }
+
+   // CONTROLS
    .controls {
-      display: none;
       position: absolute;
       bottom: 10px;
-      width: 100px;
+      width: fit-content;
       height: 24px;
-      justify-content: center;
-      overflow: hidden;
       background-color: white;
+      border: $controller-br;
       border-radius: 12px;
-      border: $controls-br;
       padding: 5px;
-      .delete-handle,
-      .rotation-handle,
-      .move-handle {
+      z-index: 99999999;
+      #delete-handle,
+      #rotate-handle,
+      #move-handle {
          margin: 0 5px;
          cursor: pointer;
+         pointer-events: auto;
       }
    }
-
    // THUMBS
-   .thumb {
+   .thumbs {
       display: none;
-      position: absolute;
-      width: 9px;
-      height: 9px;
-      background: white;
-      border: $element-br;
+      .thumb {
+         position: absolute;
+         width: 9px;
+         height: 9px;
+         background: white;
+         border: $element-br;
+         pointer-events: auto;
 
-      &.tl {
-         top: 0;
-         left: 0;
-         margin-top: -8px;
-         margin-left: -8px;
-      }
-
-      &.tr {
-         top: 0;
-         right: 0;
-         margin-top: -8px;
-         margin-right: -8px;
-      }
-
-      &.bl {
-         bottom: 0;
-         left: 0;
-         margin-bottom: -8px;
-         margin-left: -8px;
-      }
-
-      &.br {
-         bottom: 0;
-         right: 0;
-         margin-bottom: -8px;
-         margin-right: -8px;
-      }
-   }
-
-   // IMAGE
-   &.is-image {
-      width: 300px;
-      .item {
-         padding: 0;
-      }
-   }
-
-   // TEXT
-   &.is-text {
-      width: 300px;
-      .item {
-         -ms-overflow-style: none;
-         scrollbar-width: none;
-         &::-webkit-scrollbar {
-            display: none;
+         &.tl {
+            top: 0;
+            left: 0;
+            margin-top: -8px;
+            margin-left: -8px;
          }
-         &:focus {
-            outline: none !important;
-         }
-      }
-   }
 
-   // AUDIO
-   &.is-audio {
-      width: min-content;
-      cursor: unset;
-      height: 40px;
-      .item {
-         cursor: unset;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         img {
-            width: 36px;
-            height: 36px;
+         &.tr {
+            top: 0;
+            right: 0;
+            margin-top: -8px;
+            margin-right: -8px;
          }
-         a {
-            margin-left: 10px;
-            width: min-content;
-            font-family: sans-serif;
-            color: $audio-link-cl;
-            font-weight: bold;
+
+         &.bl {
+            bottom: 0;
+            left: 0;
+            margin-bottom: -8px;
+            margin-left: -8px;
          }
-      }
-      .controls {
-         width: 60px;
-      }
 
-      &.hide-links {
-         width: 100px;
-         height: 100px;
-         cursor: pointer;
-         .item {
-            cursor: pointer;
-            img {
-               width: 48px;
-               height: 48px;
-            }
-            a {
-               display: none;
-            }
-         }
-      }
-   }
-
-   &.is-video {
-      width: 300px;
-      .item {
-         border-radius: 12px;
-         overflow: hidden;
-         padding: 0;
-
-         &.link {
-            border-radius: 0;
-            cursor: unset;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            img {
-               width: 36px;
-               height: 36px;
-            }
-            a {
-               margin-left: 10px;
-               width: min-content;
-               font-family: sans-serif;
-               color: $audio-link-cl;
-               font-weight: bold;
-            }
+         &.br {
+            bottom: 0;
+            right: 0;
+            margin-bottom: -8px;
+            margin-right: -8px;
          }
       }
    }

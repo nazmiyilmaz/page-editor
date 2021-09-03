@@ -1,22 +1,14 @@
-import {
-   replaceTranslate,
-   replaceRotate,
-   getDragAngle,
-   queryParent,
-} from './helpers.js'
+import { replaceTranslate, replaceRotate, getDragAngle } from './helpers.js'
 import { markState } from './history.js'
 
 // DRAG LISTENER
 export const dragListeners = {
    move: function (event) {
-      const target = queryParent(event.target, 'element')
-      const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-      const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+      const controller = document.getElementById('controller')
+      const target = document.querySelector('#editor .element.is-active')
 
-      target.style.transform = replaceTranslate(target.style.transform, x, y)
-
-      target.setAttribute('data-x', x)
-      target.setAttribute('data-y', y)
+      drag(event, controller)
+      drag(event, target)
    },
    end: function (event) {
       markState()
@@ -26,16 +18,11 @@ export const dragListeners = {
 // RESIZE LISTENER
 export const resizeListeners = {
    move: function (event) {
-      const target = event.target
-      let x = parseFloat(target.getAttribute('data-x')) || 0
-      let y = parseFloat(target.getAttribute('data-y')) || 0
-      target.style.width = event.rect.width + 'px'
-      target.style.height = event.rect.height + 'px'
-      x += event.deltaRect.left
-      y += event.deltaRect.top
-      target.style.transform = replaceTranslate(target.style.transform, x, y)
-      target.setAttribute('data-x', x)
-      target.setAttribute('data-y', y)
+      const controller = document.getElementById('controller')
+      const target = document.querySelector('#editor .element.is-active')
+
+      resize(event, controller)
+      resize(event, target)
    },
    end: function (event) {
       markState()
@@ -45,29 +32,74 @@ export const resizeListeners = {
 // ROTATE LISTENER
 export const rotateListeners = {
    onstart: function (event) {
-      const target = queryParent(event.target, 'element')
+      const target = document.querySelector('#editor .element.is-active .item')
       const rect = target.getBoundingClientRect()
+
       target.setAttribute('data-center-x', rect.left + rect.width / 2)
       target.setAttribute('data-center-y', rect.top + rect.height / 2)
       target.setAttribute('data-angle', getDragAngle(event, target))
    },
    onmove: function (event) {
-      const target = queryParent(event.target, 'element')
-      const pos = {
-         x: parseFloat(target.getAttribute('data-x')) || 0,
-         y: parseFloat(target.getAttribute('data-y')) || 0,
-      }
+      const target = document.querySelector('#editor .element.is-active .item')
       const angle = getDragAngle(event, target)
-      target.style.transform = replaceRotate(
-         replaceTranslate(target.style.transform, pos.x, pos.y),
-         angle
-      )
+      rotate(angle, target)
    },
    onend: function (event) {
-      const target = queryParent(event.target, 'element')
-      target.setAttribute('data-angle', getDragAngle(event, target))
-
+      const target = document.querySelector('#editor .element.is-active .item')
+      const angle = getDragAngle(event, target)
+      target.setAttribute('data-angle', angle)
       // mark state
       markState()
    },
+}
+
+// DRAG ELEMENT
+function drag(event, target) {
+   // find position
+   const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+   const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+   // move
+   target.style.transform = replaceTranslate(target.style.transform, x, y)
+
+   // update data-x data-y
+   target.setAttribute('data-x', x)
+   target.setAttribute('data-y', y)
+}
+
+// RESIZE ELEMENT
+function resize(event, target) {
+   // get rect
+   const rect = event.rect
+   const deltaRect = event.deltaRect
+
+   // set size
+   target.style.width = `${rect.width}px`
+   target.style.height = `${rect.height}px`
+
+   // get position
+   let x = parseFloat(target.getAttribute('data-x')) || 0
+   let y = parseFloat(target.getAttribute('data-y')) || 0
+
+   // move
+   x += deltaRect.left
+   y += deltaRect.top
+   target.style.transform = replaceTranslate(target.style.transform, x, y)
+
+   // set data-x data-y
+   target.setAttribute('data-x', x)
+   target.setAttribute('data-y', y)
+}
+
+// ROTATE ELEMENT
+function rotate(angle, target) {
+   // find position
+   let x = parseFloat(target.getAttribute('data-x')) || 0
+   let y = parseFloat(target.getAttribute('data-y')) || 0
+
+   // rotate
+   target.style.transform = replaceRotate(
+      replaceTranslate(target.style.transform, x, y),
+      angle
+   )
 }

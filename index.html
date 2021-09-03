@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
    <head>
+      <link rel="stylesheet" href="editor.css" />
+      <link rel="stylesheet" href="preview.css" />
       <link rel="stylesheet" href="fonts.css" />
-      <link rel="stylesheet" href="main.css" />
       <link rel="stylesheet" href="pages.css" />
+      <link rel="stylesheet" href="helpers.css" />
    </head>
    <body>
-      <div class="non-func is-square600"></div>
+      <div id="preview" class="is-square600 has-display-none">
+         <div class="page"></div>
+      </div>
 
-      <div class="main-container is-square600">
-         <!--CONTROLLERS-->
-         <div id="controllers">
-            <!--ELEMENT CONTROLLER-->
-            <div id="element-controller" class="element-controller">
+      <div id="editor" class="is-square600">
+         <!--TOOLBAR-->
+         <div id="toolbar">
+            <!--OPTIONS TOOLBAR-->
+            <div id="options-toolbar">
                <!--AUDIO PLAYBACK-->
-               <span id="audio-playback" class="el">
+               <span id="audio-playback" class="tool">
                   <span class="player">
                      <img id="audio-play-button" src="icos/play.svg" />
                      <input min="0" type="range" id="audio-playback-slider" />
@@ -22,17 +26,17 @@
                </span>
 
                <!--FONT FAMILY-->
-               <span id="change-font" class="el">
+               <span id="change-font" class="tool">
                   <select id="change-font-select"></select>
                </span>
 
                <!--FONT SIZE-->
-               <span id="change-font-size" class="el">
+               <span id="change-font-size" class="tool">
                   <select id="change-font-size-select"></select>
                </span>
 
                <!--TEXT ALIGN-->
-               <span id="change-align" class="el">
+               <span id="change-align" class="tool">
                   <img class="selected" src="icos/align-left.svg" />
                   <div class="menu has-display-none">
                      <img src="icos/align-left.svg" class="left-alg" />
@@ -42,7 +46,7 @@
                </span>
 
                <!--COLOR-->
-               <span id="change-color" class="el">
+               <span id="change-color" class="tool">
                   <span class="area">
                      <img src="icos/font-color.svg" />
                      <span id="color-indicator"></span>
@@ -51,7 +55,7 @@
                </span>
 
                <!--TOGGLE BOLD-->
-               <span id="toggle-bold" class="el">
+               <span id="toggle-bold" class="tool">
                   <input type="checkbox" id="toggle-bold-btn" />
                   <label for="toggle-bold-btn"
                      ><img src="icos/bold.svg"
@@ -59,7 +63,7 @@
                </span>
 
                <!--TOGGLE ITALIC-->
-               <span id="toggle-italic" class="el italic">
+               <span id="toggle-italic" class="tool italic">
                   <input type="checkbox" id="toggle-italic-btn" />
                   <label for="toggle-italic-btn"
                      ><img src="icos/italic.svg"
@@ -67,7 +71,7 @@
                </span>
 
                <!--TOGGLE STRIKE-->
-               <span id="toggle-strike" class="el">
+               <span id="toggle-strike" class="tool">
                   <input type="checkbox" id="toggle-strike-btn" />
                   <label for="toggle-strike-btn"
                      ><img src="icos/strike.svg"
@@ -75,35 +79,35 @@
                </span>
 
                <!--FLIP HORIZONTAL-->
-               <span id="flip-horizontal" class="el">
+               <span id="flip-horizontal" class="tool">
                   <button>
                      <img src="icos/fliph.svg" />
                   </button>
                </span>
 
                <!--FLIP VERTICAL-->
-               <span id="flip-vertical" class="el">
+               <span id="flip-vertical" class="tool">
                   <button>
                      <img src="icos/flipv.svg" />
                   </button>
                </span>
 
                <!--FLIP BACK-->
-               <span id="flip-back" class="el">
+               <span id="flip-back" class="tool">
                   <button>
                      <img src="icos/flipb.svg" />
                   </button>
                </span>
 
                <!--FLIP FRONT-->
-               <span id="flip-front" class="el">
+               <span id="flip-front" class="tool">
                   <button>
                      <img src="icos/flipf.svg" />
                   </button>
                </span>
 
                <!--ALPHA-->
-               <span id="change-alpha" class="el">
+               <span id="change-alpha" class="tool">
                   <span class="icon">
                      <img src="icos/opacity.svg" />
                   </span>
@@ -113,17 +117,17 @@
                </span>
             </div>
 
-            <!--PAGE CONTROLLER-->
-            <div id="page-controller" class="page-controller">
+            <!--HISTORY TOOLBAR-->
+            <div id="history-toolbar">
                <!--FLIP BACK-->
-               <span id="undo" class="el is-disabled">
+               <span id="undo" class="tool is-disabled">
                   <button>
                      <img src="icos/undo.svg" />
                   </button>
                </span>
 
                <!--FLIP FRONT-->
-               <span id="redo" class="el is-disabled">
+               <span id="redo" class="tool is-disabled">
                   <button>
                      <img src="icos/redo.svg" />
                   </button>
@@ -132,7 +136,28 @@
          </div>
 
          <!--CONTENT-->
-         <div id="active-page"></div>
+         <div class="page">
+            <!--CONTROLLER-->
+            <div id="controller">
+               <div class="controls">
+                  <span id="rotate-handle">
+                     <img src="icos/rotation.svg" />
+                  </span>
+                  <span id="move-handle">
+                     <img src="icos/move.svg" />
+                  </span>
+                  <span id="delete-handle">
+                     <img src="icos/delete.svg" />
+                  </span>
+               </div>
+               <div class="thumbs">
+                  <span class="thumb tl"></span>
+                  <span class="thumb tr"></span>
+                  <span class="thumb bl"></span>
+                  <span class="thumb br"></span>
+               </div>
+            </div>
+         </div>
       </div>
 
       <!--SCRIPTS-->
@@ -144,8 +169,9 @@
       <script type="module" src="listeners.js"></script>
       <script type="module" src="interact.js"></script>
       <script type="module" src="actions.js"></script>
-      <script type="module" src="controls.js"></script>
-      <script type="module" src="main.js"></script>
+      <script type="module" src="toolbar.js"></script>
       <script type="module" src="demo.js"></script>
+      <script type="module" src="editor.js"></script>
+      <script type="module" src="preview.js"></script>
    </body>
 </html>

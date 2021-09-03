@@ -68,12 +68,17 @@ export function toggleFlipV(str) {
 
 // GET DRAG ANGLE
 export function getDragAngle(event, el) {
+   // start value
    const startAngle = parseFloat(el.getAttribute('data-angle')) || 0
-   const center = {
-      x: parseFloat(el.getAttribute('data-center-x')) || 0,
-      y: parseFloat(el.getAttribute('data-center-y')) || 0,
-   }
-   const angle = Math.atan2(center.y - event.clientY, center.x - event.clientX)
+
+   // find center
+   const x = parseFloat(el.getAttribute('data-center-x')) || 0
+   const y = parseFloat(el.getAttribute('data-center-y')) || 0
+
+   // calc angle
+   const angle = Math.atan2(y - event.clientY, x - event.clientX)
+
+   // return difference
    return angle - startAngle
 }
 
@@ -83,7 +88,20 @@ export function queryParent(el, cls) {
    while (!el?.classList?.contains(cls)) {
       el = el?.parentElement
       depth++
-      if (depth >= 12 || (el?.classList?.contains('book') && cls !== 'book')) {
+      if (depth >= 12 || el?.id === 'editor') {
+         return null
+      }
+   }
+   return el
+}
+
+// QUERY PARENT BY ID
+export function queryParentById(el, id) {
+   let depth = 0
+   while (el?.id !== id) {
+      el = el?.parentElement
+      depth++
+      if (depth >= 12 || el?.id === 'editor') {
          return null
       }
    }
@@ -94,28 +112,31 @@ export function queryParent(el, cls) {
 export function getMinZ(page) {
    const elements = page.querySelectorAll('.element')
    let min = 0
-   for (const e of elements) {
-      const z = e.style['z-index']
+   for (const element of elements) {
+      const z = parseInt(element.style['z-index']) || 0
       if (z <= min) min = z
    }
-   return min
+   return parseInt(min)
 }
 
 // GET MAX Z
 export function getMaxZ(page) {
    const elements = page.querySelectorAll('.element')
    let max = 0
-   for (const e of elements) {
-      const z = e.style['z-index']
+   for (const element of elements) {
+      const z = parseInt(element.style['z-index']) || 0
       if (z >= max) max = z
    }
-   return max
+   return parseInt(max)
 }
 
 // RAISE ALL
-export function raiseAllElements(page, min) {
+export function raiseAllElements(page) {
    const elements = page.querySelectorAll('.element')
-   elements.forEach((e) => (e.style['z-index'] += Math.abs(min) + 1))
+   elements.forEach(function (element) {
+      const fixed = (parseInt(element.style['z-index']) || 0) + 1
+      element.style['z-index'] = fixed
+   })
 }
 
 // REGISTER CLICK
@@ -137,4 +158,20 @@ export function registerInput(query, handler) {
    document.querySelectorAll(query).forEach(function (el) {
       el.addEventListener('input', handler)
    })
+}
+
+// RESOLVE TYPE
+export function resolveType(element) {
+   if (element?.classList.contains('is-image')) return 'image'
+   if (element?.classList.contains('is-text')) return 'text'
+   if (element?.classList.contains('is-audio')) return 'audio'
+   if (element?.classList.contains('is-video')) return 'video'
+}
+
+// COPY ATTR
+export function copyAttribute(from, to, attrName, fallback) {
+   if (!from || !to) {
+      return
+   }
+   to.setAttribute(attrName, from.getAttribute(attrName) || fallback)
 }

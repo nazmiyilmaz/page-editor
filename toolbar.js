@@ -1,5 +1,5 @@
-// CONTROLLER LIST FOR DIFFERENT TYPE OF ELEMETS
-const controls = {
+// TOOL LIST FOR DIFFERENT TYPE OF ELEMETS
+const tools = {
    image: [
       'flip-horizontal',
       'flip-vertical',
@@ -30,25 +30,32 @@ import {
    getMinZ,
    raiseAllElements,
    getMaxZ,
+   resolveType,
+   queryParentById,
 } from './helpers.js'
 
 import { load as loadAudio, resetPlayback } from './audio.js'
-import { load as loadText } from './textarea.js'
+import { load as loadText, updateFontColorIndicator } from './textarea.js'
 import { load as loadImage } from './image.js'
+
+import {
+   locate as locateController,
+   hide as hideController,
+} from './controller.js'
 
 // FLIP FRONT
 export function flipFront() {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const element = document.querySelector('#editor .element.is-active')
 
    // find page
-   const page = document.getElementById('active-page')
+   const page = document.querySelector('#editor .page')
 
    // get max index
    const max = getMaxZ(page)
 
    // set a value more than max
-   el.style['z-index'] = max + 1
+   element.style['z-index'] = max + 1
 
    // mark state
    markState()
@@ -57,10 +64,10 @@ export function flipFront() {
 // FLIP BACK
 export function flipBack() {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const element = document.querySelector('#editor .element.is-active')
 
    // find page
-   const page = document.getElementById('active-page')
+   const page = document.querySelector('#editor .page')
 
    // find minimum index
    const min = getMinZ(page)
@@ -68,14 +75,14 @@ export function flipBack() {
    // if index is negative
    if (min <= 0) {
       // raise others
-      raiseAllElements(page, min)
+      raiseAllElements(page)
       // put current below
-      el.style['z-index'] = 0
+      element.style['z-index'] = 0
    }
    // else
    else {
       // decrease z to a value less than minimum
-      el.style['z-index'] = min - 1
+      element.style['z-index'] = min - 1
    }
 
    // mark state
@@ -85,7 +92,7 @@ export function flipBack() {
 // FLIP HORIZONTAL
 export function flipHorizontal() {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const target = el.querySelector('.item')
@@ -100,7 +107,7 @@ export function flipHorizontal() {
 // FLIP VERTICAL
 export function flipVertical() {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const target = el.querySelector('.item')
@@ -115,7 +122,7 @@ export function flipVertical() {
 // BOLD
 export function toggleBold() {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -130,7 +137,7 @@ export function toggleBold() {
 // ITALIC
 export function toggleItalic() {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -145,7 +152,7 @@ export function toggleItalic() {
 // STRIKE
 export function toggleStrike() {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -160,7 +167,7 @@ export function toggleStrike() {
 // FONT FAMILY
 export function changeFontFamily(event) {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -175,7 +182,7 @@ export function changeFontFamily(event) {
 // FONT SIZE
 export function changeFontSize(event) {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -190,7 +197,7 @@ export function changeFontSize(event) {
 // COLOR
 export function changeColor(event) {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -203,12 +210,6 @@ export function changeColor(event) {
 
    // mark state
    markState()
-}
-
-// UPDATE FONT COLOR INDICATOR
-export function updateFontColorIndicator(color) {
-   const indicator = document.getElementById('color-indicator')
-   indicator.style.backgroundColor = color
 }
 
 // SETUP ALIGN
@@ -248,7 +249,7 @@ export function setupAlign() {
 // ALIGN TEXT
 export function alignText(orientation) {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -281,7 +282,7 @@ export function setupAlpha() {
 // SET ALPHA
 export function setAlpha(val) {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const item = el.querySelector('.item')
@@ -293,41 +294,33 @@ export function setAlpha(val) {
    markState()
 }
 
-// DELETE
-export function deleteItem(event) {
-   // find element
-   const el = queryParent(event.target, 'element')
-
-   // check if element exists
-   if (el) {
-      // remove element
-      el.remove()
-      // hide control components
-      hideAll()
-   }
-
-   // mark state
-   markState()
-}
-
 // DE ACTIVATE ALL ELEMENTS
 export function deActivateAll() {
-   const page = document.getElementById('active-page')
+   const page = document.querySelector('#editor .page')
    page.querySelectorAll('.element').forEach(function (e) {
       e.classList.remove('is-active')
    })
 }
 
-// SWITCH CONTROLLER
-export function switchController(event) {
+// TOGGLE TOOLBAR
+export function toggleToolbar(event) {
+   // check if origin is delete button
+   const isControl = queryParentById(event.target, 'controller')
+   // check if click origin is delete button
+   const isDel = queryParentById(event.target, 'delete-handle')
+
+   // ignore if the origin is controller
+   if (isControl && !isDel) {
+      return
+   }
+
+   // hide controller
+   hideController()
    // reset audio playback
    resetPlayback()
 
    // de-activate all elements at first
    deActivateAll()
-
-   // check if click origin is delete button
-   const isDel = queryParent(event.target, 'delete-handle')
 
    // if origin is delete button then return
    if (isDel) {
@@ -336,7 +329,7 @@ export function switchController(event) {
    }
 
    // check if click origin is page
-   const isPage = event.target.id === 'active-page'
+   const isPage = event.target.classList.contains('page')
 
    // if origin is page then de activate all elements and return
    if (isPage) {
@@ -346,7 +339,9 @@ export function switchController(event) {
 
    // set active class
    const el = queryParent(event.target, 'element')
-   el.classList.add('is-active')
+   const type = resolveType(el)
+   el?.classList.add('is-active')
+   locateController(type)
 
    // open menu
    openMenu()
@@ -358,7 +353,7 @@ export function openMenu() {
    hideAll()
 
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // if no element is active return
    if (!el) {
@@ -366,48 +361,43 @@ export function openMenu() {
    }
 
    // init type
-   let type
+   const type = resolveType(el)
 
-   // assign type
-   if (el.classList.contains('is-image')) type = 'image'
-   if (el.classList.contains('is-text')) type = 'text'
-   if (el.classList.contains('is-audio')) type = 'audio'
-
-   // get controller based on type
-   const items = controls[type]
+   // get tool list based on type
+   const items = tools[type]
    if (items) {
-      // show all related controllers
+      // show all related tools
       for (const item of items) {
          document.getElementById(item).style.display = 'unset'
       }
    }
 
    // load settings of item
-   loadController(type)
+   loadToolbar(type)
 }
 
-// HIDE ALL CONTROLLER ITEMS
-function hideAll() {
-   // find controller
-   const controller = document.getElementById('element-controller')
+// HIDE ALL TOOLBAR ITEMS
+export function hideAll() {
+   // find toolbar
+   const toolbar = document.getElementById('options-toolbar')
 
-   // set display none to all controller components
-   controller?.querySelectorAll('.el').forEach(function (el) {
+   // set display none to all toolbar components
+   toolbar?.querySelectorAll('.tool').forEach(function (el) {
       el.style.display = 'none'
    })
 }
 
-// SET VALUES OF ELEMENT IN THE CONTROLLER
-function loadController(type) {
-   // LOAD TEXT CONTROLLER
+// SET VALUES OF ELEMENT IN THE TOOLBAR
+function loadToolbar(type) {
+   // LOAD TEXT TOOLBAR
    if (type === 'text') {
       loadText()
    }
-   // LOAD IMAGE CONTROLLER
+   // LOAD IMAGE TOOLBAR
    if (type === 'image') {
       loadImage()
    }
-   // LOAD AUDIO CONTROLLER
+   // LOAD AUDIO TOOLBAR
    if (type === 'audio') {
       loadAudio()
    }

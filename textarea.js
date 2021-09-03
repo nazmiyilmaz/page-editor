@@ -1,4 +1,4 @@
-import { registerInput } from './helpers.js'
+import { registerInput, rgbToHex } from './helpers.js'
 
 import { families, sizes } from './fonts.js'
 
@@ -13,6 +13,7 @@ export function create(value) {
    return text.cloneNode(true)
 }
 
+// INIT
 export function init() {
    document.querySelectorAll('.reactive-text.item').forEach(function (ta) {
       ta.value = ta.getAttribute('content')
@@ -23,9 +24,24 @@ export function init() {
    })
 }
 
+// INIT PREVIEW
+export function initPreview() {
+   // find preview page
+   const page = document.querySelector('#preview .page')
+
+   // find texts
+   const texts = page?.querySelectorAll('.element.is-text .item')
+
+   // load slots
+   for (const text of texts) {
+      text.innerText = text.getAttribute('content')
+      text.readOnly = true
+   }
+}
+
 export function load() {
    // find element
-   const el = document.querySelector('.element.is-active')
+   const el = document.querySelector('#editor .element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -67,4 +83,10 @@ export function load() {
       ? 1
       : parseFloat(text.style.opacity)
    alphaSlider.value = alpha * 100
+}
+
+// UPDATE FONT COLOR INDICATOR
+export function updateFontColorIndicator(color) {
+   const indicator = document.getElementById('color-indicator')
+   indicator.style.backgroundColor = color
 }
