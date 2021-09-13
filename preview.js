@@ -1,24 +1,23 @@
-import { initPreview as initAudioPreview } from './audio.js'
-import { initPreview as initTextPreview } from './textarea.js'
+import { init as initAudio } from './audio.js'
+import { init as initTextAreaElements } from './textarea.js'
 
-export function init() {
-   const preview = document.getElementById('preview')
+export function reload() {
+   const previews = document.querySelectorAll('.pe-preview')
 
-   const observer = new MutationObserver(function (mutations, obs) {
-      console.log(mutations)
+   for (const preview of previews) {
+      const observer = new MutationObserver(function () {
+         // init audio
+         initAudio()
+         // init textareas
+         initTextAreaElements()
+      })
 
-      // INIT AUDIO PREVIEW
-      initAudioPreview()
-
-      // INIT TEXT PREVIEW
-      initTextPreview()
-   })
-
-   observer.observe(preview, {
-      characterData: true,
-      childList: true,
-      attributes: true,
-   })
+      observer.observe(preview, {
+         characterData: true,
+         childList: true,
+         attributes: true,
+      })
+   }
 }
 
-init()
+window.onload = () => reload()

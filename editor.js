@@ -1,4 +1,6 @@
-import { setDrag, setDropZone, setResize, setRotate } from './interact.js'
+import { registerClick, registerChange } from './helpers.js'
+
+import { setDrag, setResize, setRotate } from './interact.js'
 
 import {
    changeColor,
@@ -16,84 +18,73 @@ import {
    setupAlpha,
 } from './toolbar.js'
 
-import { registerClick, registerChange } from './helpers.js'
-import { setupFonts } from './fonts.js'
-import keyboard from './keyboard.js'
-
-import { init as initHistory, undo, redo } from './history.js'
-import { init as initAudio } from './audio.js'
-
 import { deleteItem } from './controller.js'
 
-// INIT AUDIO
-initAudio()
+import { init as initFonts } from './fonts.js'
+import { init as initHistory, undoListener, redoListener } from './history.js'
+import { init as initKeyboard } from './keyboard.js'
+import { init as initAudio } from './audio.js'
+import { init as initTextAreaElements } from './textarea.js'
 
-// TOGGLE TOOLBAR
-registerClick('#editor .element', toggleToolbar)
+export function reload() {
+   // CONTROLLER
+   // delete-handle
+   registerClick('.pe-delete-handle', deleteItem)
+   // drag listener
+   setDrag('.pe-move-handle')
+   // rotate listener
+   setRotate('.pe-rotate-handle')
+   // resize listener
+   setResize('.pe-controller.is-resizable')
 
-// SET PAGE AS DROPZONE
-setDropZone('#editor .page')
+   // TOOLBAR
+   // setup align
+   setupAlign()
+   // setup alpha
+   setupAlpha()
+   // change font
+   registerChange('.pe-change-font-select', changeFontFamily)
+   // change size
+   registerChange('.pe-change-font-size-select', changeFontSize)
+   // change color
+   registerChange('.pe-change-color-picker', changeColor)
+   // toggle bold
+   registerClick('.pe-toggle-bold', toggleBold)
+   // toggle italic
+   registerClick('.pe-toggle-italic', toggleItalic)
+   // toggle strike
+   registerClick('.pe-toggle-strike', toggleStrike)
+   // flip horizontal
+   registerClick('.pe-flip-horizontal', flipHorizontal)
+   // flip vertical
+   registerClick('.pe-flip-vertical', flipVertical)
+   // flip front
+   registerClick('.pe-flip-front', flipFront)
+   // flip back
+   registerClick('.pe-flip-back', flipBack)
 
-// SET RESIZABLE ELEMENTS
-setResize('#controller.is-resizable')
+   // TOOLBAR TOGGLE
+   // toggle toolbar
+   registerClick('.pe-editor .element', toggleToolbar)
+   // hide toolbar
+   registerClick('.pe-editor .pe-page', toggleToolbar)
 
-// SET DRAG OF ELEMENTS
-setDrag('#move-handle')
+   // INIT AUDIO
+   initAudio()
 
-// SET ROTATE OF ELEMENTS
-setRotate('#rotate-handle')
+   // INIT TEXT AREAS
+   initTextAreaElements()
 
-// DELETE HANDLE
-registerClick('#delete-handle', deleteItem)
+   // INIT FONTS
+   initFonts()
 
-// SETUP ALIGN DROPDOWN
-setupAlign()
+   // INIT KEYBOARD
+   initKeyboard()
 
-// SETUP ALPHA
-setupAlpha()
+   // INIT HISTORY
+   initHistory()
+   registerClick('.pe-undo', undoListener)
+   registerClick('.pe-redo', redoListener)
+}
 
-// SETUP FONTS
-setupFonts()
-
-// INIT KEYBOARD EVENTS
-keyboard()
-
-// CHANGE FONT
-registerChange('#change-font', changeFontFamily)
-
-// CHANGE FONT SIZE
-registerChange('#change-font-size', changeFontSize)
-
-// CHANGE COLOR
-registerChange('#change-color', changeColor)
-
-// TOGGLE BOLD TEXT
-registerChange('#toggle-bold', toggleBold)
-
-// TOGGLE ITALIC TEXT
-registerChange('#toggle-italic', toggleItalic)
-
-// TOGGLE STRIKE TEXT
-registerChange('#toggle-strike', toggleStrike)
-
-// FLIP HORIZONTAL
-registerClick('#flip-horizontal', flipHorizontal)
-
-// FLIP VERTICAL
-registerClick('#flip-vertical', flipVertical)
-
-// FLIP FRONT
-registerClick('#flip-front', flipFront)
-
-// FLIP BACK
-registerClick('#flip-back', flipBack)
-
-// HIDE TOOLBAR
-registerClick('#editor .page', toggleToolbar)
-
-// REGISTER UNDO REDO
-registerClick('#undo', undo)
-registerClick('#redo', redo)
-
-// INIT HISTORY
-initHistory()
+window.onload = () => reload()

@@ -1,4 +1,4 @@
-import { registerInput, rgbToHex } from './helpers.js'
+import { getEditor, registerInput, rgbToHex } from './helpers.js'
 
 import { families, sizes } from './fonts.js'
 
@@ -15,70 +15,65 @@ export function create(value) {
 
 // INIT
 export function init() {
+   // find texts
+   const texts = document.querySelectorAll('.pe-preview .element.is-text .item')
+   // load slots
+   for (const text of texts) {
+      text.innerText = text.getAttribute('content')
+      text.readOnly = true
+   }
+   // sync value with content attr
    document.querySelectorAll('.reactive-text.item').forEach(function (ta) {
       ta.value = ta.getAttribute('content')
    })
+   // sync value with content attr
    registerInput('.reactive-text.item', function (event) {
       const ta = event.target
       ta.setAttribute('content', ta.value)
    })
 }
 
-// INIT PREVIEW
-export function initPreview() {
-   // find preview page
-   const page = document.querySelector('#preview .page')
+export function load(event) {
+   // get editor
+   const editor = getEditor(event.target)
 
-   // find texts
-   const texts = page?.querySelectorAll('.element.is-text .item')
-
-   // load slots
-   for (const text of texts) {
-      text.innerText = text.getAttribute('content')
-      text.readOnly = true
-   }
-}
-
-export function load() {
    // find element
-   const el = document.querySelector('#editor .element.is-active')
+   const el = editor.querySelector('.element.is-active')
 
    // find item
    const text = el.querySelector('.item')
 
    // load font family
-   const fontPicker = document.getElementById('change-font-select')
+   const fontPicker = editor.querySelector('.pe-change-font-select')
    fontPicker.value = text.style.fontFamily
 
    // load font size
-   const sizePicker = document.getElementById('change-font-size-select')
+   const sizePicker = editor.querySelector('.pe-change-font-size-select')
    sizePicker.value = text.style.fontSize
 
    // load color
-   const colorPicker = document.getElementById('change-color-picker')
+   const colorPicker = editor.querySelector('.pe-change-color-picker')
    colorPicker.value = rgbToHex(text.style.color) || '#000000'
-   updateFontColorIndicator(text.style.color || '#000000')
+   updateFontColorIndicator(event, text.style.color || '#000000')
 
    // load bold
-   const boldToggle = document.getElementById('toggle-bold-btn')
+   const boldToggle = editor.querySelector('.pe-toggle-bold-btn')
    boldToggle.checked = text.classList.contains('is-bold')
 
    // load italic
-   const italicToggle = document.getElementById('toggle-italic-btn')
+   const italicToggle = editor.querySelector('.pe-toggle-italic-btn')
    italicToggle.checked = text.classList.contains('is-italic')
 
    // load strike
-   const strikeToggle = document.getElementById('toggle-strike-btn')
+   const strikeToggle = editor.querySelector('.pe-toggle-strike-btn')
    strikeToggle.checked = text.classList.contains('is-strike')
 
    // load align
-   const alignSelected = document
-      .getElementById('change-align')
-      .querySelector('.selected')
+   const alignSelected = editor.querySelector('.pe-change-align .selected')
    alignSelected.src = `icos/align-${text.style.textAlign || 'left'}.svg`
 
    // load alpha
-   const alphaSlider = document.getElementById('alpha-slider')
+   const alphaSlider = editor.querySelector('.pe-alpha-slider')
    const alpha = isNaN(parseFloat(text.style.opacity))
       ? 1
       : parseFloat(text.style.opacity)
@@ -86,7 +81,8 @@ export function load() {
 }
 
 // UPDATE FONT COLOR INDICATOR
-export function updateFontColorIndicator(color) {
-   const indicator = document.getElementById('color-indicator')
+export function updateFontColorIndicator(event, color) {
+   const editor = getEditor(event.target)
+   const indicator = editor.querySelector('.pe-color-indicator')
    indicator.style.backgroundColor = color
 }

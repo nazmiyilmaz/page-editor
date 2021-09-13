@@ -2,7 +2,7 @@ import { undo, redo } from './history.js'
 
 import { copy, cut, paste } from './clipboard.js'
 
-export default function init() {
+export function init() {
    document.addEventListener('keydown', function (event) {
       // CTRL+Z
       if (event.ctrlKey && event.key === 'z') undo()

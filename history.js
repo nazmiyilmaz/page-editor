@@ -1,101 +1,154 @@
-import { registerClick } from './helpers.js'
-import { toggleToolbar, openMenu } from './toolbar.js'
+import { getEditor, registerClick } from './helpers.js'
+import { init as initAudio } from './audio.js'
 import { init as initTextAreaElements } from './textarea.js'
+import { toggleToolbar } from './toolbar.js'
 import { deleteItem } from './controller.js'
 
-export let pointer = -1
-export let history = []
-export const memory = 50 // step count to keep in memory
+const histories = new Map()
+const memory = 50 // step count to keep in memory
 
 // UNDO
-export function undo() {
-   // find page
-   const page = document.querySelector('#editor .page')
+export function undo(editor) {
+   // get history
+   const current = histories.get(editor)
+
+   if (!current) {
+      init()
+      return
+   }
+
+   // get page
+   const page = editor.querySelector('.pe-page')
 
    // undo if history is not empty
-   if (pointer > 0) {
-      pointer--
-      page.outerHTML = history[pointer]
+   if (current.pointer > 0) {
+      current.pointer--
+      page.outerHTML = current.history[current.pointer]
    }
 
    // refresh page
-   refresh()
+   refresh(editor)
 }
 
 // REDO
-export function redo() {
-   // find page
-   const page = document.querySelector('#editor .page')
+export function redo(editor) {
+   // get history
+   const current = histories.get(editor)
+
+   if (!current) {
+      init()
+      return
+   }
+
+   // get page
+   const page = editor.querySelector('.pe-page')
 
    // redo if pointer is not the last index
-   if (pointer + 1 < history.length) {
-      pointer++
-      page.outerHTML = history[pointer]
+   if (current.pointer + 1 < current.history.length) {
+      current.pointer++
+      page.outerHTML = current.history[current.pointer]
    }
 
    // refresh page
-   refresh()
+   refresh(editor)
+}
+
+export function undoListener(event) {
+   // get editor
+   const editor = getEditor(event.target)
+   // call undo
+   undo(editor)
+}
+
+export function redoListener(event) {
+   // get editor
+   const editor = getEditor(event.target)
+   // call redo
+   redo(editor)
 }
 
 // MARK STATE
-export function markState() {
-   const page = document.querySelector('#editor .page')
+export function markState(editor) {
+   // get history
+   const current = histories.get(editor)
+
+   // get page
+   const page = editor.querySelector('.pe-page')
 
    // if memory is full
-   if (history.length >= memory && pointer + 1 === history.length) {
-      history.push(page.outerHTML)
-      history = history.slice(1, memory + 1)
+   if (
+      current.history.length >= memory &&
+      current.pointer + 1 === current.history.length
+   ) {
+      current.history.push(page.outerHTML)
+      current.history = current.history.slice(1, memory + 1)
    }
    // if last
-   else if (pointer + 1 === history.length) {
-      history.push(page.outerHTML)
-      pointer++
+   else if (current.pointer + 1 === current.history.length) {
+      current.history.push(page.outerHTML)
+      current.pointer++
    }
    // else
    else {
-      history = history.slice(0, pointer + 1)
-      history.push(page.outerHTML)
-      pointer++
+      current.history = current.history.slice(0, current.pointer + 1)
+      current.history.push(page.outerHTML)
+      current.pointer++
    }
 
-   // refresh page
-   refresh()
+   // refresh buttons
+   refreshButtons(editor)
 }
 
 // INIT
 export function init() {
-   markState()
-}
-
-// REFRESH
-function refresh() {
-   // HIDE TOOLBAR
-   registerClick('#editor .page', toggleToolbar)
-   // REGISTER DELETE
-   registerClick('#delete-handle', deleteItem)
-   // INIT TEXTAREA ELEMENTS
-   initTextAreaElements()
-   // OPEN TOOLBAR MENU
-   openMenu()
-   // REFRESH UNDO REDO BUTTON STYLE
-   refreshUndoRedoStyle()
+   const editors = document.querySelectorAll('.pe-editor')
+   for (const editor of editors) {
+      const page = editor.querySelector('.pe-page')
+      if (!histories.get(editor)) {
+         histories.set(editor, {
+            pointer: -1,
+            history: [page.outerHTML],
+         })
+      }
+   }
 }
 
 // REFRESH UNDO REDO STYLE
-export function refreshUndoRedoStyle() {
-   const undoBtn = document.getElementById('undo')
+function refreshButtons(editor) {
+   // get history
+   const current = histories.get(editor)
 
-   if (pointer > 0 && history.length > 1) {
+   // undo button
+   const undoBtn = editor.querySelector('.pe-undo')
+   if (current.pointer > 0 && current.history.length > 1) {
       undoBtn.classList.remove('is-disabled')
    } else {
       undoBtn.classList.add('is-disabled')
    }
 
-   const redoBtn = document.getElementById('redo')
-
-   if (pointer < history.length - 1) {
+   // redo button
+   const redoBtn = editor.querySelector('.pe-redo')
+   if (current.pointer < current.history.length - 1) {
       redoBtn.classList.remove('is-disabled')
    } else {
       redoBtn.classList.add('is-disabled')
    }
+}
+
+// REFRESH EDITOR
+function refresh(editor) {
+   // delete-handle
+   registerClick('.pe-delete-handle', deleteItem, editor)
+
+   // toggle toolbar
+   registerClick('.element', toggleToolbar, editor)
+
+   // hide toolbar
+   registerClick('.pe-page', toggleToolbar, editor)
+
+   // init audio
+   initAudio()
+
+   // init text area elements
+   initTextAreaElements()
 }

@@ -1,4 +1,4 @@
-import { copyAttribute } from './helpers.js'
+import { copyAttribute, getEditor } from './helpers.js'
 import { markState } from './history.js'
 import { hideAll as hideToolbar } from './toolbar.js'
 
@@ -21,32 +21,35 @@ const options = {
    },
 }
 
-export function locate(type) {
+export function locate(event, type) {
+   // get editor
+   const editor = getEditor(event.target)
+
    // find element
-   const el = document.querySelector('#editor .element.is-active')
+   const el = editor.querySelector('.element.is-active')
    if (!el) {
       return
    }
 
    // find controller
-   const controller = document.getElementById('controller')
+   const controller = editor.querySelector('.pe-controller')
 
    // resolve options
    const { thumbs, controls } = options[type]
    const { move, del, rotate } = controls
 
    // set move
-   document.getElementById('move-handle').style.display = move
+   editor.querySelector('.pe-move-handle').style.display = move
       ? 'unset'
       : 'none'
 
    // set delete
-   document.getElementById('delete-handle').style.display = del
+   editor.querySelector('.pe-delete-handle').style.display = del
       ? 'unset'
       : 'none'
 
    // set rotate
-   document.getElementById('rotate-handle').style.display = rotate
+   editor.querySelector('.pe-rotate-handle').style.display = rotate
       ? 'unset'
       : 'none'
 
@@ -68,24 +71,27 @@ export function locate(type) {
    copyAttribute(el, controller, 'data-y', 0)
 }
 
-export function hide() {
-   const controller = document.getElementById('controller')
+export function hide(event) {
+   // get editor
+   const editor = getEditor(event?.target || event)
+   // get controller
+   const controller = editor.querySelector('.pe-controller')
    controller.classList.remove('is-active')
 }
 
 // DELETE
 export function deleteItem(event) {
+   // get editor
+   const editor = getEditor(event.target)
    // find element
-   const el = document.querySelector('#editor .element.is-active')
-
+   const el = editor.querySelector('.element.is-active')
    // check if element exists
    if (el) {
       // remove element
       el.remove()
       // hide toolbar components
-      hideToolbar()
+      hideToolbar(event)
    }
-
    // mark state
-   markState()
+   markState(editor)
 }

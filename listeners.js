@@ -1,38 +1,49 @@
-import { replaceTranslate, replaceRotate, getDragAngle } from './helpers.js'
+import {
+   replaceTranslate,
+   replaceRotate,
+   getDragAngle,
+   getEditor,
+} from './helpers.js'
 import { markState } from './history.js'
 
 // DRAG LISTENER
 export const dragListeners = {
    move: function (event) {
-      const controller = document.getElementById('controller')
-      const target = document.querySelector('#editor .element.is-active')
+      const editor = getEditor(event.target)
+      const controller = editor.querySelector('.pe-controller')
+      const target = editor.querySelector('.element.is-active')
 
       drag(event, controller)
       drag(event, target)
    },
    end: function (event) {
-      markState()
+      const editor = getEditor(event.target)
+      markState(editor)
    },
 }
 
 // RESIZE LISTENER
 export const resizeListeners = {
    move: function (event) {
-      const controller = document.getElementById('controller')
-      const target = document.querySelector('#editor .element.is-active')
+      const editor = getEditor(event.target)
+      const controller = editor.querySelector('.pe-controller')
+      const target = editor.querySelector('.element.is-active')
 
       resize(event, controller)
       resize(event, target)
    },
    end: function (event) {
-      markState()
+      const editor = getEditor(event.target)
+      markState(editor)
    },
 }
 
 // ROTATE LISTENER
 export const rotateListeners = {
    onstart: function (event) {
-      const target = document.querySelector('#editor .element.is-active .item')
+      const editor = getEditor(event.target)
+      const target = editor.querySelector('.element.is-active .item')
+
       const rect = target.getBoundingClientRect()
 
       target.setAttribute('data-center-x', rect.left + rect.width / 2)
@@ -40,16 +51,18 @@ export const rotateListeners = {
       target.setAttribute('data-angle', getDragAngle(event, target))
    },
    onmove: function (event) {
-      const target = document.querySelector('#editor .element.is-active .item')
+      const editor = getEditor(event.target)
+      const target = editor.querySelector('.element.is-active .item')
       const angle = getDragAngle(event, target)
       rotate(angle, target)
    },
    onend: function (event) {
-      const target = document.querySelector('#editor .element.is-active .item')
+      const editor = getEditor(event.target)
+      const target = editor.querySelector('.element.is-active .item')
       const angle = getDragAngle(event, target)
       target.setAttribute('data-angle', angle)
       // mark state
-      markState()
+      markState(editor)
    },
 }
 

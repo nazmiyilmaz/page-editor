@@ -22,7 +22,7 @@ body {
 }
 
 // PREVIEW
-#preview {
+.pe-preview {
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -30,7 +30,7 @@ body {
 }
 
 // PAGE
-#preview .page {
+.pe-preview .pe-page {
    padding: 10px;
    margin-top: 1rem;
    display: block;

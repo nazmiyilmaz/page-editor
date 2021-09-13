@@ -15,23 +15,29 @@ export const sizes = {
    default: 18,
 }
 
-export function setupFonts() {
-   // setup families
-   const fontPicker = document.getElementById('change-font-select')
-   for (const family of families) {
-      const option = document.createElement('option')
-      option.label = family[0]
-      option.value = family[1]
-      option.style.fontFamily = family[1]
-      fontPicker.appendChild(option.cloneNode(true))
+export function init() {
+   // setup fonts
+   const fontPickers = document.querySelectorAll('.pe-change-font-select')
+
+   for (const fpicker of fontPickers) {
+      for (const family of families) {
+         const option = document.createElement('option')
+         option.label = family[0]
+         option.value = family[1]
+         option.style.fontFamily = family[1]
+         fpicker.appendChild(option.cloneNode(true))
+      }
    }
 
    // setup sizes
-   const sizePicker = document.getElementById('change-font-size-select')
-   for (let size = sizes.min; size < sizes.max; size += sizes.pace) {
-      const option = document.createElement('option')
-      option.label = size
-      option.value = `${size}${sizes.unit}`
-      sizePicker.appendChild(option.cloneNode(true))
+   const sizePickers = document.querySelectorAll('.pe-change-font-size-select')
+
+   for (const spicker of sizePickers) {
+      for (let size = sizes.min; size < sizes.max; size += sizes.pace) {
+         const option = document.createElement('option')
+         option.label = size
+         option.value = `${size}${sizes.unit}`
+         spicker.appendChild(option.cloneNode(true))
+      }
    }
 }

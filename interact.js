@@ -12,7 +12,7 @@ export function setResize(selector, preserveRatio = false) {
    const modifiers = [
       // keep the edges inside the parent
       interact.modifiers.restrictEdges({
-         outer: '#editor .page',
+         outer: '.pe-editor .pe-page',
       }),
    ]
 
@@ -45,7 +45,7 @@ export function setDrag(selector) {
       inertia: true,
       modifiers: [
          interact.modifiers.restrictRect({
-            restriction: '#editor .page',
+            restriction: '.pe-editor .pe-page',
             endOnly: true,
          }),
       ],
@@ -57,31 +57,4 @@ export function setDrag(selector) {
 // MAKE ROTATABLE
 export function setRotate(handleSelector) {
    interact(handleSelector).draggable(rotateListeners)
-}
-
-// SETUP DROPZONE
-export function setDropZone(selector) {
-   interact(selector).dropzone({
-      overlap: 0.75,
-      ondropactivate: function (event) {
-         event.target.classList.add('drop-active')
-      },
-      ondragenter: function (event) {
-         var draggableElement = event.relatedTarget
-         var dropzoneElement = event.target
-         dropzoneElement.classList.add('drop-target')
-         draggableElement.classList.add('can-drop')
-      },
-      ondragleave: function (event) {
-         event.target.classList.remove('drop-target')
-         event.relatedTarget.classList.remove('can-drop')
-      },
-      ondrop: function (event) {
-         event.relatedTarget
-      },
-      ondropdeactivate: function (event) {
-         event.target.classList.remove('drop-active')
-         event.target.classList.remove('drop-target')
-      },
-   })
 }

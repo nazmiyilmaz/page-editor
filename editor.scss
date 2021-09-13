@@ -13,7 +13,7 @@ $audio-link-cl: rgb(105, 131, 219);
 $controller-br: 1px solid grey;
 
 // EDITOR
-#editor {
+.pe-editor {
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -21,7 +21,7 @@ $controller-br: 1px solid grey;
 }
 
 // PAGE
-#editor .page {
+.pe-editor .pe-page {
    padding: 10px;
    margin-top: 1rem;
    display: block;
@@ -35,7 +35,7 @@ $controller-br: 1px solid grey;
 }
 
 // TOOLBAR
-#toolbar {
+.pe-toolbar {
    width: 100%;
    display: flex;
    align-items: center;
@@ -44,12 +44,12 @@ $controller-br: 1px solid grey;
 }
 
 // OPTIONS TOOLBAR
-#options-toolbar {
+.pe-options-toolbar {
    width: min-content;
    display: flex;
    justify-content: center;
    align-items: center;
-   z-index: 99999;
+   z-index: 999999999999;
    height: 30px;
 
    // TOOL
@@ -62,32 +62,27 @@ $controller-br: 1px solid grey;
    }
 
    // TOGGLE BOLD-ITALIC-STRIKE
-   #toggle-bold,
-   #toggle-italic,
-   #toggle-strike {
-      position: relative;
+   .pe-toggle-bold,
+   .pe-toggle-italic,
+   .pe-toggle-strike {
       input {
          display: none;
-
-         &:checked + label {
-            background-color: $toggle-bg-active;
-         }
       }
-      label {
+      input:checked + img {
+         background-color: $toggle-bg-active;
+      }
+      img {
          cursor: pointer;
          border: $default-br;
          border-radius: 6px;
          width: 30px;
          height: 100%;
-         display: flex;
-         justify-content: center;
-         align-items: center;
          background-color: $toggle-bg;
       }
    }
 
    // FONT SELECTOR
-   #change-font select {
+   .pe-change-font select {
       width: 130px;
       height: 31px;
       border: $default-br;
@@ -102,7 +97,7 @@ $controller-br: 1px solid grey;
    }
 
    // FONT SIZE SELECTOR
-   #change-font-size select {
+   .pe-change-font-size select {
       width: 60px;
       height: 31px;
       border: $default-br;
@@ -118,7 +113,7 @@ $controller-br: 1px solid grey;
    }
 
    // ALIGN SELECTOR
-   #change-align {
+   .pe-change-align {
       border: $default-br;
       border-radius: 6px;
       cursor: pointer;
@@ -159,7 +154,7 @@ $controller-br: 1px solid grey;
    }
 
    // ALPHA SELECTOR
-   #change-alpha {
+   .pe-change-alpha {
       position: relative;
       .icon {
          width: 32px;
@@ -187,7 +182,7 @@ $controller-br: 1px solid grey;
          align-items: center;
          justify-content: center;
 
-         #alpha-slider {
+         .pe-alpha-slider {
             -webkit-appearance: none;
             appearance: none;
             background-color: rgb(213, 225, 231);
@@ -220,7 +215,7 @@ $controller-br: 1px solid grey;
    }
 
    // COLOR SELECTOR
-   #change-color {
+   .pe-change-color {
       width: 28px;
       height: 30px;
       cursor: pointer;
@@ -239,14 +234,14 @@ $controller-br: 1px solid grey;
          img {
             width: 20px;
          }
-         #color-indicator {
+         .pe-color-indicator {
             width: 24px;
             height: 4px;
             border: $default-br;
             border-radius: 3px;
          }
       }
-      #change-color-picker {
+      .pe-change-color-picker {
          z-index: 99;
          cursor: pointer;
          top: 0;
@@ -266,10 +261,10 @@ $controller-br: 1px solid grey;
    }
 
    // FLIP HORIZONTAL-VERTICAL-BACK-FRONT
-   #flip-horizontal,
-   #flip-vertical,
-   #flip-back,
-   #flip-front {
+   .pe-flip-horizontal,
+   .pe-flip-vertical,
+   .pe-flip-back,
+   .pe-flip-front {
       button {
          background: none;
          border: $default-br;
@@ -281,63 +276,10 @@ $controller-br: 1px solid grey;
          width: 22px;
       }
    }
-
-   // AUDIO PLAYBACK
-   #audio-playback {
-      border: $default-br;
-      width: 180px;
-      border-radius: 8px;
-      margin-left: 8px;
-
-      .player {
-         height: 30px;
-         width: 180px;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-      }
-
-      #audio-play-button {
-         width: 22px;
-         height: 22px;
-         cursor: pointer;
-      }
-
-      #audio-playback-slider {
-         -webkit-appearance: none;
-         appearance: none;
-         width: 100%;
-         background: rgb(232, 237, 238);
-         height: 12px;
-         border: 1px solid rgb(191, 196, 197);
-         border-radius: 12px;
-         outline: none;
-         cursor: pointer;
-         margin: 0 8px;
-         &::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border: 1px solid rgb(67, 69, 71);
-            border-radius: 100%;
-            background: rgb(146, 167, 179);
-            cursor: pointer;
-         }
-         &::-moz-range-thumb {
-            width: 16px;
-            height: 16px;
-            border: 1px solid rgb(67, 69, 71);
-            border-radius: 100%;
-            background: rgb(146, 167, 179);
-            cursor: pointer;
-         }
-      }
-   }
 }
 
 // HISTORY TOOLBAR
-#history-toolbar {
+.pe-history-toolbar {
    margin-left: auto;
    width: min-content;
    height: 30px;
@@ -353,8 +295,8 @@ $controller-br: 1px solid grey;
       justify-content: center;
       align-items: center;
    }
-   #undo,
-   #redo {
+   .pe-undo,
+   .pe-redo {
       button {
          height: 100%;
          background: none;
@@ -378,7 +320,7 @@ $controller-br: 1px solid grey;
 }
 
 // EDITOR ELEMENT
-#editor .page .element {
+.pe-editor .pe-page .element {
    // GENERAL ITEM STYLES
    &:not(.is-active) {
       .item {
@@ -400,7 +342,7 @@ $controller-br: 1px solid grey;
 }
 
 // CONTROLLER
-#controller {
+.pe-controller {
    box-sizing: border-box;
    touch-action: none;
    position: absolute;
@@ -431,9 +373,9 @@ $controller-br: 1px solid grey;
       border-radius: 12px;
       padding: 5px;
       z-index: 99999999;
-      #delete-handle,
-      #rotate-handle,
-      #move-handle {
+      .pe-delete-handle,
+      .pe-rotate-handle,
+      .pe-move-handle {
          margin: 0 5px;
          cursor: pointer;
          pointer-events: auto;

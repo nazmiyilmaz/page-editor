@@ -10,89 +10,85 @@ import { create as createImage } from './image.js'
 import { create as createVideo } from './video.js'
 
 // GET PREVIEW PAGE
-export function getPreviewPage() {
-   // deactivate all
-   deActivateAll()
+export function getPreviewPage(editor) {
    // get page
-   const page = document.querySelector('#editor .page')
+   const page = editor.querySelector('.pe-page')
+   // deactivate all elements
+   deActivateAll(page)
    // return html
    return page.outerHTML
 }
 
 // GET NON FUNCTIONAL PAGE
-export function getNonFunctionalPage() {
-   // deactivate all
-   deActivateAll()
-
+export function getNonFunctionalPage(editor) {
    // get page
-   const page = document.querySelector('#editor .page')
-
+   const page = editor.querySelector('.pe-page')
+   // deactivate all elements
+   deActivateAll(page)
+   // clone page
    const temp = page.cloneNode(true)
-
+   // place audio links
    temp.querySelectorAll('.element.is-audio').forEach((el) => {
       el.classList.remove('hide-links')
    })
-
+   // place video links
    temp.querySelectorAll('.element.is-video').forEach((el) => {
       const item = el.querySelector('.item')
-
       const link = item.querySelector('span.link').cloneNode(true)
       link.classList.add('item')
       link.style = item.style
-
       item.remove()
       el.appendChild(link)
    })
-
+   // return html
    return temp.outerHTML
 }
 
 // INSERT VIDEO
-export function insertVideo(src) {
+export function insertVideo(editor, src) {
    // create
    const video = createVideo(src)
    // insert to the page
-   insertItem(video, 'video', ['hide-links'])
+   insertItem(editor, video, 'video', ['hide-links'])
 }
 
 // INSERT AUDIO
-export function insertAudio(src) {
+export function insertAudio(editor, src) {
    // create
    const audio = createAudio(src)
    // insert to the page
-   insertItem(audio, 'audio', ['hide-links'])
+   insertItem(editor, audio, 'audio', ['hide-links'])
 }
 
 // INSERT TEXT
-export function insertText(value) {
+export function insertText(editor, value) {
    // create text
    const text = createText(value)
    // insert to the page
-   insertItem(text, 'text')
+   insertItem(editor, text, 'text')
 }
 
 // INSERT IMAGE
-export function insertImage(src) {
+export function insertImage(editor, src) {
    // create image
    const image = createImage(src)
    // insert to the page
-   insertItem(image, 'image')
+   insertItem(editor, image, 'image')
 }
 
 // CHANGE BACKGROUND
-export function changeBackground(src) {
+export function changeBackground(editor, src) {
    // find page
-   const page = document.querySelector('#editor .page')
+   const page = editor.querySelector('.pe-page')
    page.style.backgroundImage = `url(${src})`
-
    // mark state
-   markState()
+   markState(editor)
 }
 
 // INSERT HTML
-export function insertElement(element) {
+export function insertElement(editor, element) {
    // find page
-   const page = document.querySelector('#editor .page')
+   const page = editor.querySelector('.pe-page')
 
    // set z-index
    element.style['z-index'] = getMaxZ(page) + 1
@@ -105,29 +101,29 @@ export function insertElement(element) {
    element.click()
 
    // mark state
-   markState()
+   markState(editor)
 }
 
 // REMOVE ELEMENT
-export function removeElement(element) {
+export function removeElement(editor, element) {
    // find page
-   const page = document.querySelector('#editor .page')
+   const page = editor.querySelector('.pe-page')
 
    // remove
-   element.remove()
+   element?.remove()
 
    // dispatch click
-   page.click()
-   element.click()
+   page?.click()
+   element?.click()
 
    // mark state
-   markState()
+   markState(editor)
 }
 
 // GENERAL FUNCTION FOR INSERTING ELEMENT
-function insertItem(item, type, bind = []) {
+function insertItem(editor, item, type, bind = []) {
    // find page
-   const page = document.querySelector('#editor .page')
+   const page = editor.querySelector('.pe-page')
 
    // create node
    const node = document.createElement('div')
@@ -153,5 +149,5 @@ function insertItem(item, type, bind = []) {
    node.click()
 
    // mark state
-   markState()
+   markState(editor)
 }

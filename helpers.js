@@ -82,6 +82,19 @@ export function getDragAngle(event, el) {
    return angle - startAngle
 }
 
+// GET EDITOR
+export function getEditor(el) {
+   let depth = 0
+   while (!el?.classList?.contains('pe-editor')) {
+      el = el?.parentElement
+      depth++
+      if (depth >= 30) {
+         return null
+      }
+   }
+   return el
+}
+
 // GET CLOSEST PARENT
 export function queryParent(el, cls) {
    let depth = 0
@@ -140,22 +153,22 @@ export function raiseAllElements(page) {
 }
 
 // REGISTER CLICK
-export function registerClick(query, handler) {
-   document.querySelectorAll(query).forEach(function (el) {
+export function registerClick(query, handler, parent = document) {
+   parent.querySelectorAll(query).forEach(function (el) {
       el.addEventListener('click', handler)
    })
 }
 
 // REGISTER CHANGE
-export function registerChange(query, handler) {
-   document.querySelectorAll(query).forEach(function (el) {
+export function registerChange(query, handler, parent = document) {
+   parent.querySelectorAll(query).forEach(function (el) {
       el.addEventListener('change', handler)
    })
 }
 
 // REGISTER INPUT
-export function registerInput(query, handler) {
-   document.querySelectorAll(query).forEach(function (el) {
+export function registerInput(query, handler, parent = document) {
+   parent.querySelectorAll(query).forEach(function (el) {
       el.addEventListener('input', handler)
    })
 }
