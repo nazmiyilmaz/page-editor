@@ -40,6 +40,7 @@ export function init() {
    }
 }
 
+// play listener
 function play(event) {
    const current = queryParent(event.target, 'pe-element')
    const item = current.querySelector('.pe-item')
@@ -59,10 +60,19 @@ function play(event) {
       audio.currentTime = 0
       icon.src = 'icons/audio-active.svg'
       audio.play()
-      audio.addEventListener('ended', function (event) {
-         icon.src = 'icons/audio.svg'
-      })
+      audio.addEventListener('ended', ended)
    } else {
+      active = null
+   }
+}
+
+// ended listener
+function ended(event) {
+   const current = queryParent(event.target, 'pe-element')
+   const item = current.querySelector('.pe-item')
+   const icon = item.querySelector('img')
+   icon.src = 'icons/audio.svg'
+   if (active === item) {
       active = null
    }
 }
