@@ -43,6 +43,9 @@ import {
    hide as hideController,
 } from './controller.js'
 
+import align from './align.js'
+import alpha from './alpha.js'
+
 // FLIP FRONT
 export function flipFront(event) {
    // get editor
@@ -196,88 +199,37 @@ export function changeColor(event) {
 export function setupAlign() {
    // find related components
    const pickers = document.querySelectorAll('.tool.pe-change-align')
-
    for (const alg of pickers) {
       // show menu when clicked to the align picker
-      alg.addEventListener('click', function (event) {
-         // register toggle menu
-         const current = queryParent(event.target, 'pe-change-align')
-         const menu = current.querySelector('.menu')
-         menu.classList.toggle('has-display-none')
-      })
+      alg.addEventListener('click', align.toggle)
       // right
       const right = alg.querySelector('.right-alg')
-      right?.addEventListener('click', function (event) {
-         const current = queryParent(event.target, 'pe-change-align')
-         const selected = current.querySelector('.selected')
-         selected.src = 'icos/align-right.svg'
-         alignText(event, 'right')
-      })
+      right?.addEventListener('click', align.right)
       // left
       const left = alg.querySelector('.left-alg')
-      left?.addEventListener('click', function (event) {
-         const current = queryParent(event.target, 'pe-change-align')
-         const selected = current.querySelector('.selected')
-         selected.src = 'icos/align-left.svg'
-         alignText(event, 'left')
-      })
+      left?.addEventListener('click', align.left)
       // center
       const center = alg.querySelector('.center-alg')
-      center?.addEventListener('click', function (event) {
-         const current = queryParent(event.target, 'pe-change-align')
-         const selected = current.querySelector('.selected')
-         selected.src = 'icos/align-center.svg'
-         alignText(event, 'center')
-      })
+      center?.addEventListener('click', align.center)
    }
-}
-
-// ALIGN TEXT
-export function alignText(event, orientation) {
-   // get editor
-   const editor = getEditor(event.target)
-   // find element
-   const text = editor.querySelector('.element.is-active .item')
-   // change align
-   text.style.textAlign = orientation
-   // mark state
-   markState(editor)
 }
 
 // SETUP ALPHA
 export function setupAlpha() {
    const pickers = document.querySelectorAll('.pe-change-alpha')
-
    for (const alp of pickers) {
       // show slider when clicked to the alpha picker
-      alp.addEventListener('click', function (event) {
-         const current = queryParent(event.target, 'pe-change-alpha')
-         const menu = current.querySelector('.menu')
-         menu.classList.toggle('has-display-none')
-      })
-
+      alp.addEventListener('click', alpha.toggle)
       // slider
       const slider = alp.querySelector('.pe-alpha-slider')
-      slider?.addEventListener('change', function (event) {
-         setAlpha(event, event.target.value)
-      })
+      slider?.addEventListener('change', alpha.change)
    }
-}
-
-// SET ALPHA
-export function setAlpha(event, val) {
-   // get editor
-   const editor = getEditor(event.target)
-   // find item
-   const item = editor.querySelector('.element.is-active .item')
-   // change opacity
-   item.style.opacity = val / 100
-   // mark state
-   markState(editor)
 }
 
 // TOGGLE TOOLBAR
 export function toggleToolbar(event) {
+   // get editor
+   const editor = getEditor(event?.target || event)
    // check if origin is delete button
    const isControl = queryParent(event.target, 'pe-controller')
    // check if click origin is delete button
@@ -287,36 +239,33 @@ export function toggleToolbar(event) {
       return
    }
    // hide controller
-   hideController(event)
+   hideController(editor)
    // de-activate all elements at first
-   deActivateAll(event)
+   deActivateAll(editor)
    // if origin is delete button then return
    if (isDel) {
-      hideAll(event)
+      hideAll(editor)
       return
    }
    // check if click origin is page
    const isPage = event.target.classList.contains('pe-page')
    // if origin is page then de activate all elements and return
    if (isPage) {
-      hideAll(event)
+      hideAll(editor)
       return
    }
    // set active class
    const el = queryParent(event.target, 'element')
-   const type = resolveType(el)
    el?.classList.add('is-active')
-   locateController(event, type)
+   locateController(editor)
    // open menu
-   openMenu(event)
+   openMenu(editor)
 }
 
 // OPEN MENU FOR SPECIFIC TYPE OF ELEMENT
-export function openMenu(event) {
+export function openMenu(editor) {
    // hide all at first
-   hideAll(event)
-   // get editor
-   const editor = getEditor(event.target)
+   hideAll(editor)
    // find element
    const el = editor.querySelector('.element.is-active')
    // if no element is active return
@@ -334,13 +283,11 @@ export function openMenu(event) {
       }
    }
    // load settings of item
-   loadToolbar(event, type)
+   loadToolbar(editor, type)
 }
 
 // HIDE ALL TOOLBAR ITEMS
-export function hideAll(event) {
-   // get editor
-   const editor = getEditor(event?.target || event)
+export function hideAll(editor) {
    // find toolbar
    const toolbar = editor.querySelector('.pe-options-toolbar')
    // set display none to all toolbar components
@@ -350,28 +297,27 @@ export function hideAll(event) {
 }
 
 // DE ACTIVATE ALL ELEMENTS
-export function deActivateAll(event) {
-   // get editor
-   const editor = getEditor(event?.target || event)
+export function deActivateAll(editor) {
    // get page
    const page = editor.querySelector('.pe-page')
+   // deactivate all
    page.querySelectorAll('.element').forEach(function (e) {
       e.classList.remove('is-active')
    })
 }
 
 // SET VALUES OF ELEMENT IN THE TOOLBAR
-function loadToolbar(event, type) {
+function loadToolbar(editor, type) {
    // LOAD TEXT TOOLBAR
    if (type === 'text') {
-      loadText(event)
+      loadText(editor)
    }
    // LOAD IMAGE TOOLBAR
    if (type === 'image') {
-      loadImage(event)
+      loadImage(editor)
    }
    // LOAD AUDIO TOOLBAR
    if (type === 'audio') {
-      loadAudio(event)
+      loadAudio(editor)
    }
 }

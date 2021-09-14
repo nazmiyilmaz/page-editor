@@ -1,7 +1,4 @@
 import { getMaxZ } from './helpers.js'
-
-import { deActivateAll } from './toolbar.js'
-
 import { markState } from './history.js'
 
 import { create as createText } from './textarea.js'
@@ -9,22 +6,29 @@ import { create as createAudio } from './audio.js'
 import { create as createImage } from './image.js'
 import { create as createVideo } from './video.js'
 
+import { deActivateAll } from './toolbar.js'
+import { hide as hideController } from './controller.js'
+
 // GET PREVIEW PAGE
 export function getPreviewPage(editor) {
+   // deactivate all elements
+   deActivateAll(editor)
+   // hide controller
+   hideController(editor)
    // get page
    const page = editor.querySelector('.pe-page')
-   // deactivate all elements
-   deActivateAll(page)
    // return html
    return page.outerHTML
 }
 
 // GET NON FUNCTIONAL PAGE
 export function getNonFunctionalPage(editor) {
+   // deactivate all elements
+   deActivateAll(editor)
+   // hide controller
+   hideController(editor)
    // get page
    const page = editor.querySelector('.pe-page')
-   // deactivate all elements
-   deActivateAll(page)
    // clone page
    const temp = page.cloneNode(true)
    // place audio links
@@ -145,8 +149,8 @@ function insertItem(editor, item, type, bind = []) {
    page.appendChild(node)
 
    // dispatch click
-   page.click()
-   node.click()
+   page?.click()
+   node?.click()
 
    // mark state
    markState(editor)

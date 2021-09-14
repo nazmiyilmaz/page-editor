@@ -65,4 +65,4 @@ export function init() {
 }
 
 // LOAD FUNCTION
-export function load(event) {}
+export function load(editor) {}

@@ -173,6 +173,16 @@ export function registerInput(query, handler, parent = document) {
    })
 }
 
+// REGISTER HOVER
+export function registerHover(query, start, end, parent = document) {
+   parent.querySelectorAll(query).forEach(function (el) {
+      el.addEventListener('mouseenter', start)
+   })
+   parent.querySelectorAll(query).forEach(function (el) {
+      el.addEventListener('mouseleave', end)
+   })
+}
+
 // RESOLVE TYPE
 export function resolveType(element) {
    if (element?.classList.contains('is-image')) return 'image'

@@ -1,8 +1,12 @@
-import { getEditor, registerClick } from './helpers.js'
+import { getEditor, registerClick, registerHover } from './helpers.js'
 import { init as initAudio } from './audio.js'
 import { init as initTextAreaElements } from './textarea.js'
-import { toggleToolbar } from './toolbar.js'
-import { deleteItem } from './controller.js'
+import { openMenu, toggleToolbar } from './toolbar.js'
+import {
+   deleteItem,
+   hoverListeners,
+   locate as locateController,
+} from './controller.js'
 
 const histories = new Map()
 const memory = 50 // step count to keep in memory
@@ -151,4 +155,17 @@ function refresh(editor) {
 
    // init text area elements
    initTextAreaElements()
+
+   // element hover
+   const { start, end } = hoverListeners
+   registerHover('.element', start, end, editor)
+
+   // locate controller
+   locateController(editor)
+
+   // open menu
+   openMenu(editor)
+
+   // refresh buttons
+   refreshButtons(editor)
 }

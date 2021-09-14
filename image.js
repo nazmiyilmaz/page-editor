@@ -1,5 +1,3 @@
-import { getEditor } from './helpers.js'
-
 export function create(src) {
    const image = document.createElement('img')
    image.src = src
@@ -8,10 +6,7 @@ export function create(src) {
 
 export function init() {}
 
-export function load(event) {
-   // get editor
-   const editor = getEditor(event.target)
-
+export function load(editor) {
    // find element
    const el = editor.querySelector('.element.is-active')
 

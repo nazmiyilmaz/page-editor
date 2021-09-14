@@ -1,4 +1,9 @@
-import { copyAttribute, getEditor } from './helpers.js'
+import {
+   copyAttribute,
+   queryParent,
+   getEditor,
+   resolveType,
+} from './helpers.js'
 import { markState } from './history.js'
 import { hideAll as hideToolbar } from './toolbar.js'
 
@@ -21,15 +26,15 @@ const options = {
    },
 }
 
-export function locate(event, type) {
-   // get editor
-   const editor = getEditor(event.target)
-
+export function locate(editor) {
    // find element
    const el = editor.querySelector('.element.is-active')
    if (!el) {
       return
    }
+
+   // get type
+   const type = resolveType(el)
 
    // find controller
    const controller = editor.querySelector('.pe-controller')
@@ -71,9 +76,7 @@ export function locate(event, type) {
    copyAttribute(el, controller, 'data-y', 0)
 }
 
-export function hide(event) {
-   // get editor
-   const editor = getEditor(event?.target || event)
+export function hide(editor) {
    // get controller
    const controller = editor.querySelector('.pe-controller')
    controller.classList.remove('is-active')
@@ -90,8 +93,20 @@ export function deleteItem(event) {
       // remove element
       el.remove()
       // hide toolbar components
-      hideToolbar(event)
+      hideToolbar(editor)
    }
    // mark state
    markState(editor)
+}
+
+// HOVER LISTENERS
+export const hoverListeners = {
+   start: function (event) {
+      const el = queryParent(event.target, 'element')
+      el.classList.add('is-hovered')
+   },
+   end: function (event) {
+      const el = queryParent(event.target, 'element')
+      el.classList.remove('is-hovered')
+   },
 }

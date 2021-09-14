@@ -1,4 +1,4 @@
-import { registerClick, registerChange } from './helpers.js'
+import { registerClick, registerChange, registerHover } from './helpers.js'
 
 import { setDrag, setResize, setRotate } from './interact.js'
 
@@ -18,7 +18,7 @@ import {
    setupAlpha,
 } from './toolbar.js'
 
-import { deleteItem } from './controller.js'
+import { deleteItem, hoverListeners } from './controller.js'
 
 import { init as initFonts } from './fonts.js'
 import { init as initHistory, undoListener, redoListener } from './history.js'
@@ -63,6 +63,13 @@ export function reload() {
    // flip back
    registerClick('.pe-flip-back', flipBack)
 
+   // ELEMENT HOVER
+   registerHover(
+      '.pe-editor .element',
+      hoverListeners.start,
+      hoverListeners.end
+   )
+
    // TOOLBAR TOGGLE
    // toggle toolbar
    registerClick('.pe-editor .element', toggleToolbar)
@@ -87,4 +94,4 @@ export function reload() {
    registerClick('.pe-redo', redoListener)
 }
 
-window.onload = () => reload()
+reload()

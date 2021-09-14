@@ -298,7 +298,8 @@ $controller-br: 1px solid grey;
    .pe-undo,
    .pe-redo {
       button {
-         height: 100%;
+         width: 32px;
+         height: 32px;
          background: none;
          border: $default-br;
          border-radius: 100%;
@@ -327,18 +328,24 @@ $controller-br: 1px solid grey;
          cursor: pointer !important;
       }
    }
-}
+   &.is-hovered {
+      border: 3px solid rgba(255, 123, 0, 0.288);
+   }
 
-// ELEMENT
-.element {
-   box-sizing: border-box;
-   touch-action: none;
-   // ACTIVE CONTROLLER DISPLAY
    &.is-active {
+      border: 3px solid transparent !important;
       .item {
          cursor: unset !important;
       }
    }
+}
+
+// ELEMENT
+.element {
+   border: 3px solid transparent;
+   box-sizing: border-box;
+   touch-action: none;
+   // ACTIVE CONTROLLER DISPLAY
 }
 
 // CONTROLLER
