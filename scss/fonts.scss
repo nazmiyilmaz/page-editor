@@ -1,0 +1,22 @@
+// fonts
+$fonts: ('Abril Fatface' 'AbrilFatface-Reqgular.ttf'),
+   ('Anton' 'Anton-Regular.ttf'), ('Bangers' 'Bangers-Regular.ttf'),
+   ('Bevan' 'Bevan-Regular.ttf'),
+   ('Grandstander Regular' 'Grandstander-Regular.ttf'),
+   ('Grandstander Bold' 'Grandstander-Bold.ttf'),
+   ('Grenze Gotisch' 'GrenzeGotisch-Regular.ttf'),
+   ('Josefin Sans Regular' 'JosefinSans-Regular.ttf'),
+   ('Josefin Sans Bold' 'JosefinSans-Bold.ttf'),
+   ('Lobster' 'Lobster-Regular.ttf'), ('Marmelad' 'Marmelad-Regular.ttf'),
+   ('Open Sans Regular' 'OpenSans-Regular.ttf'),
+   ('Open Sans Bold' 'OpenSans-Bold.ttf'),
+   ('Paytone One' 'PaytoneOne-Regular.ttf'),
+   ('Potta One' 'PottaOne-Regular.ttf');
+
+// generate font faces
+@each $f in $fonts {
+   @font-face {
+      font-family: #{nth($f, 1)};
+      src: url('../fonts/#{nth($f, 2)}');
+   }
+}

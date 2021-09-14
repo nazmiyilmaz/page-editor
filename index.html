@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <link rel="stylesheet" href="editor.css" />
-      <link rel="stylesheet" href="preview.css" />
-      <link rel="stylesheet" href="fonts.css" />
-      <link rel="stylesheet" href="pages.css" />
-      <link rel="stylesheet" href="helpers.css" />
+      <link rel="stylesheet" href="scss/editor.css" />
+      <link rel="stylesheet" href="scss/preview.css" />
+      <link rel="stylesheet" href="scss/fonts.css" />
+      <link rel="stylesheet" href="scss/pages.css" />
+      <link rel="stylesheet" href="scss/helpers.css" />
    </head>
    <body>
-      <div class="pe-preview is-square600 has-display-none">
+      <div class="pe-preview pe-size-768x1024 pe-hidden">
          <div class="pe-page"></div>
       </div>
 
-      <div class="pe-editor is-square600">
+      <div class="pe-editor pe-size-768x1024">
          <!--TOOLBAR-->
          <div class="pe-toolbar">
             <!--OPTIONS TOOLBAR-->
             <div class="pe-options-toolbar">
                <!--FONT FAMILY-->
-               <span class="tool pe-change-font">
+               <span class="pe-tool pe-change-font">
                   <select class="pe-change-font-select"></select>
                </span>
 
                <!--FONT SIZE-->
-               <span class="tool pe-change-font-size">
+               <span class="pe-tool pe-change-font-size">
                   <select class="pe-change-font-size-select"></select>
                </span>
 
                <!--TEXT ALIGN-->
-               <span class="tool pe-change-align">
-                  <img class="selected" src="icos/align-left.svg" />
-                  <div class="menu has-display-none">
-                     <img src="icos/align-left.svg" class="left-alg" />
-                     <img src="icos/align-center.svg" class="center-alg" />
-                     <img src="icos/align-right.svg" class="right-alg" />
+               <span class="pe-tool pe-change-align">
+                  <img class="selected" src="icons/align-left.svg" />
+                  <div class="menu pe-hidden">
+                     <img src="icons/align-left.svg" class="left-alg" />
+                     <img src="icons/align-center.svg" class="center-alg" />
+                     <img src="icons/align-right.svg" class="right-alg" />
                   </div>
                </span>
 
                <!--COLOR-->
-               <span class="tool pe-change-color">
+               <span class="pe-tool pe-change-color">
                   <span class="area">
-                     <img src="icos/font-color.svg" />
+                     <img src="icons/font-color.svg" />
                      <span class="pe-color-indicator"></span>
                   </span>
                   <input class="pe-change-color-picker" type="color" />
                </span>
 
                <!--TOGGLE BOLD-->
-               <span class="tool pe-toggle-bold">
+               <span class="pe-tool pe-toggle-bold">
                   <input type="checkbox" class="pe-toggle-bold-btn" />
-                  <img src="icos/bold.svg" />
+                  <img src="icons/bold.svg" />
                </span>
 
                <!--TOGGLE ITALIC-->
-               <span class="tool pe-toggle-italic">
+               <span class="pe-tool pe-toggle-italic">
                   <input type="checkbox" class="pe-toggle-italic-btn" />
-                  <img src="icos/italic.svg" />
+                  <img src="icons/italic.svg" />
                </span>
 
                <!--TOGGLE STRIKE-->
-               <span class="tool pe-toggle-strike">
+               <span class="pe-tool pe-toggle-strike">
                   <input type="checkbox" class="pe-toggle-strike-btn" />
-                  <img src="icos/strike.svg" />
+                  <img src="icons/strike.svg" />
                </span>
 
                <!--FLIP HORIZONTAL-->
-               <span class="tool pe-flip-horizontal">
+               <span class="pe-tool pe-flip-horizontal">
                   <button>
-                     <img src="icos/fliph.svg" />
+                     <img src="icons/fliph.svg" />
                   </button>
                </span>
 
                <!--FLIP VERTICAL-->
-               <span class="tool pe-flip-vertical">
+               <span class="pe-tool pe-flip-vertical">
                   <button>
-                     <img src="icos/flipv.svg" />
+                     <img src="icons/flipv.svg" />
                   </button>
                </span>
 
                <!--FLIP BACK-->
-               <span class="tool pe-flip-back">
+               <span class="pe-tool pe-flip-back">
                   <button>
-                     <img src="icos/flipb.svg" />
+                     <img src="icons/flipb.svg" />
                   </button>
                </span>
 
                <!--FLIP FRONT-->
-               <span class="tool pe-flip-front">
+               <span class="pe-tool pe-flip-front">
                   <button>
-                     <img src="icos/flipf.svg" />
+                     <img src="icons/flipf.svg" />
                   </button>
                </span>
 
                <!--ALPHA-->
-               <span class="tool pe-change-alpha">
+               <span class="pe-tool pe-change-alpha">
                   <span class="icon">
-                     <img src="icos/opacity.svg" />
+                     <img src="icons/opacity.svg" />
                   </span>
-                  <div class="menu has-display-none">
+                  <div class="menu pe-hidden">
                      <input
                         type="range"
                         min="0"
@@ -111,16 +111,16 @@
             <!--HISTORY TOOLBAR-->
             <div class="pe-history-toolbar">
                <!--FLIP BACK-->
-               <span class="tool is-disabled pe-undo">
+               <span class="pe-tool is-disabled pe-undo">
                   <button>
-                     <img src="icos/undo.svg" />
+                     <img src="icons/undo.svg" />
                   </button>
                </span>
 
                <!--FLIP FRONT-->
-               <span class="tool is-disabled pe-redo">
+               <span class="pe-tool is-disabled pe-redo">
                   <button>
-                     <img src="icos/redo.svg" />
+                     <img src="icons/redo.svg" />
                   </button>
                </span>
             </div>
@@ -132,13 +132,13 @@
             <div class="pe-controller">
                <div class="controls">
                   <span class="pe-rotate-handle">
-                     <img src="icos/rotation.svg" />
+                     <img src="icons/rotation.svg" />
                   </span>
                   <span class="pe-move-handle">
-                     <img src="icos/move.svg" />
+                     <img src="icons/move.svg" />
                   </span>
                   <span class="pe-delete-handle">
-                     <img src="icos/delete.svg" />
+                     <img src="icons/delete.svg" />
                   </span>
                </div>
                <div class="thumbs">
@@ -152,17 +152,8 @@
       </div>
 
       <!--SCRIPTS-->
-      <script type="module" src="textarea.js"></script>
-      <script type="module" src="helpers.js"></script>
-      <script type="module" src="fonts.js"></script>
-      <script type="module" src="history.js"></script>
-      <script type="module" src="keyboard.js"></script>
-      <script type="module" src="listeners.js"></script>
-      <script type="module" src="interact.js"></script>
-      <script type="module" src="actions.js"></script>
-      <script type="module" src="toolbar.js"></script>
-      <script type="module" src="demo.js"></script>
-      <script type="module" src="editor.js"></script>
-      <script type="module" src="preview.js"></script>
+      <script type="module" src="js/editor.js"></script>
+      <script type="module" src="js/preview.js"></script>
+      <script type="module" src="js/demo.js"></script>
    </body>
 </html>

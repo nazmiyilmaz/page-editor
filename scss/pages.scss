@@ -1,0 +1,13 @@
+// Page size options include following ratios and sizes
+$sizes: (1024 768), (768 1024), (800 600), (600 800), (800 400), (400 800),
+   (800 800), (600 600);
+
+// loop to dynamically create classes for page sizes
+@each $size in $sizes {
+   .pe-size-#{nth($size,1)}x#{nth($size,2)} {
+      .pe-page {
+         width: #{nth($size, 1)}px;
+         height: #{nth($size, 2)}px;
+      }
+   }
+}
