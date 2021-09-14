@@ -32,11 +32,11 @@ export function create(src) {
 // INIT PREVIEW
 export function init() {
    // find items
-   const elements = document.querySelectorAll('.element.is-audio')
+   const elements = document.querySelectorAll('.pe-element.is-audio')
    // add listeners
    for (const element of elements) {
       element.addEventListener('click', function (event) {
-         const current = queryParent(event.target, 'element')
+         const current = queryParent(event.target, 'pe-element')
          const item = current.querySelector('.item')
          // stop others
          if (active) {

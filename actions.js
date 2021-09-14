@@ -6,37 +6,34 @@ import { create as createAudio } from './audio.js'
 import { create as createImage } from './image.js'
 import { create as createVideo } from './video.js'
 
-import { deActivateAll } from './toolbar.js'
-import { hide as hideController } from './controller.js'
+import { setReadOnly } from './controller.js'
 
 // GET PREVIEW PAGE
 export function getPreviewPage(editor) {
-   // deactivate all elements
-   deActivateAll(editor)
-   // hide controller
-   hideController(editor)
-   // get page
-   const page = editor.querySelector('.pe-page')
-   // return html
-   return page.outerHTML
-}
-
-// GET NON FUNCTIONAL PAGE
-export function getNonFunctionalPage(editor) {
-   // deactivate all elements
-   deActivateAll(editor)
-   // hide controller
-   hideController(editor)
    // get page
    const page = editor.querySelector('.pe-page')
    // clone page
    const temp = page.cloneNode(true)
+   // remove controller
+   setReadOnly(temp)
+   // return html
+   return temp.outerHTML
+}
+
+// GET NON FUNCTIONAL PAGE
+export function getNonFunctionalPage(editor) {
+   // get page
+   const page = editor.querySelector('.pe-page')
+   // clone page
+   const temp = page.cloneNode(true)
+   // remove controller
+   setReadOnly(temp)
    // place audio links
-   temp.querySelectorAll('.element.is-audio').forEach((el) => {
+   temp.querySelectorAll('.pe-element.is-audio').forEach((el) => {
       el.classList.remove('hide-links')
    })
    // place video links
-   temp.querySelectorAll('.element.is-video').forEach((el) => {
+   temp.querySelectorAll('.pe-element.is-video').forEach((el) => {
       const item = el.querySelector('.item')
       const link = item.querySelector('span.link').cloneNode(true)
       link.classList.add('item')
@@ -131,7 +128,7 @@ function insertItem(editor, item, type, bind = []) {
 
    // create node
    const node = document.createElement('div')
-   node.classList.add('element', `is-${type}`)
+   node.classList.add('pe-element', `is-${type}`)
 
    // bind optional classes
    if (bind.length) {

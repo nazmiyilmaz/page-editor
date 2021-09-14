@@ -24,10 +24,10 @@ setTimeout(() => {
    // insertVideo(editor, 'assets/sample.mp4')
    // changeBackground(editor, 'assets/page.jpg')
 
-   //setTimeout(() => {
-   //   const preview = document.querySelector('.pe-preview')
-   //   preview.innerHTML = getPreviewPage(editor)
-   //}, 10000)
+   // setTimeout(() => {
+   // const preview = document.querySelector('.pe-preview')
+   // preview.innerHTML = getPreviewPage(editor)
+   // }, 10000)
 
    reload()
 }, 1000)

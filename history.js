@@ -8,6 +8,8 @@ import {
    locate as locateController,
 } from './controller.js'
 
+import { setActive as setActiveEditor } from './keyboard.js'
+
 const histories = new Map()
 const memory = 50 // step count to keep in memory
 
@@ -99,8 +101,8 @@ export function markState(editor) {
       current.pointer++
    }
 
-   // refresh buttons
-   refreshButtons(editor)
+   // refresh
+   refresh(editor)
 }
 
 // INIT
@@ -145,10 +147,13 @@ function refresh(editor) {
    registerClick('.pe-delete-handle', deleteItem, editor)
 
    // toggle toolbar
-   registerClick('.element', toggleToolbar, editor)
+   registerClick('.pe-element', toggleToolbar, editor)
 
    // hide toolbar
    registerClick('.pe-page', toggleToolbar, editor)
+
+   // set active editor listener
+   registerClick('.pe-editor .pe-page', setActiveEditor)
 
    // init audio
    initAudio()
@@ -158,7 +163,7 @@ function refresh(editor) {
 
    // element hover
    const { start, end } = hoverListeners
-   registerHover('.element', start, end, editor)
+   registerHover('.pe-element', start, end, editor)
 
    // locate controller
    locateController(editor)

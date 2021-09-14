@@ -8,7 +8,7 @@ export function init() {}
 
 export function load(editor) {
    // find element
-   const el = editor.querySelector('.element.is-active')
+   const el = editor.querySelector('.pe-element.is-active')
 
    // find item
    const image = el.querySelector('.item')

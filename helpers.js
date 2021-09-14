@@ -123,7 +123,7 @@ export function queryParentById(el, id) {
 
 // GET MIN Z
 export function getMinZ(page) {
-   const elements = page.querySelectorAll('.element')
+   const elements = page.querySelectorAll('.pe-element')
    let min = 0
    for (const element of elements) {
       const z = parseInt(element.style['z-index']) || 0
@@ -134,7 +134,7 @@ export function getMinZ(page) {
 
 // GET MAX Z
 export function getMaxZ(page) {
-   const elements = page.querySelectorAll('.element')
+   const elements = page.querySelectorAll('.pe-element')
    let max = 0
    for (const element of elements) {
       const z = parseInt(element.style['z-index']) || 0
@@ -145,7 +145,7 @@ export function getMaxZ(page) {
 
 // RAISE ALL
 export function raiseAllElements(page) {
-   const elements = page.querySelectorAll('.element')
+   const elements = page.querySelectorAll('.pe-element')
    elements.forEach(function (element) {
       const fixed = (parseInt(element.style['z-index']) || 0) + 1
       element.style['z-index'] = fixed

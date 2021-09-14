@@ -1,22 +1,69 @@
+import { getEditor } from './helpers.js'
+
+let active = null
+
+export function setActive(event) {
+   const editor = getEditor(event?.target || event)
+   active = editor
+   console.log(active)
+}
+
 import { undo, redo } from './history.js'
 
 import { copy, cut, paste } from './clipboard.js'
 
 export function init() {
-   document.addEventListener('keydown', function (event) {
-      // CTRL+Z
-      if (event.ctrlKey && event.key === 'z') undo()
+   document.addEventListener('keydown', keyListener)
+}
 
-      // CTRL+Y
-      if (event.ctrlKey && event.key === 'y') redo()
+function keyListener(event) {
+   // CTRL+Z
+   if (checkKey(event, 'ctrl+z')) {
+      if (active) {
+         undo(active)
+      }
+   }
 
-      // CTRL+C
-      if (event.ctrlKey && event.key === 'c') copy()
+   // CTRL+Y
+   if (checkKey(event, 'ctrl+y')) {
+      if (active) {
+         redo(active)
+      }
+   }
 
-      // CTRL+X
-      if (event.ctrlKey && event.key === 'x') cut()
+   // CTRL+C
+   if (checkKey(event, 'ctrl+c')) {
+      if (active) {
+         copy(active)
+      }
+   }
 
-      // CTRL+V
-      if (event.ctrlKey && event.key === 'v') paste()
-   })
+   // CTRL+X
+   if (checkKey(event, 'ctrl+x')) {
+      if (active) {
+         cut(active)
+      }
+   }
+
+   // CTRL+V
+   if (checkKey(event, 'ctrl+v')) {
+      if (active) {
+         paste(active)
+      }
+   }
+}
+
+function checkKey(event, pattern = '') {
+   const keys = pattern.split('+')
+   if (keys.length === 1) {
+      return event.key === keys[0]
+   } else if (keys.length === 2) {
+      let first = false
+      if (keys[0] === 'ctrl' && event.ctrlKey) {
+         first = true
+      }
+      return first && event.key === keys[1]
+   } else {
+      return false
+   }
 }

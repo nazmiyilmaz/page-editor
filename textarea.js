@@ -16,7 +16,9 @@ export function create(value) {
 // INIT
 export function init() {
    // find texts
-   const texts = document.querySelectorAll('.pe-preview .element.is-text .item')
+   const texts = document.querySelectorAll(
+      '.pe-preview .pe-element.is-text .item'
+   )
    // load slots
    for (const text of texts) {
       text.innerText = text.getAttribute('content')
@@ -35,7 +37,7 @@ export function init() {
 
 export function load(editor) {
    // find element
-   const el = editor.querySelector('.element.is-active')
+   const el = editor.querySelector('.pe-element.is-active')
 
    // find item
    const text = el.querySelector('.item')
@@ -51,7 +53,7 @@ export function load(editor) {
    // load color
    const colorPicker = editor.querySelector('.pe-change-color-picker')
    colorPicker.value = rgbToHex(text.style.color) || '#000000'
-   updateFontColorIndicator(event, text.style.color || '#000000')
+   updateFontColorIndicator(editor, text.style.color || '#000000')
 
    // load bold
    const boldToggle = editor.querySelector('.pe-toggle-bold-btn')
@@ -78,8 +80,7 @@ export function load(editor) {
 }
 
 // UPDATE FONT COLOR INDICATOR
-export function updateFontColorIndicator(event, color) {
-   const editor = getEditor(event.target)
+export function updateFontColorIndicator(editor, color) {
    const indicator = editor.querySelector('.pe-color-indicator')
    indicator.style.backgroundColor = color
 }

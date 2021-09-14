@@ -321,7 +321,7 @@ $controller-br: 1px solid grey;
 }
 
 // EDITOR ELEMENT
-.pe-editor .pe-page .element {
+.pe-editor .pe-page .pe-element {
    // GENERAL ITEM STYLES
    &:not(.is-active) {
       .item {
@@ -341,7 +341,7 @@ $controller-br: 1px solid grey;
 }
 
 // ELEMENT
-.element {
+.pe-element {
    border: 3px solid transparent;
    box-sizing: border-box;
    touch-action: none;

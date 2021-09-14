@@ -28,7 +28,7 @@ const options = {
 
 export function locate(editor) {
    // find element
-   const el = editor.querySelector('.element.is-active')
+   const el = editor.querySelector('.pe-element.is-active')
    if (!el) {
       return
    }
@@ -87,7 +87,7 @@ export function deleteItem(event) {
    // get editor
    const editor = getEditor(event.target)
    // find element
-   const el = editor.querySelector('.element.is-active')
+   const el = editor.querySelector('.pe-element.is-active')
    // check if element exists
    if (el) {
       // remove element
@@ -102,11 +102,16 @@ export function deleteItem(event) {
 // HOVER LISTENERS
 export const hoverListeners = {
    start: function (event) {
-      const el = queryParent(event.target, 'element')
+      const el = queryParent(event.target, 'pe-element')
       el.classList.add('is-hovered')
    },
    end: function (event) {
-      const el = queryParent(event.target, 'element')
+      const el = queryParent(event.target, 'pe-element')
       el.classList.remove('is-hovered')
    },
+}
+
+export function setReadOnly(page) {
+   const controller = page.querySelector('.pe-controller')
+   controller?.remove()
 }

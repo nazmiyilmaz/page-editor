@@ -16,7 +16,7 @@ function setAlpha(event, val) {
    // get editor
    const editor = getEditor(event.target)
    // find item
-   const item = editor.querySelector('.element.is-active .item')
+   const item = editor.querySelector('.pe-element.is-active .item')
    // change opacity
    item.style.opacity = val / 100
    // mark state

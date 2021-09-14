@@ -1,32 +1,24 @@
 import { insertElement, removeElement } from './actions.js'
 
-let copiedElement
+let copiedElement = null
 
-export function copy() {
-   const element = document.querySelector('#editor .element.is-active')
-
+export function copy(editor) {
+   const element = editor.querySelector('.pe-element.is-active')
    if (element) {
       copiedElement = element.cloneNode(true)
    }
-
-   console.log('copy', copiedElement)
 }
 
-export function cut() {
-   const element = document.querySelector('#editor .element.is-active')
-
+export function cut(editor) {
+   const element = editor.querySelector('.pe-element.is-active')
    if (element) {
       copiedElement = element.cloneNode(true)
-      removeElement(element)
+      removeElement(editor, element)
    }
-
-   console.log('cut', copiedElement)
 }
 
-export function paste() {
+export function paste(editor) {
    if (copiedElement) {
-      insertElement(copiedElement)
+      insertElement(editor, copiedElement.cloneNode(true))
    }
-
-   console.log('paste', copiedElement)
 }

@@ -33,7 +33,7 @@ function alignText(event, orientation) {
    // get editor
    const editor = getEditor(event.target)
    // find element
-   const text = editor.querySelector('.element.is-active .item')
+   const text = editor.querySelector('.pe-element.is-active .item')
    // change align
    text.style.textAlign = orientation
    // mark state
