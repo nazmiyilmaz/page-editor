@@ -11,7 +11,6 @@ export const families = [
    'Open Sans Regular',
    'Open Sans Bold',
    'Paytone One',
-   'Potta One',
 ]
 
 export const sizes = {

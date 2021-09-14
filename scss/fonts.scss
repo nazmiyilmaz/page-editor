@@ -10,8 +10,7 @@ $fonts: ('Abril Fatface' 'AbrilFatface-Reqgular.ttf'),
    ('Lobster' 'Lobster-Regular.ttf'), ('Marmelad' 'Marmelad-Regular.ttf'),
    ('Open Sans Regular' 'OpenSans-Regular.ttf'),
    ('Open Sans Bold' 'OpenSans-Bold.ttf'),
-   ('Paytone One' 'PaytoneOne-Regular.ttf'),
-   ('Potta One' 'PottaOne-Regular.ttf');
+   ('Paytone One' 'PaytoneOne-Regular.ttf');
 
 // generate font faces
 @each $f in $fonts {
