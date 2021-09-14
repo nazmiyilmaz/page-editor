@@ -22,12 +22,16 @@ setTimeout(() => {
    insertText(editor, 'Lorem Ipsum is simply dummy text')
    // insertText(editor, 'Lorem Ipsum is simply dummy text. Lorem Ipsum is simply')
    // insertVideo(editor, 'assets/sample.mp4')
-   // changeBackground(editor, 'assets/page.jpg')
+   changeBackground(editor, 'assets/page.jpg')
 
    // setTimeout(() => {
    // const preview = document.querySelector('.pe-preview')
    // preview.innerHTML = getPreviewPage(editor)
    // }, 10000)
+
+   setTimeout(() => {
+      console.log(`${getNonFunctionalPage(editor)}`)
+   }, 10000)
 
    reload()
 }, 1000)

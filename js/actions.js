@@ -29,8 +29,11 @@ export function getNonFunctionalPage(editor) {
    // remove controller
    setReadOnly(temp)
    // place audio links
-   temp.querySelectorAll('.pe-element.pe-is-element-audio').forEach((el) => {
-      el.classList.remove('pe-hide-links')
+   temp.querySelectorAll('.pe-element.pe-is-element-audio').forEach((audio) => {
+      audio.classList.remove('pe-hide-links')
+      const item = audio.querySelector('.pe-item')
+      const icon = item.querySelector('img')
+      icon.src = 'icons/audio.svg'
    })
    // place video links
    temp.querySelectorAll('.pe-element.pe-is-element-video').forEach((el) => {

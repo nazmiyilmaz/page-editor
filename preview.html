@@ -1,0 +1,45 @@
+<html>
+   <head>
+      <link rel="stylesheet" href="scss/editor.css" />
+      <link rel="stylesheet" href="scss/preview.css" />
+      <link rel="stylesheet" href="scss/fonts.css" />
+      <link rel="stylesheet" href="scss/pages.css" />
+      <link rel="stylesheet" href="scss/helpers.css" />
+   </head>
+   <body>
+      <div class="pe-preview pe-size-600x600">
+         <div class="pe-page">
+            <!--CONTROLLER-->
+
+            <div
+               class="pe-element pe-is-element-audio pe-is-active"
+               style="z-index: 1; transform: translate(218px, 70px)"
+               data-x="218"
+               data-y="70"
+            >
+               <div class="pe-item">
+                  <audio><source src="assets/sample.mp3" /></audio
+                  ><img src="icons/audio.svg" /><a
+                     href="assets/sample.mp3"
+                     target="_blank"
+                     >assets/sample.mp3</a
+                  >
+               </div>
+            </div>
+            <div
+               class="pe-element pe-is-element-text"
+               style="z-index: 2; transform: translate(193px, 285px)"
+               data-x="193"
+               data-y="285"
+            >
+               <textarea
+                  content="Lorem Ipsum is simply dummy text"
+                  class="reactive-text pe-item"
+                  spellcheck="false"
+                  style="font-family: 'Abril Fatface'; font-size: 18px"
+               ></textarea>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

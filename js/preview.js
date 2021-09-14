@@ -20,4 +20,4 @@ export function reload() {
    }
 }
 
-window.onload = () => reload()
+reload()
