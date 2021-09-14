@@ -83,7 +83,7 @@ $controller-br: 1px solid grey;
 
    // FONT SELECTOR
    .pe-change-font select {
-      width: 200px;
+      width: 150px;
       height: 31px;
       border: $default-br;
       padding: 5px 8px;
@@ -121,7 +121,7 @@ $controller-br: 1px solid grey;
       padding: 0;
       width: 32px;
       margin-right: 8px;
-      .selected {
+      .pe-align-selected {
          &:hover {
             background-color: $toggle-bg-active;
          }
@@ -129,7 +129,7 @@ $controller-br: 1px solid grey;
          padding: 3px 4px;
          border-radius: 5px;
       }
-      .menu {
+      .pe-align-menu {
          overflow: hidden;
          background-color: white;
          display: flex;
@@ -156,7 +156,7 @@ $controller-br: 1px solid grey;
    // ALPHA SELECTOR
    .pe-change-alpha {
       position: relative;
-      .icon {
+      .pe-alpha-icon {
          width: 32px;
          height: 28px;
          border: $default-br;
@@ -169,7 +169,7 @@ $controller-br: 1px solid grey;
          }
       }
 
-      .menu {
+      .pe-alpha-menu {
          position: absolute;
          top: 32px;
          left: 0;
@@ -224,7 +224,7 @@ $controller-br: 1px solid grey;
       background-color: white;
       margin-right: 5px;
       position: relative;
-      .area {
+      .pe-color-area {
          width: 100%;
          height: 100%;
          display: flex;
@@ -309,7 +309,7 @@ $controller-br: 1px solid grey;
          width: 16px;
       }
 
-      &.is-disabled {
+      &.pe-is-disabled {
          button {
             cursor: not-allowed;
          }
@@ -323,18 +323,18 @@ $controller-br: 1px solid grey;
 // EDITOR ELEMENT
 .pe-editor .pe-page .pe-element {
    // GENERAL ITEM STYLES
-   &:not(.is-active) {
-      .item {
+   &:not(.pe-is-active) {
+      .pe-item {
          cursor: pointer !important;
       }
    }
-   &.is-hovered {
+   &.pe-is-hovered {
       border: 3px solid rgba(255, 123, 0, 0.288);
    }
 
-   &.is-active {
+   &.pe-is-active {
       border: 3px solid transparent !important;
-      .item {
+      .pe-item {
          cursor: unset !important;
       }
    }
@@ -359,18 +359,18 @@ $controller-br: 1px solid grey;
    height: 300px;
    pointer-events: none;
    justify-content: center;
-   &.is-active {
+   &.pe-is-active {
       display: flex;
    }
 
-   &.is-resizable {
-      .thumbs {
+   &.pe-is-resizable {
+      .pe-thumbs {
          display: unset;
       }
    }
 
    // CONTROLS
-   .controls {
+   .pe-controls {
       position: absolute;
       bottom: 10px;
       width: fit-content;
@@ -380,6 +380,8 @@ $controller-br: 1px solid grey;
       border-radius: 12px;
       padding: 5px;
       z-index: 99999999;
+      display: flex;
+      justify-content: center;
       .pe-delete-handle,
       .pe-rotate-handle,
       .pe-move-handle {
@@ -389,9 +391,9 @@ $controller-br: 1px solid grey;
       }
    }
    // THUMBS
-   .thumbs {
+   .pe-thumbs {
       display: none;
-      .thumb {
+      .pe-thumb {
          position: absolute;
          width: 9px;
          height: 9px;
@@ -399,28 +401,28 @@ $controller-br: 1px solid grey;
          border: $element-br;
          pointer-events: auto;
 
-         &.tl {
+         &.pe-thumb-tl {
             top: 0;
             left: 0;
             margin-top: -8px;
             margin-left: -8px;
          }
 
-         &.tr {
+         &.pe-thumb-tr {
             top: 0;
             right: 0;
             margin-top: -8px;
             margin-right: -8px;
          }
 
-         &.bl {
+         &.pe-thumb-bl {
             bottom: 0;
             left: 0;
             margin-bottom: -8px;
             margin-left: -8px;
          }
 
-         &.br {
+         &.pe-thumb-br {
             bottom: 0;
             right: 0;
             margin-bottom: -8px;

@@ -1,5 +1,5 @@
 export const families = [
-   'Abril Fat Face',
+   'Abril Fatface',
    'Anton',
    'Bevan',
    'Grandstander Regular',
@@ -52,7 +52,7 @@ function insertFontOptions(picker) {
    for (const family of families) {
       const option = document.createElement('option')
       option.label = family
-      option.value = family
+      option.value = `"${family}"`
       option.style.fontFamily = family
       picker.appendChild(option.cloneNode(true))
    }

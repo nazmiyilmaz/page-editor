@@ -8,10 +8,10 @@ export function init() {}
 
 export function load(editor) {
    // find element
-   const el = editor.querySelector('.pe-element.is-active')
+   const el = editor.querySelector('.pe-element.pe-is-active')
 
    // find item
-   const image = el.querySelector('.item')
+   const image = el.querySelector('.pe-item')
 
    // load alpha
    const alphaSlider = editor.querySelector('.pe-alpha-slider')

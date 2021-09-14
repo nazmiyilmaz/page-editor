@@ -11,7 +11,7 @@ export const dragListeners = {
    move: function (event) {
       const editor = getEditor(event.target)
       const controller = editor.querySelector('.pe-controller')
-      const target = editor.querySelector('.pe-element.is-active')
+      const target = editor.querySelector('.pe-element.pe-is-active')
 
       drag(event, controller)
       drag(event, target)
@@ -27,7 +27,7 @@ export const resizeListeners = {
    move: function (event) {
       const editor = getEditor(event.target)
       const controller = editor.querySelector('.pe-controller')
-      const target = editor.querySelector('.pe-element.is-active')
+      const target = editor.querySelector('.pe-element.pe-is-active')
 
       resize(event, controller)
       resize(event, target)
@@ -42,7 +42,7 @@ export const resizeListeners = {
 export const rotateListeners = {
    onstart: function (event) {
       const editor = getEditor(event.target)
-      const target = editor.querySelector('.pe-element.is-active .item')
+      const target = editor.querySelector('.pe-element.pe-is-active .pe-item')
 
       const rect = target.getBoundingClientRect()
 
@@ -52,13 +52,13 @@ export const rotateListeners = {
    },
    onmove: function (event) {
       const editor = getEditor(event.target)
-      const target = editor.querySelector('.pe-element.is-active .item')
+      const target = editor.querySelector('.pe-element.pe-is-active .pe-item')
       const angle = getDragAngle(event, target)
       rotate(angle, target)
    },
    onend: function (event) {
       const editor = getEditor(event.target)
-      const target = editor.querySelector('.pe-element.is-active .item')
+      const target = editor.querySelector('.pe-element.pe-is-active .pe-item')
       const angle = getDragAngle(event, target)
       target.setAttribute('data-angle', angle)
       // mark state

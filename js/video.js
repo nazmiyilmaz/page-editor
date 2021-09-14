@@ -21,7 +21,7 @@ export function create(src) {
    const linkView = document.createElement('span')
    linkView.appendChild(videoIcon.cloneNode(true))
    linkView.appendChild(link.cloneNode(true))
-   linkView.classList.add('link')
+   linkView.classList.add('pe-link')
 
    // append source
    video.appendChild(source.cloneNode(true))

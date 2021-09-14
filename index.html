@@ -12,7 +12,7 @@
          <div class="pe-page"></div>
       </div>
 
-      <div class="pe-editor pe-size-768x1024">
+      <div class="pe-editor pe-size-600x600">
          <!--TOOLBAR-->
          <div class="pe-toolbar">
             <!--OPTIONS TOOLBAR-->
@@ -29,17 +29,17 @@
 
                <!--TEXT ALIGN-->
                <span class="pe-tool pe-change-align">
-                  <img class="selected" src="icons/align-left.svg" />
-                  <div class="menu pe-hidden">
-                     <img src="icons/align-left.svg" class="left-alg" />
-                     <img src="icons/align-center.svg" class="center-alg" />
-                     <img src="icons/align-right.svg" class="right-alg" />
+                  <img class="pe-align-selected" src="icons/align-left.svg" />
+                  <div class="pe-align-menu pe-hidden">
+                     <img src="icons/align-left.svg" class="pe-left-alg" />
+                     <img src="icons/align-center.svg" class="pe-center-alg" />
+                     <img src="icons/align-right.svg" class="pe-right-alg" />
                   </div>
                </span>
 
                <!--COLOR-->
                <span class="pe-tool pe-change-color">
-                  <span class="area">
+                  <span class="pe-color-area">
                      <img src="icons/font-color.svg" />
                      <span class="pe-color-indicator"></span>
                   </span>
@@ -94,10 +94,10 @@
 
                <!--ALPHA-->
                <span class="pe-tool pe-change-alpha">
-                  <span class="icon">
+                  <span class="pe-alpha-icon">
                      <img src="icons/opacity.svg" />
                   </span>
-                  <div class="menu pe-hidden">
+                  <div class="pe-alpha-menu pe-hidden">
                      <input
                         type="range"
                         min="0"
@@ -111,14 +111,14 @@
             <!--HISTORY TOOLBAR-->
             <div class="pe-history-toolbar">
                <!--FLIP BACK-->
-               <span class="pe-tool is-disabled pe-undo">
+               <span class="pe-tool pe-is-disabled pe-undo">
                   <button>
                      <img src="icons/undo.svg" />
                   </button>
                </span>
 
                <!--FLIP FRONT-->
-               <span class="pe-tool is-disabled pe-redo">
+               <span class="pe-tool pe-is-disabled pe-redo">
                   <button>
                      <img src="icons/redo.svg" />
                   </button>
@@ -130,7 +130,7 @@
          <div class="pe-page">
             <!--CONTROLLER-->
             <div class="pe-controller">
-               <div class="controls">
+               <div class="pe-controls">
                   <span class="pe-rotate-handle">
                      <img src="icons/rotation.svg" />
                   </span>
@@ -141,11 +141,11 @@
                      <img src="icons/delete.svg" />
                   </span>
                </div>
-               <div class="thumbs">
-                  <span class="thumb tl"></span>
-                  <span class="thumb tr"></span>
-                  <span class="thumb bl"></span>
-                  <span class="thumb br"></span>
+               <div class="pe-thumbs">
+                  <span class="pe-thumb pe-thumb-tl"></span>
+                  <span class="pe-thumb pe-thumb-tr"></span>
+                  <span class="pe-thumb pe-thumb-bl"></span>
+                  <span class="pe-thumb pe-thumb-br"></span>
                </div>
             </div>
          </div>

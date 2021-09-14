@@ -1,5 +1,5 @@
 // fonts
-$fonts: ('Abril Fatface' 'AbrilFatface-Reqgular.ttf'),
+$fonts: ('Abril Fatface' 'AbrilFatface-Regular.ttf'),
    ('Anton' 'Anton-Regular.ttf'), ('Bangers' 'Bangers-Regular.ttf'),
    ('Bevan' 'Bevan-Regular.ttf'),
    ('Grandstander Regular' 'Grandstander-Regular.ttf'),
@@ -15,7 +15,7 @@ $fonts: ('Abril Fatface' 'AbrilFatface-Reqgular.ttf'),
 // generate font faces
 @each $f in $fonts {
    @font-face {
-      font-family: #{nth($f, 1)};
+      font-family: '#{nth($f, 1)}';
       src: url('../fonts/#{nth($f, 2)}');
    }
 }

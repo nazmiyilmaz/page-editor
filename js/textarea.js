@@ -17,7 +17,7 @@ export function create(value) {
 export function init() {
    // find texts
    const texts = document.querySelectorAll(
-      '.pe-preview .pe-element.is-text .item'
+      '.pe-preview .pe-element.pe-is-element-text .pe-item'
    )
    // load slots
    for (const text of texts) {
@@ -25,11 +25,11 @@ export function init() {
       text.readOnly = true
    }
    // sync value with content attr
-   document.querySelectorAll('.reactive-text.item').forEach(function (ta) {
+   document.querySelectorAll('.reactive-text.pe-item').forEach(function (ta) {
       ta.value = ta.getAttribute('content')
    })
    // sync value with content attr
-   registerInput('.reactive-text.item', function (event) {
+   registerInput('.reactive-text.pe-item', function (event) {
       const ta = event.target
       ta.setAttribute('content', ta.value)
    })
@@ -37,10 +37,10 @@ export function init() {
 
 export function load(editor) {
    // find element
-   const el = editor.querySelector('.pe-element.is-active')
+   const el = editor.querySelector('.pe-element.pe-is-active')
 
    // find item
-   const text = el.querySelector('.item')
+   const text = el.querySelector('.pe-item')
 
    // load font family
    const fontPicker = editor.querySelector('.pe-change-font-select')
@@ -68,7 +68,9 @@ export function load(editor) {
    strikeToggle.checked = text.classList.contains('pe-is-strike')
 
    // load align
-   const alignSelected = editor.querySelector('.pe-change-align .selected')
+   const alignSelected = editor.querySelector(
+      '.pe-change-align .pe-align-selected'
+   )
    alignSelected.src = `icons/align-${text.style.textAlign || 'left'}.svg`
 
    // load alpha

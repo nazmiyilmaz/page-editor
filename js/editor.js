@@ -38,7 +38,7 @@ export function reload() {
    // rotate listener
    setRotate('.pe-rotate-handle')
    // resize listener
-   setResize('.pe-controller.is-resizable')
+   setResize('.pe-controller.pe-is-resizable')
 
    // TOOLBAR
    // setup align

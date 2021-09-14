@@ -51,7 +51,7 @@ export function flipFront(event) {
    // get editor
    const editor = getEditor(event.target)
    // find element
-   const element = editor.querySelector('.pe-element.is-active')
+   const element = editor.querySelector('.pe-element.pe-is-active')
    // find page
    const page = editor.querySelector('.pe-page')
    // get max index
@@ -67,7 +67,7 @@ export function flipBack(event) {
    // get editor
    const editor = getEditor(event.target)
    // find element
-   const element = editor.querySelector('.pe-element.is-active')
+   const element = editor.querySelector('.pe-element.pe-is-active')
    // find page
    const page = editor.querySelector('.pe-page')
    // find minimum index
@@ -93,7 +93,7 @@ export function flipHorizontal(event) {
    // get editor
    const editor = getEditor(event.target)
    // find target
-   const target = editor.querySelector('.pe-element.is-active .item')
+   const target = editor.querySelector('.pe-element.pe-is-active .pe-item')
    // flip item horizontally
    target.style.transform = toggleFlipH(target?.style?.transform)
    // mark state
@@ -105,7 +105,7 @@ export function flipVertical() {
    // get editor
    const editor = getEditor(event.target)
    // find target
-   const target = editor.querySelector('.pe-element.is-active .item')
+   const target = editor.querySelector('.pe-element.pe-is-active .pe-item')
    // flip item vertically
    target.style.transform = toggleFlipV(target?.style?.transform)
    // mark state
@@ -117,7 +117,7 @@ export function toggleBold(event) {
    // get editor
    const editor = getEditor(event.target)
    // find item
-   const text = editor.querySelector('.pe-element.is-active .item')
+   const text = editor.querySelector('.pe-element.pe-is-active .pe-item')
    // toggle bold
    text.classList.toggle('pe-is-bold')
    // update checkbox value
@@ -132,7 +132,7 @@ export function toggleItalic(event) {
    // get editor
    const editor = getEditor(event.target)
    // find item
-   const text = editor.querySelector('.pe-element.is-active .item')
+   const text = editor.querySelector('.pe-element.pe-is-active .pe-item')
    // toggle italic
    text.classList.toggle('pe-is-italic')
    // update checkbox value
@@ -147,7 +147,7 @@ export function toggleStrike(event) {
    // get editor
    const editor = getEditor(event.target)
    // find item
-   const text = editor.querySelector('.pe-element.is-active .item')
+   const text = editor.querySelector('.pe-element.pe-is-active .pe-item')
    // toggle strike
    text.classList.toggle('pe-is-strike')
    // update checkbox value
@@ -162,7 +162,7 @@ export function changeFontFamily(event) {
    // get editor
    const editor = getEditor(event.target)
    // find item
-   const text = editor.querySelector('.pe-element.is-active .item')
+   const text = editor.querySelector('.pe-element.pe-is-active .pe-item')
    // change font
    text.style.fontFamily = event.target.value
    // mark state
@@ -174,7 +174,7 @@ export function changeFontSize(event) {
    // get editor
    const editor = getEditor(event.target)
    // find item
-   const text = editor.querySelector('.pe-element.is-active .item')
+   const text = editor.querySelector('.pe-element.pe-is-active .pe-item')
    // change font size
    text.style.fontSize = event.target.value
    // mark state
@@ -186,7 +186,7 @@ export function changeColor(event) {
    // get editor
    const editor = getEditor(event.target)
    // find item
-   const text = editor.querySelector('.pe-element.is-active .item')
+   const text = editor.querySelector('.pe-element.pe-is-active .pe-item')
    // change color
    text.style.color = `${event.target.value}`
    // update indicator
@@ -203,13 +203,13 @@ export function setupAlign() {
       // show menu when clicked to the align picker
       alg.addEventListener('click', align.toggle)
       // right
-      const right = alg.querySelector('.right-alg')
+      const right = alg.querySelector('.pe-right-alg')
       right?.addEventListener('click', align.right)
       // left
-      const left = alg.querySelector('.left-alg')
+      const left = alg.querySelector('.pe-left-alg')
       left?.addEventListener('click', align.left)
       // center
-      const center = alg.querySelector('.center-alg')
+      const center = alg.querySelector('.pe-center-alg')
       center?.addEventListener('click', align.center)
    }
 }
@@ -256,7 +256,7 @@ export function toggleToolbar(event) {
    }
    // set active class
    const el = queryParent(event.target, 'pe-element')
-   el?.classList.add('is-active')
+   el?.classList.add('pe-is-active')
    locateController(editor)
    // open menu
    openMenu(editor)
@@ -267,7 +267,7 @@ export function openMenu(editor) {
    // hide all at first
    hideAll(editor)
    // find element
-   const el = editor.querySelector('.pe-element.is-active')
+   const el = editor.querySelector('.pe-element.pe-is-active')
    // if no element is active return
    if (!el) {
       return
@@ -302,7 +302,7 @@ export function deActivateAll(editor) {
    const page = editor.querySelector('.pe-page')
    // deactivate all
    page.querySelectorAll('.pe-element').forEach(function (e) {
-      e.classList.remove('is-active')
+      e.classList.remove('pe-is-active')
    })
 }
 

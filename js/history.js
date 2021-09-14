@@ -127,17 +127,17 @@ function refreshButtons(editor) {
    // undo button
    const undoBtn = editor.querySelector('.pe-undo')
    if (current.pointer > 0 && current.history.length > 1) {
-      undoBtn.classList.remove('is-disabled')
+      undoBtn.classList.remove('pe-is-disabled')
    } else {
-      undoBtn.classList.add('is-disabled')
+      undoBtn.classList.add('pe-is-disabled')
    }
 
    // redo button
    const redoBtn = editor.querySelector('.pe-redo')
    if (current.pointer < current.history.length - 1) {
-      redoBtn.classList.remove('is-disabled')
+      redoBtn.classList.remove('pe-is-disabled')
    } else {
-      redoBtn.classList.add('is-disabled')
+      redoBtn.classList.add('pe-is-disabled')
    }
 }
 

@@ -16,7 +16,7 @@ $audio-link-cl: rgb(105, 131, 219);
 
 // REMOVE LATER |||||||||||||||||||||||||||
 body {
-   width: 1600px;
+   width: auto;
    margin: auto;
    margin-top: 80px;
 }
@@ -53,7 +53,7 @@ body {
    align-items: center;
 
    // GENERAL ITEM STYLES
-   .item {
+   .pe-item {
       resize: none;
       border: none;
       width: 100%;
@@ -64,17 +64,17 @@ body {
    }
 
    // IMAGE
-   &.is-image {
+   &.pe-is-element-image {
       width: 300px;
-      .item {
+      .pe-item {
          padding: 0;
       }
    }
 
    // TEXT
-   &.is-text {
+   &.pe-is-element-text {
       width: 300px;
-      .item {
+      .pe-item {
          -ms-overflow-style: none;
          scrollbar-width: none;
          &::-webkit-scrollbar {
@@ -87,11 +87,11 @@ body {
    }
 
    // AUDIO
-   &.is-audio {
+   &.pe-is-element-audio {
       width: min-content;
       cursor: unset;
       height: 40px;
-      .item {
+      .pe-item {
          cursor: unset;
          display: flex;
          justify-content: center;
@@ -109,11 +109,11 @@ body {
          }
       }
 
-      &.hide-links {
+      &.pe-hide-links {
          width: 100px;
          height: 100px;
          cursor: pointer;
-         .item {
+         .pe-item {
             cursor: pointer;
             img {
                width: 48px;
@@ -126,14 +126,14 @@ body {
       }
    }
 
-   &.is-video {
+   &.pe-is-element-video {
       width: 300px;
-      .item {
+      .pe-item {
          border-radius: 12px;
          overflow: hidden;
          padding: 0;
 
-         &.link {
+         &.pe-link {
             border-radius: 0;
             cursor: unset;
             display: flex;

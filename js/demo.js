@@ -15,7 +15,7 @@ setTimeout(() => {
    reload()
    const editor = document.querySelector('.pe-editor')
 
-   // insertAudio(editor, 'assets/sample.mp3')
+   insertAudio(editor, 'assets/sample.mp3')
    // insertAudio(editor, 'assets/sample2.mp3')
    // insertImage(editor, 'assets/bird.png')
    // insertImage(editor, 'assets/pineapple.png')

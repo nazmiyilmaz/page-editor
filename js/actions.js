@@ -29,14 +29,14 @@ export function getNonFunctionalPage(editor) {
    // remove controller
    setReadOnly(temp)
    // place audio links
-   temp.querySelectorAll('.pe-element.is-audio').forEach((el) => {
-      el.classList.remove('hide-links')
+   temp.querySelectorAll('.pe-element.pe-is-element-audio').forEach((el) => {
+      el.classList.remove('pe-hide-links')
    })
    // place video links
-   temp.querySelectorAll('.pe-element.is-video').forEach((el) => {
-      const item = el.querySelector('.item')
-      const link = item.querySelector('span.link').cloneNode(true)
-      link.classList.add('item')
+   temp.querySelectorAll('.pe-element.pe-is-element-video').forEach((el) => {
+      const item = el.querySelector('.pe-item')
+      const link = item.querySelector('span.pe-link').cloneNode(true)
+      link.classList.add('pe-item')
       link.style = item.style
       item.remove()
       el.appendChild(link)
@@ -50,7 +50,7 @@ export function insertVideo(editor, src) {
    // create
    const video = createVideo(src)
    // insert to the page
-   insertItem(editor, video, 'video', ['hide-links'])
+   insertItem(editor, video, 'video', ['pe-hide-links'])
 }
 
 // INSERT AUDIO
@@ -58,7 +58,7 @@ export function insertAudio(editor, src) {
    // create
    const audio = createAudio(src)
    // insert to the page
-   insertItem(editor, audio, 'audio', ['hide-links'])
+   insertItem(editor, audio, 'audio', ['pe-hide-links'])
 }
 
 // INSERT TEXT
@@ -128,7 +128,7 @@ function insertItem(editor, item, type, bind = []) {
 
    // create node
    const node = document.createElement('div')
-   node.classList.add('pe-element', `is-${type}`)
+   node.classList.add('pe-element', `pe-is-element-${type}`)
 
    // bind optional classes
    if (bind.length) {
@@ -139,7 +139,7 @@ function insertItem(editor, item, type, bind = []) {
    node.style['z-index'] = getMaxZ(page) + 1
 
    // attach item
-   item.classList.add('item')
+   item.classList.add('pe-item')
    node.appendChild(item)
 
    // append to the page

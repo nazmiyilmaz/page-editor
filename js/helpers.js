@@ -108,19 +108,6 @@ export function queryParent(el, cls) {
    return el
 }
 
-// QUERY PARENT BY ID
-export function queryParentById(el, id) {
-   let depth = 0
-   while (el?.id !== id) {
-      el = el?.parentElement
-      depth++
-      if (depth >= 12 || el?.id === 'editor') {
-         return null
-      }
-   }
-   return el
-}
-
 // GET MIN Z
 export function getMinZ(page) {
    const elements = page.querySelectorAll('.pe-element')
@@ -185,10 +172,10 @@ export function registerHover(query, start, end, parent = document) {
 
 // RESOLVE TYPE
 export function resolveType(element) {
-   if (element?.classList.contains('is-image')) return 'image'
-   if (element?.classList.contains('is-text')) return 'text'
-   if (element?.classList.contains('is-audio')) return 'audio'
-   if (element?.classList.contains('is-video')) return 'video'
+   if (element?.classList.contains('pe-is-element-image')) return 'image'
+   if (element?.classList.contains('pe-is-element-text')) return 'text'
+   if (element?.classList.contains('pe-is-element-audio')) return 'audio'
+   if (element?.classList.contains('pe-is-element-video')) return 'video'
 }
 
 // COPY ATTR

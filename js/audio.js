@@ -22,6 +22,7 @@ export function create(src) {
    link.href = src
    link.target = '_blank'
    link.innerText = src
+
    // append icon
    item.appendChild(audio.cloneNode(true))
    item.appendChild(audioIcon.cloneNode(true))
@@ -32,35 +33,37 @@ export function create(src) {
 // INIT PREVIEW
 export function init() {
    // find items
-   const elements = document.querySelectorAll('.pe-element.is-audio')
+   const elements = document.querySelectorAll('.pe-element.pe-is-element-audio')
    // add listeners
    for (const element of elements) {
-      element.addEventListener('click', function (event) {
-         const current = queryParent(event.target, 'pe-element')
-         const item = current.querySelector('.item')
-         // stop others
-         if (active) {
-            const audio = active.querySelector('audio')
-            const icon = active.querySelector('img')
-            audio.pause()
-            audio.currentTime = 0
-            icon.src = 'icons/audio.svg'
-         }
-         // play
-         if (active !== item) {
-            active = item
-            const audio = item.querySelector('audio')
-            const icon = item.querySelector('img')
-            audio.currentTime = 0
-            icon.src = 'icons/audio-active.svg'
-            audio.play()
-            audio.addEventListener('ended', function (event) {
-               icon.src = 'icons/audio.svg'
-            })
-         } else {
-            active = null
-         }
+      element.addEventListener('click', play)
+   }
+}
+
+function play(event) {
+   const current = queryParent(event.target, 'pe-element')
+   const item = current.querySelector('.pe-item')
+   // stop others
+   if (active) {
+      const audio = active.querySelector('audio')
+      const icon = active.querySelector('img')
+      audio.pause()
+      audio.currentTime = 0
+      icon.src = 'icons/audio.svg'
+   }
+   // play
+   if (active !== item) {
+      active = item
+      const audio = item.querySelector('audio')
+      const icon = item.querySelector('img')
+      audio.currentTime = 0
+      icon.src = 'icons/audio-active.svg'
+      audio.play()
+      audio.addEventListener('ended', function (event) {
+         icon.src = 'icons/audio.svg'
       })
+   } else {
+      active = null
    }
 }
 

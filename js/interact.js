@@ -28,10 +28,10 @@ export function setResize(selector, preserveRatio = false) {
    interact(selector).resizable({
       // resize from all edges and corners
       edges: {
-         top: '.thumb.tl, .thumb.tr',
-         left: '.thumb.tl, .thumb.bl',
-         bottom: '.thumb.br, .thumb.bl',
-         right: '.thumb.br, .thumb.tr',
+         top: '.pe-thumb.pe-thumb-tl, .pe-thumb.pe-thumb-tr',
+         left: '.pe-thumb.pe-thumb-tl, .pe-thumb.pe-thumb-bl',
+         bottom: '.pe-thumb.pe-thumb-br, .pe-thumb.pe-thumb-bl',
+         right: '.pe-thumb.pe-thumb-br, .pe-thumb.pe-thumb-tr',
       },
       listeners: resizeListeners,
       modifiers,

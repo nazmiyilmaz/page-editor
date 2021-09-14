@@ -28,7 +28,7 @@ const options = {
 
 export function locate(editor) {
    // find element
-   const el = editor.querySelector('.pe-element.is-active')
+   const el = editor.querySelector('.pe-element.pe-is-active')
    if (!el) {
       return
    }
@@ -59,13 +59,17 @@ export function locate(editor) {
       : 'none'
 
    // set thumbs
-   if (thumbs) controller.classList.add('is-resizable')
+   if (thumbs) {
+      controller.classList.add('pe-is-resizable')
+   } else {
+      controller.classList.remove('pe-is-resizable')
+   }
 
    // get rect
    const rect = el.getBoundingClientRect()
 
    // activate
-   controller.classList.add('is-active')
+   controller.classList.add('pe-is-active')
    controller.style['z-index'] = 99999999
 
    // copy style
@@ -79,7 +83,7 @@ export function locate(editor) {
 export function hide(editor) {
    // get controller
    const controller = editor.querySelector('.pe-controller')
-   controller.classList.remove('is-active')
+   controller.classList.remove('pe-is-active')
 }
 
 // DELETE
@@ -87,7 +91,7 @@ export function deleteItem(event) {
    // get editor
    const editor = getEditor(event.target)
    // find element
-   const el = editor.querySelector('.pe-element.is-active')
+   const el = editor.querySelector('.pe-element.pe-is-active')
    // check if element exists
    if (el) {
       // remove element
@@ -103,11 +107,11 @@ export function deleteItem(event) {
 export const hoverListeners = {
    start: function (event) {
       const el = queryParent(event.target, 'pe-element')
-      el.classList.add('is-hovered')
+      el.classList.add('pe-is-hovered')
    },
    end: function (event) {
       const el = queryParent(event.target, 'pe-element')
-      el.classList.remove('is-hovered')
+      el.classList.remove('pe-is-hovered')
    },
 }
 
