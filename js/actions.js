@@ -48,38 +48,6 @@ export function getNonFunctionalPage(editor) {
    return temp.outerHTML
 }
 
-// INSERT VIDEO
-export function insertVideo(editor, src) {
-   // create
-   const video = createVideo(src)
-   // insert to the page
-   insertItem(editor, video, 'video', ['pe-hide-links'])
-}
-
-// INSERT AUDIO
-export function insertAudio(editor, src) {
-   // create
-   const audio = createAudio(src)
-   // insert to the page
-   insertItem(editor, audio, 'audio', ['pe-hide-links'])
-}
-
-// INSERT TEXT
-export function insertText(editor, value) {
-   // create text
-   const text = createText(value)
-   // insert to the page
-   insertItem(editor, text, 'text')
-}
-
-// INSERT IMAGE
-export function insertImage(editor, src) {
-   // create image
-   const image = createImage(src)
-   // insert to the page
-   insertItem(editor, image, 'image')
-}
-
 // CHANGE BACKGROUND
 export function changeBackground(editor, src) {
    // find page
@@ -87,6 +55,14 @@ export function changeBackground(editor, src) {
    page.style.backgroundImage = `url(${src})`
    // mark state
    markState(editor)
+}
+
+// INSERT
+export function insert(editor, type, src) {
+   if (type === 'image') insertImage(editor, src)
+   if (type === 'video') insertVideo(editor, src)
+   if (type === 'text') insertText(editor, src)
+   if (type === 'audio') insertAudio(editor, src)
 }
 
 // INSERT HTML
@@ -122,6 +98,38 @@ export function removeElement(editor, element) {
 
    // mark state
    markState(editor)
+}
+
+// INSERT VIDEO
+function insertVideo(editor, src) {
+   // create
+   const video = createVideo(src)
+   // insert to the page
+   insertItem(editor, video, 'video', ['pe-hide-links'])
+}
+
+// INSERT AUDIO
+function insertAudio(editor, src) {
+   // create
+   const audio = createAudio(src)
+   // insert to the page
+   insertItem(editor, audio, 'audio', ['pe-hide-links'])
+}
+
+// INSERT TEXT
+function insertText(editor, value) {
+   // create text
+   const text = createText(value)
+   // insert to the page
+   insertItem(editor, text, 'text')
+}
+
+// INSERT IMAGE
+function insertImage(editor, src) {
+   // create image
+   const image = createImage(src)
+   // insert to the page
+   insertItem(editor, image, 'image')
 }
 
 // GENERAL FUNCTION FOR INSERTING ELEMENT

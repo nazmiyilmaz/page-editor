@@ -178,6 +178,14 @@ export function resolveType(element) {
    if (element?.classList.contains('pe-is-element-video')) return 'video'
 }
 
+// RESOLVE DROP TYPE
+export function resolveDropType(element) {
+   if (element?.classList.contains('pe-image-material')) return 'image'
+   if (element?.classList.contains('pe-text-material')) return 'text'
+   if (element?.classList.contains('pe-audio-material')) return 'audio'
+   if (element?.classList.contains('pe-video-material')) return 'video'
+}
+
 // COPY ATTR
 export function copyAttribute(from, to, attrName, fallback) {
    if (!from || !to) {

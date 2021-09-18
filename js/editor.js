@@ -28,6 +28,7 @@ import {
 } from './keyboard.js'
 import { init as initAudio } from './audio.js'
 import { init as initTextAreaElements } from './textarea.js'
+import { init as initDragDrop } from './drag-drop.js'
 
 export function reload() {
    // CONTROLLER
@@ -72,6 +73,9 @@ export function reload() {
       hoverListeners.start,
       hoverListeners.end
    )
+
+   // DRAG DROP
+   initDragDrop()
 
    // TOOLBAR TOGGLE
    // toggle toolbar

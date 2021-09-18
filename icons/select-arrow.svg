@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,9 +43,9 @@
      id="namedview8"
      showgrid="false"
      inkscape:pagecheckerboard="true"
-     inkscape:zoom="16"
-     inkscape:cx="-12.313576"
-     inkscape:cy="9.7254832"
+     inkscape:zoom="11.313709"
+     inkscape:cx="-27.853943"
+     inkscape:cy="14.761062"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -57,7 +57,7 @@
   <g
      id="g970"
      transform="matrix(0.73846952,0,0,0.73846952,1.6768083,3.0451312)"
-     style="stroke-width:1.35415208">
+     style="stroke-width:1.35415208;fill:#1c1c1c;fill-opacity:1">
     <rect
        transform="rotate(-48.420483)"
        rx="0.61360013"
@@ -67,7 +67,7 @@
        height="0.9609375"
        width="5.890625"
        id="rect951"
-       style="opacity:1;vector-effect:none;fill:#6e6e6e;fill-opacity:1;fill-rule:evenodd;stroke-width:0.98069459;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="opacity:1;vector-effect:none;fill:#1c1c1c;fill-opacity:1;fill-rule:evenodd;stroke-width:0.98069459;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <rect
        transform="matrix(-0.66365884,-0.74803539,-0.74803539,0.66365884,0,0)"
        rx="0.61360013"
@@ -77,12 +77,12 @@
        height="0.9609375"
        width="5.890625"
        id="rect951-7"
-       style="opacity:1;vector-effect:none;fill:#6e6e6e;fill-opacity:1;fill-rule:evenodd;stroke-width:0.98069459;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="opacity:1;vector-effect:none;fill:#1c1c1c;fill-opacity:1;fill-rule:evenodd;stroke-width:0.98069459;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   </g>
   <g
      id="g970-6"
      transform="matrix(0.73846952,0,0,-0.73846952,1.6768083,20.703413)"
-     style="stroke-width:1.35415208">
+     style="stroke-width:1.35415208;fill:#1c1c1c;fill-opacity:1">
     <rect
        transform="rotate(-48.420483)"
        rx="0.61360013"
@@ -92,7 +92,7 @@
        height="0.9609375"
        width="5.890625"
        id="rect951-0"
-       style="opacity:1;vector-effect:none;fill:#6e6e6e;fill-opacity:1;fill-rule:evenodd;stroke-width:0.98069459;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="opacity:1;vector-effect:none;fill:#1c1c1c;fill-opacity:1;fill-rule:evenodd;stroke-width:0.98069459;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <rect
        transform="matrix(-0.66365884,-0.74803539,-0.74803539,0.66365884,0,0)"
        rx="0.61360013"
@@ -102,6 +102,6 @@
        height="0.9609375"
        width="5.890625"
        id="rect951-7-6"
-       style="opacity:1;vector-effect:none;fill:#6e6e6e;fill-opacity:1;fill-rule:evenodd;stroke-width:0.98069459;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="opacity:1;vector-effect:none;fill:#1c1c1c;fill-opacity:1;fill-rule:evenodd;stroke-width:0.98069459;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   </g>
 </svg>

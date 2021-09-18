@@ -1,17 +1,9 @@
-$toolbar-bg: white;
-$toolbar-bg-hover: rgb(234, 240, 243);
-$border-color: rgb(226, 230, 235);
-$default-br: 1px solid $border-color;
+// Page Variables
+$page-br: 1px solid rgb(226, 230, 235);
+$page-bg: rgb(250, 248, 242);
 
-$element-br: 2px solid rgb(97, 106, 112);
-$element-br-transparent: 2px solid transparent;
-$element-br-radius: 12px;
-
-$controller-br: 1px solid grey;
-
-$toggle-bg: white;
-$toggle-bg-active: rgb(241, 241, 241);
-
+// Element Variables
+$element-br: 3px solid transparent;
 $audio-link-cl: rgb(105, 131, 219);
 
 // REMOVE LATER |||||||||||||||||||||||||||
@@ -21,12 +13,24 @@ body {
    margin-top: 80px;
 }
 
+.materials {
+   margin: 20px;
+   border: 1px solid grey;
+   padding: 20px;
+   display: flex;
+   justify-content: center;
+   img {
+      width: 120px;
+   }
+}
+
+//       |||||||||||||||||||||||||||||||||||
+
 // PREVIEW
 .pe-preview {
    display: flex;
    flex-direction: column;
    align-items: center;
-   border: 3px solid green;
 }
 
 // PAGE
@@ -34,10 +38,11 @@ body {
    padding: 10px;
    margin-top: 1rem;
    display: block;
-   border: $default-br;
+   border: $page-br;
    border-radius: 12px;
    overflow: hidden;
    position: relative;
+   background-color: $page-bg;
    background-repeat: no-repeat;
    background-position: center;
    background-size: cover;
@@ -45,6 +50,7 @@ body {
 
 // ELEMENT
 .pe-element {
+   border: $element-br;
    position: absolute;
    touch-action: none;
    box-sizing: border-box;

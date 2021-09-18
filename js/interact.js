@@ -15,7 +15,6 @@ export function setResize(selector, preserveRatio = false) {
          outer: '.pe-editor .pe-page',
       }),
    ]
-
    if (preserveRatio) {
       modifiers.push(
          interact.modifiers.aspectRatio({
@@ -24,9 +23,8 @@ export function setResize(selector, preserveRatio = false) {
          })
       )
    }
-
    interact(selector).resizable({
-      // resize from all edges and corners
+      // thumb selectors
       edges: {
          top: '.pe-thumb.pe-thumb-tl, .pe-thumb.pe-thumb-tr',
          left: '.pe-thumb.pe-thumb-tl, .pe-thumb.pe-thumb-bl',

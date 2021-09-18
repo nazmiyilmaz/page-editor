@@ -1,9 +1,6 @@
 import {
-   insertImage,
-   insertText,
+   insert,
    changeBackground,
-   insertAudio,
-   insertVideo,
    getNonFunctionalPage,
    getPreviewPage,
 } from './actions.js'
@@ -15,23 +12,15 @@ setTimeout(() => {
    reload()
    const editor = document.querySelector('.pe-editor')
 
-   insertAudio(editor, 'assets/sample.mp3')
-   // insertAudio(editor, 'assets/sample2.mp3')
-   // insertImage(editor, 'assets/bird.png')
-   // insertImage(editor, 'assets/pineapple.png')
-   insertText(editor, 'Lorem Ipsum is simply dummy text')
-   // insertText(editor, 'Lorem Ipsum is simply dummy text. Lorem Ipsum is simply')
-   // insertVideo(editor, 'assets/sample.mp4')
-   changeBackground(editor, 'assets/page.jpg')
+   insert(editor, 'audio', 'assets/sample.mp3')
+   // insert(editor,'audio', 'assets/sample2.mp3')
+   insert(editor, 'image', 'assets/bird.png')
+   // insert(editor,'image', 'assets/pineapple.png')
+   insert(editor, 'text', 'Lorem Ipsum is simply dummy text')
+   // insert(editor,'text', 'Lorem Ipsum is simply dummy text. Lorem Ipsum is simply')
+   // insert(editor,'video', 'assets/sample.mp4')
 
-   // setTimeout(() => {
-   // const preview = document.querySelector('.pe-preview')
-   // preview.innerHTML = getPreviewPage(editor)
-   // }, 10000)
-
-   setTimeout(() => {
-      console.log(`${getNonFunctionalPage(editor)}`)
-   }, 10000)
+   // changeBackground(editor, 'assets/page.jpg')
 
    reload()
 }, 1000)
